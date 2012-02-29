@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
-        <version>1.2.1.GA_CP03</version>
+        <version>1.2.1.GA_CP04</version>
     </parent>
     <name>Resteasy Providers</name>
     <modelVersion>4.0.0</modelVersion>
@@ -16,9 +16,9 @@
         <module>jaxb</module>
         <module>jettison</module>
         <module>fastinfoset</module>
-        <module>test-all-jaxb</module>
+        <!--<module>test-all-jaxb</module>-->
         <module>jackson</module>
-        <module>test-jackson-jaxb-coexistence</module>
+        <!--<module>test-jackson-jaxb-coexistence</module>-->
         <module>abdera-atom</module>
         <module>resteasy-atom</module>
         <module>multipart</module>

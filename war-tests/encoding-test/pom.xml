@@ -5,7 +5,7 @@
     <groupId>org.jboss.resteasy.test</groupId>
     <artifactId>encoding-test</artifactId>
     <packaging>war</packaging>
-    <version>1.2.1.GA_CP03</version>
+    <version>1.2.1.GA_CP04</version>
     <name>encoding-test</name>
     <url>http://maven.apache.org</url>
 
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>1.2.1.GA_CP03</version>
+            <version>1.2.1.GA_CP04</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -34,6 +34,19 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.15</version>
+				<dependencies>
+				  <dependency>
+				    <groupId>org.mortbay.jetty</groupId>
+				    <artifactId>jetty-util</artifactId>
+				    <version>6.1.22</version>
+				    <scope>runtime</scope>
+				  </dependency>
+				  <dependency>
+				    <groupId>javax.servlet</groupId>
+				    <artifactId>servlet-api</artifactId>
+				    <version>2.5</version>
+				  </dependency>
+				</dependencies>
                 <configuration>
                     <!-- By default the artifactId is taken, override it with something simple -->
                     <contextPath>/</contextPath>

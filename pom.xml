@@ -5,7 +5,7 @@
     <name>RESTEasy JAX-RS</name>
     <groupId>org.jboss.resteasy</groupId>
     <artifactId>resteasy-jaxrs-all</artifactId>
-    <version>1.2.1.GA_CP03</version>
+    <version>1.2.1.GA_CP04</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -70,20 +70,20 @@
 
         <!-- Should probably be removed and be treated as external dependency -->
         <module>jaxrs-api</module>
-        <module>resteasy-test-data</module>
+        <!--<module>resteasy-test-data</module>-->
         <module>resteasy-jaxrs</module>
         <module>providers</module>
         <module>resteasy-jaxrs-war</module>
         <module>resteasy-bom</module>
         <module>resteasy-cache</module>
         <module>resteasy-guice</module>
-        <module>resteasy-oauth</module>
+        <!--<module>resteasy-oauth</module>-->
         <module>async-http-jbossweb</module>
         <module>async-http-tomcat</module>
         <module>resteasy-spring</module>
         <module>war-tests</module>
         <module>examples</module>
-        <module>async-http-servlet-3.0</module>
+        <!--<module>async-http-servlet-3.0</module>-->
     </modules>
 
     <dependencyManagement>
