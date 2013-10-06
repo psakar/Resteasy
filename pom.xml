@@ -1,115 +1,313 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>RESTEasy JAX-RS</name>
-    <description>
-        Resteasy
-    </description>
-    <groupId>org.jboss.resteasy</groupId>
+    <name>RESTEasy JAX-RS test</name>
+    <groupId>org.jboss.resteasy-ts</groupId>
     <artifactId>resteasy-jaxrs-all</artifactId>
     <version>2.3.7.Final</version>
     <packaging>pom</packaging>
-
     <properties>
-        <jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
-        <dep.jaxb-impl.version>2.2.4</dep.jaxb-impl.version>
-        <dep.jettison.version>1.3.1</dep.jettison.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		
+		<versions.org.jboss.resteasy>${project.version}</versions.org.jboss.resteasy>
+		<versions.cglib.cglib-nodep>2.1_3</versions.cglib.cglib-nodep>
+		<versions.org.springframework>3.0.3.RELEASE</versions.org.springframework>
+		<versions.javax.persistence.persistence-api>1.0.2</versions.javax.persistence.persistence-api>
+		<versions.httpunit.httpunit>1.7</versions.httpunit.httpunit>
+		<versions.commons-httpclient.commons-httpclient>3.1</versions.commons-httpclient.commons-httpclient>
+		<versions.org.mortbay.jetty.jetty>6.1.15</versions.org.mortbay.jetty.jetty>
+
     </properties>
 
-    <url>http://rest-easy.org</url>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+	<profiles>
+		<profile>
+			<!-- set properties for test of productized bits -->
+			<id>productized</id>
+			<activation>
+				<property>
+					<name>productized</name>
+				</property>
+			</activation>
+			<properties>
+				<versions-test.org.jboss.resteasy>2.3.7.Final-redhat-2</versions-test.org.jboss.resteasy>
+				<versions.com.google.code.guice.guice>3.0</versions.com.google.code.guice.guice>
+				<versions.javax.enterprise.cdi-api>1.0-SP4.redhat-3</versions.javax.enterprise.cdi-api>
+				<versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.2.Final-redhat-2</versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>
+				<versions.com.sun.xml.bind.jaxb-impl>2.2.5-redhat-5</versions.com.sun.xml.bind.jaxb-impl>
+				<versions.com.sun.istack.istack-commons-runtime>2.6.1-redhat-2</versions.com.sun.istack.istack-commons-runtime>
+				<versions.org.codehaus.jettison.jettison>1.3.1-redhat-2</versions.org.codehaus.jettison.jettison>
 
-    <scm>
-        <connection>scm:svn:https://resteasy.svn.sourceforge.net/svnroot/resteasy/trunk/jaxrs</connection>
-        <developerConnection>scm:svn:https://resteasy.svn.sourceforge.net/svnroot/resteasy/trunk/jaxrs
-        </developerConnection>
-        <url>http://resteasy.svn.sourceforge.net/viewvc/resteasy/trunk/jaxrs</url>
-    </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>jboss-releases-repository</id>
-            <name>JBoss Releases Repository</name>
-            <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
-    <issueManagement>
-        <system>JIRA</system>
-        <url>http://jira.jboss.com/jira/browse/RESTEASY</url>
-    </issueManagement>
-
-    <developers>
-        <developer>
-            <id>rmcdonough</id>
-            <name>Ryan J. McDonough</name>
-            <email>ryan@damnhandy.com</email>
-            <url>http://damnhandy.com</url>
-            <roles>
-                <role>project-owner</role>
-            </roles>
-            <timezone>-5</timezone>
-        </developer>
-        <developer>
-            <id>patriot1burke</id>
-            <name>Bill Burke</name>
-            <email>bill@burkecentral.com</email>
-            <organization>JBoss</organization>
-            <roles>
-                <role>project-owner</role>
-            </roles>
-            <timezone>-5</timezone>
-        </developer>
-    </developers>
-
-    <contributors>
-        <contributor>
-            <name>Heiko Braun</name>
-        </contributor>
-        <contributor>
-            <name>Martin Algesten</name>
-        </contributor>
-    </contributors>
+		<!--
+				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
+		-->
+			</properties>
+		</profile>
+		<profile>
+			<!-- set properties for test of upstream bits -->
+			<id>upstream</id>
+			<activation>
+				<property>
+					<name>!productized</name>
+				</property>
+			</activation>
+			<properties>
+				<versions-test.org.jboss.resteasy>2.3.7.Final</versions-test.org.jboss.resteasy>
+				<versions.com.google.code.guice.guice>3.0</versions.com.google.code.guice.guice>
+				<versions.javax.enterprise.cdi-api>1.0-SP1</versions.javax.enterprise.cdi-api><!--1.0-SP4.redhat-3-->
+				<versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.0.CR2</versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec> <!-- 1.0.2.Final-redhat-2 -->
+				<versions.com.sun.xml.bind.jaxb-impl>2.2.5</versions.com.sun.xml.bind.jaxb-impl>
+				<versions.org.codehaus.jettison.jettison>1.3.1</versions.org.codehaus.jettison.jettison>
+		<!--
+				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
+		-->
+			</properties>
+		</profile>
+	</profiles>
 
     <modules>
+        <module>resteasy-test</module>
 
         <!-- Should probably be removed and be treated as external dependency   -->
-        <module>tjws</module>
-        <module>jaxrs-api</module>
-        <module>resteasy-test-data</module>
+        <!--module>tjws</module--><!-- does not contain any tests -->
+        <!--module>jaxrs-api</module--><!-- does not contain any tests -->
+        <!--module>resteasy-test-data</module--><!-- does not contain any tests -->
         <module>resteasy-jaxrs</module>
         <module>providers</module>
-        <module>resteasy-jaxrs-war</module>
-        <module>resteasy-bom</module>
+        <!--module>resteasy-jaxrs-war</module--><!-- does not contain any tests -->
+        <!--module>resteasy-bom</module--><!-- does not contain any tests -->
         <module>resteasy-cache</module>
         <module>resteasy-guice</module>
-        <module>eagledns</module>
+        <!--module>eagledns</module--><!-- does not contain any tests -->
         <module>security</module>
         <module>resteasy-links</module>
-        <module>async-http-jbossweb</module>
+        <!--module>async-http-jbossweb</module--><!-- tests are not included in upstream -->
         <module>async-http-tomcat</module>
         <module>resteasy-spring</module>
         <module>resteasy-jsapi</module>
-        <!-- <module>resteasy-jsapi-testing</module> -->
+        <!-- <module>resteasy-jsapi-testing</module> --><!-- not included in upstream -->
         <module>resteasy-cdi</module>
         <module>server-adapters</module>
         <!-- <module>interface-description</module> -->
         <module>war-tests</module>
+<!--FIXME
         <module>examples</module>
+        -->
         <module>async-http-servlet-3.0</module>
         <module>profiling-tests</module>
-        <module>jboss-modules</module>
-        <!-- <module>as7-integration-testing</module> -->
-        <!--module>arquillian</module-->
-    </modules>
+        <!--module>jboss-modules</module--><!-- does not contain any tests -->
+        <!-- <module>as7-integration-testing</module> --><!-- not included in upstream -->
+        <!--module>arquillian</module--> <!-- FIXME upstream version is not ready to be tested with product -->
+<!--
+./resteasy-cdi/src/test/java
 
+./providers/fastinfoset/src/test/resources
+./providers/fastinfoset/src/test/java
+
+./providers/jackson/src/test/java
+
+./providers/jettison/src/test/java
+
+./providers/abdera-atom/src/test/java
+
+./providers/test-all-jaxb/src/test/java
+
+./providers/resteasy-atom/src/test/resources
+./providers/resteasy-atom/src/test/java
+
+./providers/test-jackson-jaxb-coexistence/src/test/java
+
+./providers/jaxb/src/test/java
+
+./providers/yaml/src/test/java
+
+./providers/resteasy-hibernatevalidator-provider/src/test/java
+
+./providers/multipart/src/test/test-data
+./providers/multipart/src/test/java
+
+./arquillian/RESTEASY-736-jetty/src/test/resources
+./arquillian/RESTEASY-736-jetty/src/test/java
+
+./arquillian/RESTEASY-800-AS71/src/test/resources
+./arquillian/RESTEASY-800-AS71/src/test/java
+
+./arquillian/RESTEASY-736-as71/src/test/resources
+./arquillian/RESTEASY-736-as71/src/test/java
+
+./arquillian/RESTEASY-752-jetty/src/test/resources
+./arquillian/RESTEASY-752-jetty/src/test/java
+
+./arquillian/RESTEASY-802-AS71/src/test/resources
+./arquillian/RESTEASY-802-AS71/src/test/java
+
+./arquillian/RESTEASY-802-AS72/src/test/resources
+./arquillian/RESTEASY-802-AS72/src/test/java
+
+./arquillian/RESTEASY-767-jetty/src/test/resources
+./arquillian/RESTEASY-767-jetty/src/test/java
+
+./arquillian/RESTEASY-760-jetty/src/test/resources
+./arquillian/RESTEASY-760-jetty/src/test/java
+
+./resteasy-links/src/test/java
+
+./resteasy-cache/resteasy-cache-core/src/test/java
+
+./async-http-servlet-3.0/async-http-servlet-3.0-test/src/test/resources
+./async-http-servlet-3.0/async-http-servlet-3.0-test/src/test/java
+
+./jboss-integration-testing/servlet-mapping-test/src/test/resources
+./jboss-integration-testing/servlet-mapping-test/src/test/java
+
+
+./jboss-integration-testing/application-config-test/src/test/resources
+./jboss-integration-testing/application-config-test/src/test/java
+
+./jboss-integration-testing/spring-integration-test/src/test/resources
+./jboss-integration-testing/spring-integration-test/src/test/java
+
+./jboss-integration-testing/basic-integration-test/src/test/resources
+./jboss-integration-testing/basic-integration-test/src/test/java
+
+./jboss-integration-testing/ejb-test/ear/src/test/resources
+./jboss-integration-testing/ejb-test/ear/src/test/java
+
+./jboss-integration-testing/scanning-test/scanning-test-war/src/test/java
+
+
+./async-http-tomcat/async-http-tomcat-test/src/test/resources
+./async-http-tomcat/async-http-tomcat-test/src/test/java
+
+
+./async-http-jbossweb/async-http-jbossweb-test/src/test/java
+
+./war-tests/application-test/src/test/java
+
+./war-tests/jsapi-servlet-test/src/test/resources
+./war-tests/jsapi-servlet-test/src/test/js
+./war-tests/jsapi-servlet-test/src/test/java
+
+./war-tests/filter-test/src/test/java
+
+./war-tests/context-test/src/test/java
+
+./war-tests/oauth-servlet-test/src/test/resources
+./war-tests/oauth-servlet-test/src/test/java
+
+./war-tests/encoding-test/src/test/java
+
+./resteasy-jaxrs/src/test/test-data
+./resteasy-jaxrs/src/test/resources
+./resteasy-jaxrs/src/test/java
+
+./resteasy-spring/src/test/resources
+./resteasy-spring/src/test/java
+
+./resteasy-guice/src/test/java
+
+./as7-integration-testing/cdi-test/src/test/java
+
+./resteasy-jsapi-testing/src/test/java
+
+./resteasy-jsapi/src/test/java
+./profiling-tests/src/test/java
+
+
+
+
+./examples/digital-signatures/use-dns/src/test/resources
+./examples/digital-signatures/use-dns/src/test/java
+
+./examples/digital-signatures/no-dns/src/test/resources
+./examples/digital-signatures/no-dns/src/test/java
+
+./examples/guice-hello/src/test/java
+
+./examples/spring-hibernate-contacts/persistence/src/test/resources
+./examples/spring-hibernate-contacts/persistence/src/test/java
+
+./examples/oreilly-workbook/ex11_2/src/test/java
+
+./examples/oreilly-workbook/ex07_1/src/test/java
+
+./examples/oreilly-workbook/ex03_1/src/test/java
+
+./examples/oreilly-workbook/ex06_2/src/test/java
+
+./examples/oreilly-workbook/ex05_1/src/test/java
+
+./examples/oreilly-workbook/ex06_1/src/test/java
+
+./examples/oreilly-workbook/ex10_1/src/test/java
+
+./examples/oreilly-workbook/ex11_1/ear/src/test/java
+
+./examples/oreilly-workbook/ex04_2/src/test/java
+
+./examples/oreilly-workbook/ex04_3/src/test/java
+
+./examples/oreilly-workbook/ex09_2/src/test/java
+
+./examples/oreilly-workbook/ex09_1/src/test/java
+
+./examples/oreilly-workbook/ex04_1/src/test/java
+
+./examples/oreilly-workbook/ex08_1/src/test/java
+
+./examples/smime/src/test/java
+
+./examples/async-job-service/src/test/java
+
+./examples/ejb-integration/ear/src/test/resources
+./examples/ejb-integration/ear/src/test/java
+
+./examples/oreilly-workbook-as7/ex07_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex03_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex06_2/src/test/java
+
+./examples/oreilly-workbook-as7/ex05_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex06_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex10_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex11_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex04_2/src/test/java
+
+./examples/oreilly-workbook-as7/ex04_3/src/test/java
+
+./examples/oreilly-workbook-as7/ex09_2/src/test/java
+
+./examples/oreilly-workbook-as7/ex09_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex04_1/src/test/java
+
+./examples/oreilly-workbook-as7/ex08_1/src/test/java
+
+./examples/resteasy-springMVC/src/test/java
+
+./examples/oauth-examples/oauth-push-messaging-openid/openid/src/test/resources
+
+./examples/oauth-examples/oauth-push-messaging/src/test/resources
+
+./examples/oauth-examples/oauth/src/test/resources
+
+./server-adapters/resteasy-netty/src/test/java
+
+./server-adapters/resteasy-jdk-http/src/test/java
+
+./security/resteasy-crypto/src/test/resources
+./security/resteasy-crypto/src/test/java
+-->
+    </modules>
     <dependencyManagement>
         <dependencies>
 
@@ -155,7 +353,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>${dep.jaxb-impl.version}</version>
+                <version>${versions.com.sun.xml.bind.jaxb-impl}</version>
             </dependency>
 
             <dependency>
@@ -209,7 +407,7 @@
             <dependency>
                 <groupId>org.codehaus.jettison</groupId>
                 <artifactId>jettison</artifactId>
-                <version>${dep.jettison.version}</version>
+                <version>${versions.org.codehaus.jettison.jettison}</version>
                 <exclusions>
                     <!-- This results in duplicate stax-api jars. This is the older
             one. A newer is brought in by com.sun.xml.bind:jaxb-impl -->
@@ -267,7 +465,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.1</version>
+                <version>4.7</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
@@ -331,6 +529,7 @@
     </repositories>
     <pluginRepositories>
     </pluginRepositories>
+    <!--
     <build>
         <pluginManagement>
             <plugins>
@@ -444,4 +643,5 @@
         </plugins>
 
     </build>
+-->
 </project>

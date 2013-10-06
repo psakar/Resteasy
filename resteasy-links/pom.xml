@@ -4,82 +4,44 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>2.3.7.Final</version>
     </parent>
 
     <artifactId>resteasy-links</artifactId>
-    <name>RESTEasy Links</name>
-    <description/>
+    <name>RESTEasy Links test</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.el</groupId>
-            <artifactId>jboss-el</artifactId>
-            <version>1.0_02.CR4</version>
-        </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-links</artifactId>
+            <version>${versions.org.jboss.resteasy}</version><!-- only upstream  -->
             <scope>test</scope>
         </dependency>
+        
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>tjws</artifactId>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${project.version}</version>
+            <version>${versions-test.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jettison-provider</artifactId>
-            <version>${project.version}</version>
+            <version>${versions-test.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <scope>test</scope>
-</dependency>
-    </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    </dependencies>
 
 </project>

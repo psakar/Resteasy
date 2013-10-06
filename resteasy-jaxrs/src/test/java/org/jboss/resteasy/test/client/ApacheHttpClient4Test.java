@@ -1,5 +1,11 @@
 package org.jboss.resteasy.test.client;
 
+import java.util.concurrent.atomic.AtomicLong;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
@@ -21,11 +27,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import java.util.concurrent.atomic.AtomicLong;
-
 /**
  * Test connection cleanup
  *
@@ -37,11 +38,13 @@ public class ApacheHttpClient4Test extends BaseResourceTest
 
    public static class MyResourceImpl implements MyResource
    {
+      @Override
       public String get()
       {
          return "hello world";
       }
 
+      @Override
       public String error()
       {
          throw new NoLogWebApplicationException(404);
@@ -67,7 +70,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
       addPerRequestResource(MyResourceImpl.class);
    }
 
-   private AtomicLong counter = new AtomicLong();
+   private final AtomicLong counter = new AtomicLong();
 
    @Test
    public void testConnectionCleanupGC() throws Exception
@@ -222,10 +225,9 @@ public class ApacheHttpClient4Test extends BaseResourceTest
                for (int j = 0; j < 10; j++)
                {
                   System.out.println("calling proxy");
-                  String str = null;
                   try
                   {
-                     str = proxy.error();
+                     proxy.error();
                   }
                   catch (ClientResponseFailure e)
                   {
@@ -247,10 +249,9 @@ public class ApacheHttpClient4Test extends BaseResourceTest
 
    private void callProxy(MyResource proxy)
    {
-      String str = null;
       try
       {
-         str = proxy.error();
+         proxy.error();
       }
       catch (ClientResponseFailure e)
       {

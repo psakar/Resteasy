@@ -4,36 +4,31 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>2.3.7.Final</version>
+	    <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>resteasy-jsapi</artifactId>
-    <name>RESTEasy JAX-RS JSAPI</name>
-    <description/>
+    <name>RESTEasy JAX-RS JSAPI test</name>
 
     <dependencies>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-jsapi</artifactId>
+            <version>${versions-test.org.jboss.resteasy}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>provided</scope>
-        </dependency>
+
     </dependencies>
 
 </project>

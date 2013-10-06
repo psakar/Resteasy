@@ -1,45 +1,32 @@
 <?xml version="1.0"?>
 <project>
     <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>2.3.7.Final</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>resteasy-jdk-http</artifactId>
-    <name>RESTEasy JBoss Sun JDK HTTP Server Integration</name>
-    <description/>
+    <name>RESTEasy JBoss Sun JDK HTTP Server Integration test</name>
 
     <dependencies>
+		
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
+            <artifactId>resteasy-jdk-http</artifactId>
+            <version>${versions-test.org.jboss.resteasy}</version>
+            <scope>test</scope>
         </dependency>
+        
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>provided</scope>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <scope>test</scope>
-</dependency>
+        
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

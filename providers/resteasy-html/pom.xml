@@ -2,52 +2,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.jboss.resteasy</groupId>
-        <artifactId>resteasy-jaxrs-all</artifactId>
+        <groupId>org.jboss.resteasy-ts</groupId>
+        <artifactId>providers-pom</artifactId>
         <version>2.3.7.Final</version>
-	    <relativePath>../../pom.xml</relativePath>
+	    <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>resteasy-html</artifactId>
     <packaging>jar</packaging>
-    <name>Resteasy HTML Provider</name>
-    <description/>
+    <name>Resteasy HTML Provider test</name>
 
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <artifactId>resteasy-html</artifactId>
+            <version>${versions.org.jboss.resteasy}</version> <!-- only upstream -->
             <scope>test</scope>
         </dependency>
+        
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>tjws</artifactId>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

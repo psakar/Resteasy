@@ -1,50 +1,31 @@
 <?xml version="1.0"?>
 <project>
     <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
-        <groupId>org.jboss.resteasy</groupId>
         <version>2.3.7.Final</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>resteasy-netty</artifactId>
-    <name>RESTEasy Netty Integration</name>
-    <description/>
+    <name>RESTEasy Netty Integration test</name>
 
     <dependencies>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-netty</artifactId>
+            <version>${versions-test.org.jboss.resteasy}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty</artifactId>
-            <version>3.4.4.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>provided</scope>
-        </dependency>
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <scope>test</scope>
-</dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
+    </dependencies>
 </project>

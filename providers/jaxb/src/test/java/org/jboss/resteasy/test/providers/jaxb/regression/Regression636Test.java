@@ -1,14 +1,9 @@
 package org.jboss.resteasy.test.providers.jaxb.regression;
 
-import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.resteasy.spi.ResteasyDeployment;
-import org.jboss.resteasy.test.BaseResourceTest;
-import org.jboss.resteasy.util.Types;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.jboss.resteasy.test.TestPortProvider.*;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -21,12 +16,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
-import static org.jboss.resteasy.test.TestPortProvider.*;
+import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.client.ClientResponse;
+import org.jboss.resteasy.test.BaseResourceTest;
+import org.jboss.resteasy.util.Types;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class Regression636Test extends BaseResourceTest
 {
@@ -99,11 +97,13 @@ public class Regression636Test extends BaseResourceTest
    {
       private String name;
 
+      @Override
       public String getName()
       {
          return name;
       }
 
+      @Override
       public void setName(String name)
       {
          this.name = name;
@@ -221,11 +221,12 @@ public class Regression636Test extends BaseResourceTest
 
    public static class Guid implements Serializable
    {
-
+      private static final long serialVersionUID = -7554132838292504890L;
    }
 
    public static class storage_pool extends IVdcQueryable implements INotifyPropertyChanged, BusinessEntity<Guid>
    {
+      private static final long serialVersionUID = 651560497341131841L;
 
       @Override
       public Guid getId()
@@ -375,7 +376,7 @@ public class Regression636Test extends BaseResourceTest
    @Test
    public void testGetImplementationReflection() throws Exception
    {
-      Class updatableResource = BackendDataCenterResource.class.getInterfaces()[0].getInterfaces()[0];
+      Class<?> updatableResource = BackendDataCenterResource.class.getInterfaces()[0].getInterfaces()[0];
       Assert.assertEquals(updatableResource, UpdatableResource.class);
       Method update = null;
       for (Method method : updatableResource.getMethods())
@@ -399,17 +400,16 @@ public class Regression636Test extends BaseResourceTest
    @Test
    public void testInheritance() throws Exception
    {
-      ResteasyDeployment dep = deployment;
       ClientRequest request = new ClientRequest(generateURL("/datacenters/1"));
-      ClientResponse res = request.get();
+      ClientResponse<?> res = request.get();
       Assert.assertEquals(200, res.getStatus());
-      DataCenter dc = (DataCenter) res.getEntity(DataCenter.class);
+      DataCenter dc = res.getEntity(DataCenter.class);
       Assert.assertEquals(dc.getName(), "Bill");
       request = new ClientRequest(generateURL("/datacenters/1"));
 
       res = request.body("application/xml", dc).put();
       Assert.assertEquals(200, res.getStatus());
-      dc = (DataCenter) res.getEntity(DataCenter.class);
+      dc = res.getEntity(DataCenter.class);
       Assert.assertEquals(dc.getName(), "Bill");
 
 

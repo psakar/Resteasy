@@ -1,11 +1,5 @@
 package org.jboss.resteasy.test;
 
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientResponse;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,6 +7,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.client.ClientResponse;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -81,8 +81,7 @@ public class StreamResetTest extends BaseResourceTest
       boolean exceptionThrown = false;
       try
       {
-         Place place = response.getEntity();
-
+         response.getEntity();
       }
       catch (Exception e)
       {

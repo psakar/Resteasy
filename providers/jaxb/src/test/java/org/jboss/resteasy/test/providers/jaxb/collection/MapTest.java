@@ -1,15 +1,13 @@
 package org.jboss.resteasy.test.providers.jaxb.collection;
 
-import org.jboss.resteasy.annotations.providers.jaxb.WrappedMap;
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.resteasy.test.BaseResourceTest;
 import static org.jboss.resteasy.test.TestPortProvider.*;
-import org.jboss.resteasy.util.GenericType;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.w3c.dom.Element;
+
+import java.io.ByteArrayInputStream;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -26,12 +24,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
-import java.io.ByteArrayInputStream;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import org.jboss.resteasy.annotations.providers.jaxb.WrappedMap;
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.client.ClientResponse;
+import org.jboss.resteasy.test.BaseResourceTest;
+import org.jboss.resteasy.util.GenericType;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.w3c.dom.Element;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -216,7 +218,7 @@ public class MapTest extends BaseResourceTest
       Element entry = (Element) element.getValue().getValue().get(0);
 
       JAXBContext ctx3 = JAXBContext.newInstance(JaxbMap.Entry.class);
-      JAXBElement<JaxbMap.Entry> e = ctx3.createUnmarshaller().unmarshal(entry, JaxbMap.Entry.class);
+      ctx3.createUnmarshaller().unmarshal(entry, JaxbMap.Entry.class);
 
       System.out.println("hello");
 

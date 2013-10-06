@@ -1,16 +1,8 @@
 package org.jboss.resteasy.test.providers.jaxb;
 
-import org.jboss.resteasy.annotations.DecorateTypes;
-import org.jboss.resteasy.annotations.Decorator;
-import org.jboss.resteasy.annotations.providers.jaxb.Stylesheet;
-import org.jboss.resteasy.annotations.providers.jaxb.XmlHeader;
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.spi.interception.DecoratorProcessor;
-import org.jboss.resteasy.test.BaseResourceTest;
 import static org.jboss.resteasy.test.TestPortProvider.*;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import java.lang.annotation.Annotation;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +10,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.lang.annotation.Annotation;
+
+import org.jboss.resteasy.annotations.DecorateTypes;
+import org.jboss.resteasy.annotations.Decorator;
+import org.jboss.resteasy.annotations.providers.jaxb.Stylesheet;
+import org.jboss.resteasy.annotations.providers.jaxb.XmlHeader;
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.spi.interception.DecoratorProcessor;
+import org.jboss.resteasy.test.BaseResourceTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * This tests decorators in general as well as the @XmlHeader and @Stylesheet annotations
@@ -39,7 +41,8 @@ public class XmlHeaderTest extends BaseResourceTest
    @DecorateTypes("application/json")
    public static class MyDecorator implements DecoratorProcessor<Marshaller, Junk>
    {
-      public Marshaller decorate(Marshaller target, Junk annotation, Class type, Annotation[] annotations, MediaType mediaType)
+      @Override
+      public Marshaller decorate(Marshaller target, Junk annotation, @SuppressWarnings("rawtypes") Class type, Annotation[] annotations, MediaType mediaType)
       {
          throw new RuntimeException("FAILURE!!!!");
       }
@@ -56,7 +59,8 @@ public class XmlHeaderTest extends BaseResourceTest
    @DecorateTypes("application/xml")
    public static class MyDecorator2 implements DecoratorProcessor<Assert, Junk2>
    {
-      public Assert decorate(Assert target, Junk2 annotation, Class type, Annotation[] annotations, MediaType mediaType)
+      @Override
+      public Assert decorate(Assert target, Junk2 annotation, @SuppressWarnings("rawtypes") Class type, Annotation[] annotations, MediaType mediaType)
       {
          throw new RuntimeException("FAILURE!!!!");
       }

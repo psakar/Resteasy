@@ -1,10 +1,11 @@
 package org.jboss.resteasy.test.providers.jaxb.regression.resteasy143;
 
+import static org.jboss.resteasy.test.TestPortProvider.*;
+
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.test.EmbeddedContainer;
-import static org.jboss.resteasy.test.TestPortProvider.*;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -34,14 +35,6 @@ public class TestJAXB
       EmbeddedContainer.stop();
    }
 
-   private static final String XML_CONTENT_DEFAULT_NS = "<DataCollectionPackage xmlns=\"http://www.example.org/DataCollectionPackage\">\n"
-           + "  <sourceID>System A</sourceID>\n"
-           + "  <eventID>Exercise B</eventID>\n"
-           + "  <dataRecords>\n"
-           + "     <DataCollectionRecord>\n"
-           + "        <timestamp>2008-08-13T12:24:00</timestamp>\n"
-           + "        <collectedData>Operator pushed easy button</collectedData>\n"
-           + "     </DataCollectionRecord>\n" + "  </dataRecords>\n" + "</DataCollectionPackage>";
    private static final String XML_CONTENT = "<ns:DataCollectionPackage xmlns:ns=\"http://www.example.org/DataCollectionPackage\">\n"
            + "  <sourceID>System A</sourceID>\n"
            + "  <eventID>Exercise B</eventID>\n"
@@ -105,7 +98,7 @@ public class TestJAXB
          Assert.assertEquals(201, response.getStatus());
          response.releaseConnection();
       }
-      
+
       {
          ClientRequest request = new ClientRequest(generateURL("/storeXML/abstract"));
          request.body("application/xml", XML_CONTENT);
