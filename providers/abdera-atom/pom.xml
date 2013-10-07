@@ -19,7 +19,6 @@
         </repository>
     </repositories>
 
-
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -46,13 +45,6 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--
-        <dependency>
-           <groupId>tjws</groupId>
-           <artifactId>webserver</artifactId>
-           <scope>test</scope>
-        </dependency>
-        -->
     </dependencies>
 
 

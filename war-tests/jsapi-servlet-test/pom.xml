@@ -53,10 +53,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <!-- FIXME separate profile
-    Failed to execute goal tv.bodil:maven-testlol-plugin:1.2.2:test (default) on project test-jsapi-servlet-war: Execution default of goal tv.bodil:maven-testlol-plugin:1.2.2:test failed. NullPointerException
-    requires change of testlol/src/main/resources/tv/bodil/testlol/js/env.rhino.js, see http://envjs.lighthouseapp.com/projects/21590/tickets/178-__trim__-function-not-available-from-envjssetcookie-method
-    -->
     <build>
         <plugins>
             <plugin>
@@ -78,7 +74,5 @@
             </plugin>
         </plugins>
     </build>
-    <!--
-    -->
 </project>
 

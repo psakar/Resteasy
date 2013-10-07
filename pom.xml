@@ -23,7 +23,6 @@
 
     </properties>
 
-
 	<profiles>
 		<profile>
 			<!-- set properties for test of productized bits -->
@@ -46,6 +45,16 @@
 				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
 		-->
 			</properties>
+			<dependencyManagement>
+				<dependencies>
+
+					<dependency>
+						<groupId>com.github.relaxng</groupId>
+						<artifactId>relaxngDatatype</artifactId>
+						<version>2011.1-redhat-6</version><!--${versions.com.sun.istack.istack-commons-runtime}-->
+					</dependency>
+				</dependencies>
+			</dependencyManagement>
 		</profile>
 		<profile>
 			<!-- set properties for test of upstream bits -->

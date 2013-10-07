@@ -8,3 +8,5 @@
 # maven files
 target
 bin
+/maven-repo-as
+/maven-repo-local

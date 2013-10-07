@@ -11,6 +11,7 @@
     </parent>
     <artifactId>resteasy-guice</artifactId>
     <name>Resteasy Guice test</name>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>

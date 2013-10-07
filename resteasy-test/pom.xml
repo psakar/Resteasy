@@ -36,11 +36,18 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${versions.org.jboss.resteasy}</version>
+			<scope>compile</scope>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
             <version>${versions-test.org.jboss.resteasy}</version>
 			<scope>compile</scope>
         </dependency>
-
+		-->
 
         <!-- test -->
         <dependency>
