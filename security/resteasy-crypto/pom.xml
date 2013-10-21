@@ -19,7 +19,7 @@
             <version>${versions.org.jboss.resteasy}</version><!-- only upstream -->
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
             <artifactId>resteasy-test</artifactId>
@@ -42,5 +42,33 @@
         </dependency>
 
     </dependencies>
+
+	<profiles>
+		<profile>
+			<!-- exclude integrations tests which are known to fail-->
+			<id>exclude-tests-known-failures-BC</id>
+			<activation>
+				<property>
+					<name>exclude-tests-known-failures-BC</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes combine.children="append">
+								<!-- requires jdk with unlimited cryptography without BouncyCastle JCE provider  -->
+								<exclude>org/jboss/resteasy/test/security/smime/EnvelopedTest.java</exclude>
+								<exclude>org/jboss/resteasy/test/security/smime/IntegrationTest.java</exclude>
+								<exclude>org/jboss/resteasy/test/security/smime/SignedTest.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
