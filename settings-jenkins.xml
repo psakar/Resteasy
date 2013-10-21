@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>maven-repo-local</localRepository>
+  <profiles>
+		<profile>
+	      <id>eap-productization-maven-repository</id>
+		  <repositories>
+		    <repository>
+		      <id>eap-productization-maven-repository</id>
+			  <url>http://download.lab.bos.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
+		      <releases>
+		        <enabled>true</enabled>
+		      </releases>
+		      <snapshots>
+		        <enabled>false</enabled>
+		      </snapshots>
+		    </repository>
+		  </repositories>
+		  <pluginRepositories>
+		    <pluginRepository>
+		      <id>eap-productization-maven-plugin-repository</id>
+		      <url>http://download.lab.bos.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
+		      <releases>
+		        <enabled>true</enabled>
+		      </releases>
+		      <snapshots>
+		        <enabled>false</enabled>
+		      </snapshots>
+		    </pluginRepository>
+		  </pluginRepositories>
+		</profile>
+
+		<profile>
+		  <id>jboss-eap-maven-repository</id>
+		  <repositories>
+		    <repository>
+		      <id>jboss-eap</id>
+		      <url>file://maven-repo-as</url>
+		      <releases>
+		        <enabled>true</enabled>
+		      </releases>
+		      <snapshots>
+		        <enabled>false</enabled>
+		      </snapshots>
+		    </repository>
+		  </repositories>
+		  <pluginRepositories>
+		    <pluginRepository>
+		      <id>jboss-eap-maven-plugin-repository</id>
+		      <url>file://maven-repo-as</url>
+		      <releases>
+		        <enabled>true</enabled>
+		      </releases>
+		      <snapshots>
+		        <enabled>false</enabled>
+		      </snapshots>
+		    </pluginRepository>
+		  </pluginRepositories>
+		</profile>
+		<profile>
+		  <id>jboss-nexus-repository</id>
+		  <repositories>
+		    <repository>
+		        <id>jboss-nexus-public</id>
+		        <name>JBoss Nexus Public Repository</name>
+		        <layout>default</layout>
+		        <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		        <snapshots>
+		            <enabled>true</enabled>
+		        </snapshots>
+		    </repository>
+		  </repositories>
+		  <pluginRepositories>
+		    <pluginRepository>
+		        <id>jboss-nexus-public</id>
+		        <name>JBoss Nexus Public Repository</name>
+		        <layout>default</layout>
+		        <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		        <snapshots>
+		            <enabled>true</enabled>
+		        </snapshots>
+		    </pluginRepository>
+		  </pluginRepositories>
+		</profile>
+  </profiles>
+
+  <activeProfiles>
+		<!--
+    <activeProfile>eap-productization-maven-repository</activeProfile>
+		-->
+		<activeProfile>jboss-eap-maven-repository</activeProfile>
+		<activeProfile>jboss-nexus-repository</activeProfile>
+  </activeProfiles>
+
+</settings>
