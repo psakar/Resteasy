@@ -1,15 +1,12 @@
 <project>
     <parent>
-        <groupId>org.jboss.resteasy</groupId>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <version>2.3.7.Final</version>
     </parent>
     <name>Resteasy Examples</name>
-    <description/>
-    <url>http://wiki.jboss.org/wiki/Wiki.jsp?page=RESTeasyJAXRS</url>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.jboss.resteasy</groupId>
     <artifactId>testable-examples-pom</artifactId>
     <packaging>pom</packaging>
 

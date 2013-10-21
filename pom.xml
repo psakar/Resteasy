@@ -9,10 +9,11 @@
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		
+		<downloadSources>true</downloadSources>
+
 		<versions.org.jboss.resteasy>${project.version}</versions.org.jboss.resteasy>
 		<versions.cglib.cglib-nodep>2.1_3</versions.cglib.cglib-nodep>
 		<versions.org.springframework>3.0.3.RELEASE</versions.org.springframework>
@@ -529,7 +530,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+<!--
     <repositories>
         <repository>
             <id>jboss</id>
@@ -538,6 +539,7 @@
     </repositories>
     <pluginRepositories>
     </pluginRepositories>
+    -->
     <!--
     <build>
         <pluginManagement>
