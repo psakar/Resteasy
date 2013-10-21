@@ -23,11 +23,12 @@ public class ContextRefreshTest
 {
 
    private WebAppContext context;
+  private Server server;
 
    @Before
    public void before() throws Exception
    {
-      Server server = new Server(9092);
+      server = new Server(9092);
       context = new WebAppContext();
       context.setDescriptor("WEB-INF/web.xml");
       context.setResourceBase("src/test/resources");
@@ -39,6 +40,7 @@ public class ContextRefreshTest
 
    @After
    public void after() throws Exception {
+     server.stop();
      context.stop();
    }
 
