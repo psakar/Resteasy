@@ -11,6 +11,9 @@ prepare_maven_repo_as() {
 		echo "Maven repo as zip file $1 not found"
 		exit 1
 	fi
+	if [ -d $2 ]; then
+		rm -rf $2
+	fi
 	local MAVEN_REPO_TMP=${BUILD_DIR}/maven-repo-tmp
 	if [ -d ${MAVEN_REPO_TMP} ]; then
 	  rm -rf ${MAVEN_REPO_TMP}
@@ -19,7 +22,7 @@ prepare_maven_repo_as() {
 
 	unzip -q $1 -d ${MAVEN_REPO_TMP}
 	local MAVEN_REPO_FOLDER=$(ls ${MAVEN_REPO_TMP})
-	mv maven-repo-tmp/$MAVEN_REPO_FOLDER ${MAVEN_REPO_LOCAL}
+	mv ${MAVEN_REPO_TMP}/$MAVEN_REPO_FOLDER $2
 }
 
 # param #1 maven repos local folder
