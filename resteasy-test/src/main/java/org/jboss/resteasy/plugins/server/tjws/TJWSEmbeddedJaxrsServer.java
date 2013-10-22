@@ -1,12 +1,12 @@
 package org.jboss.resteasy.plugins.server.tjws;
 
 import java.util.Hashtable;
-import java.util.Map;
 
-import Acme.Serve.Serve;
 import org.jboss.resteasy.plugins.server.embedded.EmbeddedJaxrsServer;
 import org.jboss.resteasy.plugins.server.embedded.SecurityDomain;
 import org.jboss.resteasy.spi.ResteasyDeployment;
+
+import Acme.Serve.Serve;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -21,7 +21,8 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    protected Hashtable<String,String> initParameters;
    protected Hashtable<String,String> contextParameters;
 
-   public void setRootResourcePath(String rootResourcePath)
+   @Override
+  public void setRootResourcePath(String rootResourcePath)
    {
       this.rootResourcePath = rootResourcePath;
    }
@@ -30,12 +31,14 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    {
    }
 
-   public ResteasyDeployment getDeployment()
+   @Override
+  public ResteasyDeployment getDeployment()
    {
       return deployment;
    }
 
-   public void setDeployment(ResteasyDeployment deployment)
+   @Override
+  public void setDeployment(ResteasyDeployment deployment)
    {
       this.deployment = deployment;
    }
@@ -44,7 +47,7 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    {
       this.initParameters = initParameters;
    }
-   
+
    public void setContextParameters(Hashtable<String,String> contextParameters)
    {
       this.contextParameters = contextParameters;
@@ -59,7 +62,8 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
       super.start();
    }
 
-   public void setSecurityDomain(SecurityDomain sc)
+   @Override
+  public void setSecurityDomain(SecurityDomain sc)
    {
       servlet.setSecurityDomain(sc);
    }

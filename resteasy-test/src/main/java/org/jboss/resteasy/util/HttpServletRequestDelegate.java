@@ -1,10 +1,5 @@
 package org.jboss.resteasy.util;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,6 +7,12 @@ import java.security.Principal;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -21,12 +22,14 @@ public class HttpServletRequestDelegate implements HttpServletRequest
 {
    protected HttpServletRequest delegate;
 
-   public boolean isUserInRole(String s)
+   @Override
+  public boolean isUserInRole(String s)
    {
       return delegate.isUserInRole(s);
    }
 
-   public Principal getUserPrincipal()
+   @Override
+  public Principal getUserPrincipal()
    {
       return delegate.getUserPrincipal();
    }
@@ -36,267 +39,319 @@ public class HttpServletRequestDelegate implements HttpServletRequest
       this.delegate = delegate;
    }
 
-   public String getAuthType()
+   @Override
+  public String getAuthType()
    {
       return delegate.getAuthType();
    }
 
-   public int getLocalPort()
+   @Override
+  public int getLocalPort()
    {
       return delegate.getLocalPort();
    }
 
-   public Cookie[] getCookies()
+   @Override
+  public Cookie[] getCookies()
    {
       return delegate.getCookies();
    }
 
-   public long getDateHeader(String s)
+   @Override
+  public long getDateHeader(String s)
    {
       return delegate.getDateHeader(s);
    }
 
-   public String getHeader(String s)
+   @Override
+  public String getHeader(String s)
    {
       return delegate.getHeader(s);
    }
 
-   public Enumeration getHeaders(String s)
+   @Override
+  public Enumeration<?> getHeaders(String s)
    {
       return delegate.getHeaders(s);
    }
 
-   public Enumeration getHeaderNames()
+   @Override
+  public Enumeration<?> getHeaderNames()
    {
       return delegate.getHeaderNames();
    }
 
-   public int getIntHeader(String s)
+   @Override
+  public int getIntHeader(String s)
    {
       return delegate.getIntHeader(s);
    }
 
-   public String getMethod()
+   @Override
+  public String getMethod()
    {
       return delegate.getMethod();
    }
 
-   public String getPathInfo()
+   @Override
+  public String getPathInfo()
    {
       return delegate.getPathInfo();
    }
 
-   public String getPathTranslated()
+   @Override
+  public String getPathTranslated()
    {
       return delegate.getPathTranslated();
    }
 
-   public String getContextPath()
+   @Override
+  public String getContextPath()
    {
       return delegate.getContextPath();
    }
 
-   public String getQueryString()
+   @Override
+  public String getQueryString()
    {
       return delegate.getQueryString();
    }
 
-   public String getRemoteUser()
+   @Override
+  public String getRemoteUser()
    {
       return delegate.getRemoteUser();
    }
 
-   public String getRequestedSessionId()
+   @Override
+  public String getRequestedSessionId()
    {
       return delegate.getRequestedSessionId();
    }
 
-   public String getRequestURI()
+   @Override
+  public String getRequestURI()
    {
       return delegate.getRequestURI();
    }
 
-   public StringBuffer getRequestURL()
+   @Override
+  public StringBuffer getRequestURL()
    {
       return delegate.getRequestURL();
    }
 
-   public String getServletPath()
+   @Override
+  public String getServletPath()
    {
       return delegate.getServletPath();
    }
 
-   public HttpSession getSession(boolean b)
+   @Override
+  public HttpSession getSession(boolean b)
    {
       return delegate.getSession(b);
    }
 
-   public HttpSession getSession()
+   @Override
+  public HttpSession getSession()
    {
       return delegate.getSession();
    }
 
-   public boolean isRequestedSessionIdValid()
+   @Override
+  public boolean isRequestedSessionIdValid()
    {
       return delegate.isRequestedSessionIdValid();
    }
 
-   public boolean isRequestedSessionIdFromCookie()
+   @Override
+  public boolean isRequestedSessionIdFromCookie()
    {
       return delegate.isRequestedSessionIdFromCookie();
    }
 
-   public boolean isRequestedSessionIdFromURL()
+   @Override
+  public boolean isRequestedSessionIdFromURL()
    {
       return delegate.isRequestedSessionIdFromURL();
    }
 
-   @SuppressWarnings("deprecation")
+   @Override
+  @SuppressWarnings("deprecation")
    public boolean isRequestedSessionIdFromUrl()
    {
       return delegate.isRequestedSessionIdFromUrl();
    }
 
-   public Object getAttribute(String s)
+   @Override
+  public Object getAttribute(String s)
    {
       return delegate.getAttribute(s);
    }
 
-   public Enumeration getAttributeNames()
+   @Override
+  public Enumeration<?> getAttributeNames()
    {
       return delegate.getAttributeNames();
    }
 
-   public String getCharacterEncoding()
+   @Override
+  public String getCharacterEncoding()
    {
       return delegate.getCharacterEncoding();
    }
 
-   public void setCharacterEncoding(String s)
+   @Override
+  public void setCharacterEncoding(String s)
            throws UnsupportedEncodingException
    {
       delegate.setCharacterEncoding(s);
    }
 
-   public int getContentLength()
+   @Override
+  public int getContentLength()
    {
       return delegate.getContentLength();
    }
 
-   public String getContentType()
+   @Override
+  public String getContentType()
    {
       return delegate.getContentType();
    }
 
-   public ServletInputStream getInputStream()
+   @Override
+  public ServletInputStream getInputStream()
            throws IOException
    {
       return delegate.getInputStream();
    }
 
-   public String getParameter(String s)
+   @Override
+  public String getParameter(String s)
    {
       return delegate.getParameter(s);
    }
 
-   public Enumeration getParameterNames()
+   @Override
+  public Enumeration<?> getParameterNames()
    {
       return delegate.getParameterNames();
    }
 
-   public String[] getParameterValues(String s)
+   @Override
+  public String[] getParameterValues(String s)
    {
       return delegate.getParameterValues(s);
    }
 
-   public Map getParameterMap()
+   @Override
+  public Map<?, ?> getParameterMap()
    {
       return delegate.getParameterMap();
    }
 
-   public String getProtocol()
+   @Override
+  public String getProtocol()
    {
       return delegate.getProtocol();
    }
 
-   public String getScheme()
+   @Override
+  public String getScheme()
    {
       return delegate.getScheme();
    }
 
-   public String getServerName()
+   @Override
+  public String getServerName()
    {
       return delegate.getServerName();
    }
 
-   public int getServerPort()
+   @Override
+  public int getServerPort()
    {
       return delegate.getServerPort();
    }
 
-   public BufferedReader getReader()
+   @Override
+  public BufferedReader getReader()
            throws IOException
    {
       return delegate.getReader();
    }
 
-   public String getRemoteAddr()
+   @Override
+  public String getRemoteAddr()
    {
       return delegate.getRemoteAddr();
    }
 
-   public String getRemoteHost()
+   @Override
+  public String getRemoteHost()
    {
       return delegate.getRemoteHost();
    }
 
-   public void setAttribute(String s, Object o)
+   @Override
+  public void setAttribute(String s, Object o)
    {
       delegate.setAttribute(s, o);
    }
 
-   public void removeAttribute(String s)
+   @Override
+  public void removeAttribute(String s)
    {
       delegate.removeAttribute(s);
    }
 
-   public Locale getLocale()
+   @Override
+  public Locale getLocale()
    {
       return delegate.getLocale();
    }
 
-   public Enumeration getLocales()
+   @Override
+  public Enumeration<?> getLocales()
    {
       return delegate.getLocales();
    }
 
-   public boolean isSecure()
+   @Override
+  public boolean isSecure()
    {
       return delegate.isSecure();
    }
 
-   public RequestDispatcher getRequestDispatcher(String s)
+   @Override
+  public RequestDispatcher getRequestDispatcher(String s)
    {
       return delegate.getRequestDispatcher(s);
    }
 
-   @SuppressWarnings("deprecation")
+   @Override
+  @SuppressWarnings("deprecation")
    public String getRealPath(String s)
    {
       return delegate.getRealPath(s);
    }
 
-   public int getRemotePort()
+   @Override
+  public int getRemotePort()
    {
       return delegate.getRemotePort();
    }
 
-   public String getLocalName()
+   @Override
+  public String getLocalName()
    {
       return delegate.getLocalName();
    }
 
-   public String getLocalAddr()
+   @Override
+  public String getLocalAddr()
    {
       return delegate.getLocalAddr();
    }

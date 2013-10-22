@@ -50,41 +50,45 @@ import java.util.Vector;
 // <P>
 // @see Acme.Utils#match
 
-public class WildcardDictionary extends Dictionary
+public class WildcardDictionary extends Dictionary<Object, Object>
 {
 
-   private Vector keys;
+   private final Vector<Object> keys;
 
-   private Vector elements;
+   private final Vector<Object> elements;
 
    // / Constructor.
    public WildcardDictionary()
    {
-      keys = new Vector();
-      elements = new Vector();
+      keys = new Vector<Object>();
+      elements = new Vector<Object>();
    }
 
    // / Returns the number of elements contained within the dictionary.
-   public int size()
+   @Override
+  public int size()
    {
       return elements.size();
    }
 
    // / Returns true if the dictionary contains no elements.
-   public boolean isEmpty()
+   @Override
+  public boolean isEmpty()
    {
       return size() == 0;
    }
 
    // / Returns an enumeration of the dictionary's keys.
-   public Enumeration keys()
+   @Override
+  public Enumeration<Object> keys()
    {
       return keys.elements();
    }
 
    // / Returns an enumeration of the elements. Use the Enumeration methods
    // on the returned object to fetch the elements sequentially.
-   public Enumeration elements()
+   @Override
+  public Enumeration<Object> elements()
    {
       return elements.elements();
    }
@@ -95,7 +99,8 @@ public class WildcardDictionary extends Dictionary
    // @param key the string to match
    // @returns the element for the key, or null if there's no match
    // @see Acme.Utils#match
-   public synchronized Object get(Object key)
+   @Override
+  public synchronized Object get(Object key)
    {
       String sKey = (String) key;
       int matching_len = 0, found = -1;
@@ -148,7 +153,8 @@ public class WildcardDictionary extends Dictionary
    // @return the old value of the key, or null if it did not have one.
    // @exception NullPointerException If the value of the specified
    // element is null.
-   public synchronized Object put(Object key, Object element)
+   @Override
+  public synchronized Object put(Object key, Object element)
    {
       int i = keys.indexOf(key);
       if (i != -1)
@@ -169,7 +175,8 @@ public class WildcardDictionary extends Dictionary
    // key is not present.
    // @param key the key that needs to be removed
    // @return the value of key, or null if the key was not found.
-   public synchronized Object remove(Object key)
+   @Override
+  public synchronized Object remove(Object key)
    {
       int i = keys.indexOf(key);
       if (i != -1)

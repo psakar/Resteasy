@@ -19,20 +19,15 @@
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  *  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  *  SUCH DAMAGE.
- *  
+ *
  *  Visit http://tjws.sourceforge.net to get the latest information
- *  about Rogatkin's products.                                                        
- *  $Id: SSLAcceptor.java,v 1.5 2009/12/10 04:30:51 dmitriy Exp $                
+ *  about Rogatkin's products.
+ *  $Id: SSLAcceptor.java,v 1.5 2009/12/10 04:30:51 dmitriy Exp $
  *  Created on Feb 21, 2007
  *  @author dmitriy
  */
 package Acme.Serve;
 
-import Acme.Serve.Serve.Acceptor;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocket;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -42,6 +37,12 @@ import java.net.Socket;
 import java.security.KeyStore;
 import java.security.Security;
 import java.util.Map;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocket;
+
+import Acme.Serve.Serve.Acceptor;
 
 public class SSLAcceptor implements Acceptor
 {
@@ -121,7 +122,8 @@ public class SSLAcceptor implements Acceptor
    }
 
 
-   public Socket accept() throws IOException
+   @Override
+  public Socket accept() throws IOException
    {
       Socket result = socket.accept();
       if (result != null)
@@ -129,7 +131,8 @@ public class SSLAcceptor implements Acceptor
       return result;
    }
 
-   public void destroy() throws IOException
+   @Override
+  public void destroy() throws IOException
    {
       try
       {
@@ -141,7 +144,8 @@ public class SSLAcceptor implements Acceptor
       }
    }
 
-   public void init(Map inProperties, Map outProperties) throws IOException
+   @Override
+  public void init(Map<Object, Object> inProperties, Map<Object, Object> outProperties) throws IOException
    {
       javax.net.ssl.SSLServerSocketFactory sslSoc = null;
       // init keystore
@@ -256,7 +260,8 @@ public class SSLAcceptor implements Acceptor
       System.setProperty(PROTOCOL_PACKAGES, packages);
    }
 
-   public String toString()
+   @Override
+  public String toString()
    {
       return socket != null ? socket.toString() : "SSLAcceptor uninitialized";
    }
@@ -283,7 +288,7 @@ public class SSLAcceptor implements Acceptor
       socket.setNeedClientAuth(clientAuth);
    }
 
-   private String getWithDefault(Map args, String name, String defValue)
+   private String getWithDefault(Map<Object, Object> args, String name, String defValue)
    {
       String result = (String) args.get(name);
       if (result == null)
