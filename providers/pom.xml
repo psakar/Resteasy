@@ -12,18 +12,42 @@
     <artifactId>providers-pom</artifactId>
     <packaging>pom</packaging>
 
+	<profiles>
+		<profile>
+			<!-- set properties for test of productized bits -->
+			<id>productized</id>
+			<activation>
+				<property>
+					<name>productized</name>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<!-- set properties for test of upstream bits -->
+			<id>upstream</id>
+			<activation>
+				<property>
+					<name>!productized</name>
+				</property>
+			</activation>
+  	  <modules>
+        <module>fastinfoset</module>
+	    </modules>
+		</profile>
+	</profiles>
+
+
     <modules>
         <!-- module>abdera-atom</module -->
         <module>jaxb</module>
         <module>jettison</module>
-        <module>fastinfoset</module>
         <module>test-all-jaxb</module>
         <module>jackson</module>
         <module>test-jackson-jaxb-coexistence</module>
         <module>resteasy-atom</module>
         <module>multipart</module>
         <module>yaml</module>
-        <!--module>resteasy-html</module--><!-- no tests, only upstream --> 
+        <!--module>resteasy-html</module--><!-- no tests, only upstream -->
         <!--module>test-resteasy-html</module--><!-- no tests, only upstream -->
         <module>resteasy-hibernatevalidator-provider</module>
     </modules>

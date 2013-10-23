@@ -78,6 +78,10 @@
 				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
 		-->
 			</properties>
+
+	    <modules>
+        <module>server-adapters</module>
+	    </modules>
 		</profile>
 	</profiles>
 
