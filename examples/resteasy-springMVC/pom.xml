@@ -3,28 +3,82 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.resteasy.examples</groupId>
+
+    <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
+        <artifactId>resteasy-jaxrs-all</artifactId>
+        <version>2.3.7.Final</version>
+	    <relativePath>../../pom.xml</relativePath>
+    </parent>
+
     <artifactId>examples-resteasy-springMVC</artifactId>
     <packaging>war</packaging>
     <version>2.3.7.Final</version>
+
     <name>Spring MVC RestContact Maven Webapp</name>
-    <description/>
-    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-spring</artifactId>
-            <version>2.3.7.Final</version>
+            <version>${versions-test.org.jboss.resteasy}</version>
+            <exclusions>
+            	<exclusion>
+	            	<groupId>org.jboss.resteasy</groupId>
+	            	<artifactId>resteasy-jaxrs</artifactId>
+            	</exclusion>
+            	<exclusion>
+	            	<groupId>org.jboss.resteasy</groupId>
+	            	<artifactId>jaxrs-api</artifactId>
+            	</exclusion>
+            	<exclusion>
+	            	<groupId>org.jboss.resteasy</groupId>
+	            	<artifactId>resteasy-jettison-provider</artifactId>
+            	</exclusion>
+            	<exclusion>
+	            	<groupId>org.jboss.spec.javax.annotation</groupId>
+	            	<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
+
+
+         	<dependency>
+          	<groupId>org.jboss.resteasy</groupId>
+          	<artifactId>resteasy-jaxrs</artifactId>
+          	<version>${versions-test.org.jboss.resteasy}</version>
+           <scope>provided</scope>
+         	</dependency>
+         	<dependency>
+          	<groupId>org.jboss.resteasy</groupId>
+          	<artifactId>jaxrs-api</artifactId>
+          	<version>${versions-test.org.jboss.resteasy}</version>
+           <scope>provided</scope>
+         	</dependency>
+         	<dependency>
+          	<groupId>org.jboss.resteasy</groupId>
+          	<artifactId>resteasy-jettison-provider</artifactId>
+          	<version>${versions-test.org.jboss.resteasy}</version>
+           <scope>provided</scope>
+         	</dependency>
+         	<dependency>
+          	<groupId>org.jboss.spec.javax.annotation</groupId>
+          	<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+          	<version>1.0.0.Final</version>
+           <scope>provided</scope>
+         	</dependency>
+
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>2.3.7.Final</version>
+            <version>${versions-test.org.jboss.resteasy}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>${versions.org.springframework}</version>
         </dependency>
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -33,31 +87,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.4</version>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>tjws</artifactId>
-            <version>2.3.7.Final</version>
-            <scope>test</scope>
-        </dependency>
-        <!--
-        <dependency>
-           <groupId>tjws</groupId>
-           <artifactId>webserver</artifactId>
-           <version>1.3.1</version>
-           <scope>test</scope>
-        </dependency>
-        -->
     </dependencies>
 
     <!-- this distributionManagement is only here for RESTEasy automated testing of examples build.  You can remove if you are copying this
@@ -88,13 +122,6 @@
                 <configuration>
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
                 </configuration>
             </plugin>
         </plugins>
