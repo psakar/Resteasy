@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <name>RESTEasy JAX-RS test</name>
-    <groupId>org.jboss.resteasy-ts</groupId>
-    <artifactId>resteasy-jaxrs-all</artifactId>
-    <version>2.3.7.Final</version>
-    <packaging>pom</packaging>
-    <properties>
+  <modelVersion>4.0.0</modelVersion>
+  <name>RESTEasy JAX-RS test</name>
+  <groupId>org.jboss.resteasy-ts</groupId>
+  <artifactId>resteasy-jaxrs-all</artifactId>
+  <version>2.3.7.Final</version>
+  <packaging>pom</packaging>
+  <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -21,8 +21,10 @@
 		<versions.httpunit.httpunit>1.7</versions.httpunit.httpunit>
 		<versions.commons-httpclient.commons-httpclient>3.1</versions.commons-httpclient.commons-httpclient>
 		<versions.org.mortbay.jetty.jetty>6.1.15</versions.org.mortbay.jetty.jetty>
-
-    </properties>
+   	<as.version>7.3.0.Final-redhat-9</as.version>
+    <jetty7.version>7.0.2.v20100331</jetty7.version>
+    <jetty8.version>8.1.1.v20120215</jetty8.version>
+  </properties>
 
 	<profiles>
 		<profile>
@@ -111,7 +113,7 @@
         <module>profiling-tests</module>
         <!--module>jboss-modules</module--><!-- does not contain any tests -->
         <!-- <module>as7-integration-testing</module> --><!-- not included in upstream -->
-        <!--module>arquillian</module--> <!-- FIXME upstream version is not ready to be tested with product -->
+        <module>arquillian</module> <!-- regression tests using arquillian container -->
 <!--
 ./resteasy-cdi/src/test/java
 
@@ -475,7 +477,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.7</version>
+                <version>4.8.1</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
