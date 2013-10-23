@@ -6,13 +6,13 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.junit.Test;
 
-public class AsyncTimeoutTest extends AsyncTimeoutTestCase
+public class DefaultAsyncTimeoutWithRunnableTest extends AsyncTimeoutWithRunnableTestCase
 {
 
    @Test
-   public void testAsynchTimeout() throws Exception
+   public void testDefaultAsynchTimeout() throws Exception
    {
-      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-736/test/");
+      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-736-runnable/default/");
       long start = System.currentTimeMillis();
       System.out.println("start:   " + start);
       ClientResponse<String> response = null;
@@ -34,8 +34,7 @@ public class AsyncTimeoutTest extends AsyncTimeoutTestCase
          assertTrue(response != null);
          System.out.println("response: " + response.getEntity());
          assertEquals(503, response.getStatus());
-         assertTrue("Expected response time < 10000, actual " + elapsed, elapsed < 10000 + 500);
+         assertTrue("Expected response time < 35000, actual " + elapsed, elapsed < 35000); // Jetty async timeout defaults to 30000.
       }
    }
-
 }

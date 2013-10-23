@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * 
+ *
  * @author <a href="ron.sigal@jboss.com">Ron Sigal</a>
  * @version $Revision: 1.1 $
  *
@@ -42,7 +42,7 @@ public class AsyncPostProcessingTest
    public void testSync() throws Exception
    {
       reset();
-      ClientRequest request = new ClientRequest("http://localhost:9090/RESTEASY-767/sync");
+      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-767/sync");
       ClientResponse<?> response = request.get();
       System.out.println("Status: " + response.getStatus());
       assertEquals(200, response.getStatus());
@@ -53,12 +53,12 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("sync", response.getEntity(String.class));
    }
-   
+
    @Test
    public void testAsyncWithDelay() throws Exception
    {
       reset();
-      ClientRequest request = new ClientRequest("http://localhost:9090/RESTEASY-767/async/delay");
+      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-767/async/delay");
       ClientResponse<?> response = request.get();
       System.out.println("Status: " + response.getStatus());
       assertEquals(200, response.getStatus());
@@ -69,12 +69,12 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("async/delay", response.getEntity(String.class));
    }
-   
+
    @Test
    public void testAsyncWithNoDelay() throws Exception
    {
       reset();
-      ClientRequest request = new ClientRequest("http://localhost:9090/RESTEASY-767/async/nodelay");
+      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-767/async/nodelay");
       ClientResponse<?> response = request.get();
       System.out.println("Status: " + response.getStatus());
       assertEquals(200, response.getStatus());
@@ -85,7 +85,7 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("async/nodelay", response.getEntity(String.class));
    }
-   
+
    private void reset()
    {
       TestMessageBodyWriterInterceptor.called = false;

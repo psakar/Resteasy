@@ -6,13 +6,13 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.junit.Test;
 
-public class AsyncTimeoutTest extends AsyncTimeoutTestCase
+public class AsyncTimeoutWithRunnableTest extends AsyncTimeoutWithRunnableTestCase
 {
 
    @Test
    public void testAsynchTimeout() throws Exception
    {
-      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-736/test/");
+      ClientRequest request = new ClientRequest("http://localhost:8080/RESTEASY-736-runnable/test/");
       long start = System.currentTimeMillis();
       System.out.println("start:   " + start);
       ClientResponse<String> response = null;
