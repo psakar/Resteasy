@@ -1,5 +1,21 @@
 package org.jboss.resteasy.test.security.smime;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.SequenceInputStream;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.Security;
+import java.security.cert.X509Certificate;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetHeaders;
+import javax.mail.internet.MimeBodyPart;
+
 import org.bouncycastle.cms.CMSAlgorithm;
 import org.bouncycastle.cms.CMSEnvelopedDataStreamGenerator;
 import org.bouncycastle.cms.CMSException;
@@ -20,24 +36,6 @@ import org.jboss.resteasy.util.Base64;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import javax.activation.CommandMap;
-import javax.activation.MailcapCommandMap;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetHeaders;
-import javax.mail.internet.MimeBodyPart;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.SequenceInputStream;
-import java.security.NoSuchProviderException;
-import java.security.PrivateKey;
-import java.security.Security;
-import java.security.cert.X509Certificate;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -117,7 +115,8 @@ public class EnvelopedTest
       Assert.assertEquals("<customer name=\"bill\"/>", body.trim());
    }
 
-   @Test
+   @SuppressWarnings("deprecation")
+  @Test
    public void testHeaders()
            throws Exception
    {
@@ -149,13 +148,6 @@ public class EnvelopedTest
       mp.writeTo(os);
       String s = new String(os.toByteArray());
       System.out.println(s);
-   }
-
-   private void outputFile(MimeBodyPart mp) throws IOException, MessagingException
-   {
-      FileOutputStream os = new FileOutputStream("smime.txt");
-      mp.writeTo(os);
-      os.close();
    }
 
    @Test
@@ -213,6 +205,7 @@ public class EnvelopedTest
       return decode2Mime(mp);
    }
 
+   @SuppressWarnings("deprecation")
    private MimeBodyPart decode2Mime(MimeBodyPart mp) throws MessagingException, CMSException, SMIMEException, NoSuchProviderException, IOException
    {
       SMIMEEnveloped m = new SMIMEEnveloped(mp);

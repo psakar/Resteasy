@@ -1,5 +1,26 @@
 package org.jboss.resteasy.test.security.doseta;
 
+import java.net.URL;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SignatureException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 import org.jboss.resteasy.annotations.security.doseta.After;
 import org.jboss.resteasy.annotations.security.doseta.Signed;
 import org.jboss.resteasy.annotations.security.doseta.Verify;
@@ -7,7 +28,6 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
-import org.jboss.resteasy.client.exception.mapper.ApacheHttpClient4ExceptionMapper;
 import org.jboss.resteasy.logging.Logger;
 import org.jboss.resteasy.security.doseta.DKIMSignature;
 import org.jboss.resteasy.security.doseta.DosetaKeyRepository;
@@ -25,26 +45,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import java.net.URL;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SignatureException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -158,7 +158,7 @@ public class SigningTest extends BaseResourceTest
          DKIMSignature signature = new DKIMSignature();
          signature.setDomain("samplezone.org");
          signature.setSelector("test");
-         signature.sign(new HashMap(), "hello world".getBytes(), keys.getPrivate());
+         signature.sign(new HashMap<Object, Object>(), "hello world".getBytes(), keys.getPrivate());
 
          byte[] sig = {0x0f, 0x03};
          String encodedBadSig = Base64.encodeBytes(sig);
@@ -179,7 +179,7 @@ public class SigningTest extends BaseResourceTest
          DKIMSignature signature = new DKIMSignature();
          signature.setDomain("samplezone.org");
          signature.setSelector("test");
-         signature.sign(new HashMap(), "hello world".getBytes(), keys.getPrivate());
+         signature.sign(new HashMap<Object, Object>(), "hello world".getBytes(), keys.getPrivate());
 
          return Response.ok("hello").header(DKIMSignature.DKIM_SIGNATURE, signature.toString()).build();
       }
@@ -325,9 +325,9 @@ public class SigningTest extends BaseResourceTest
       contentSignature.setAttribute("token", "1122");
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
 
-      ClientResponse response = request.delete();
+      ClientResponse<?> response = request.delete();
       Assert.assertEquals(200, response.getStatus());
-      String signatureHeader = (String)response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE);
+      String signatureHeader = response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE);
       contentSignature = new DKIMSignature(signatureHeader);
       Verification verification = new Verification(keys.getPublic());
       verification.setBodyHashRequired(false);
@@ -371,7 +371,7 @@ public class SigningTest extends BaseResourceTest
       contentSignature.setPrivateKey(keys.getPrivate());
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(204, response.getStatus());
       response.releaseConnection();
 
@@ -389,7 +389,7 @@ public class SigningTest extends BaseResourceTest
       contentSignature.setPrivateKey(keys.getPrivate());
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(204, response.getStatus());
       response.releaseConnection();
 
@@ -407,7 +407,7 @@ public class SigningTest extends BaseResourceTest
 
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(204, response.getStatus());
       response.releaseConnection();
 
@@ -424,7 +424,7 @@ public class SigningTest extends BaseResourceTest
       contentSignature.setPrivateKey(badKey);
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(401, response.getStatus());
       response.releaseConnection();
    }
@@ -434,7 +434,7 @@ public class SigningTest extends BaseResourceTest
    {
       ClientRequest request = executor.createRequest(TestPortProvider.generateURL("/signed"));
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(401, response.getStatus());
       response.releaseConnection();
    }
@@ -446,7 +446,7 @@ public class SigningTest extends BaseResourceTest
       signature.setTimestamp();
       signature.setSelector("test");
       signature.setDomain("samplezone.org");
-      signature.sign(new HashMap(), "hello world".getBytes(), keys.getPrivate());
+      signature.sign(new HashMap<Object, Object>(), "hello world".getBytes(), keys.getPrivate());
       String sig = signature.toString();
       System.out.println(DKIMSignature.DKIM_SIGNATURE + ": " + sig);
       signature = new DKIMSignature(sig);
@@ -467,7 +467,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
 
 
@@ -490,16 +490,14 @@ public class SigningTest extends BaseResourceTest
       Thread.sleep(1500);
       try
       {
-         String output = response.getEntity();
-         throw new Exception("unreachable!");
+         response.getEntity();
+         Assert.fail("unreachable!");
       }
       catch (UnauthorizedSignatureException e)
       {
          Assert.assertEquals("Failed to verify signatures:\r\n Signature is stale", e.getMessage());
       }
       response.releaseConnection();
-
-
    }
 
    @Test
@@ -514,7 +512,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
    }
 
@@ -530,7 +528,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
    }
 
@@ -546,7 +544,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
    }
 
@@ -562,7 +560,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
    }
 
@@ -578,7 +576,7 @@ public class SigningTest extends BaseResourceTest
       response.getAttributes().put(Verifier.class.getName(), verifier);
       System.out.println(response.getHeaders().getFirst(DKIMSignature.DKIM_SIGNATURE));
       Assert.assertEquals(200, response.getStatus());
-      String output = response.getEntity();
+      response.getEntity();
       response.releaseConnection();
    }
 
@@ -597,8 +595,8 @@ public class SigningTest extends BaseResourceTest
       Thread.sleep(1500);
       try
       {
-         String output = response.getEntity();
-         throw new Exception("unreachable!");
+         response.getEntity();
+         Assert.fail("unreachable!");
       }
       catch (UnauthorizedSignatureException e)
       {
@@ -628,8 +626,8 @@ public class SigningTest extends BaseResourceTest
       Assert.assertEquals(200, response.getStatus());
       try
       {
-         String output = response.getEntity();
-         throw new Exception("unreachable!");
+         response.getEntity();
+         Assert.fail("unreachable!");
       }
       catch (UnauthorizedSignatureException e)
       {
@@ -741,24 +739,18 @@ public class SigningTest extends BaseResourceTest
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put(KeyRepository.class.getName(), repository);
       SigningProxy proxy = ProxyFactory.create(SigningProxy.class, TestPortProvider.generateURL(""), attributes);
-      String output = proxy.hello();
+      proxy.hello();
       proxy.postSimple("hello world");
    }
 
 
-   @Test
+   @Test(expected = UnauthorizedSignatureException.class)
    public void testBadSignatureProxy() throws Exception
    {
       Map<String, Object> attributes = new HashMap<String, Object>();
       attributes.put(KeyRepository.class.getName(), repository);
       SigningProxy proxy = ProxyFactory.create(SigningProxy.class, TestPortProvider.generateURL(""), attributes);
-      try
-      {
-         String output = proxy.bad();
-      }
-      catch (UnauthorizedSignatureException e)
-      {
-      }
+      proxy.bad();
    }
 
 }

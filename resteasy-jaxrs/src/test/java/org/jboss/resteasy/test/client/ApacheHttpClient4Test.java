@@ -285,7 +285,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
    private void runit(ApacheHttpClient4Executor executor, boolean release)
    {
       ClientRequest request = executor.createRequest("http://localhost:8081/test");
-      ClientResponse response = null;
+      ClientResponse<?> response = null;
       try
       {
          System.out.println("get");

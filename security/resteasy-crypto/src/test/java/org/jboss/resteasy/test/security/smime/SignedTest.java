@@ -1,5 +1,20 @@
 package org.jboss.resteasy.test.security.smime;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.PrivateKey;
+import java.security.Security;
+import java.security.cert.X509Certificate;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetHeaders;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
+
 import org.bouncycastle.cms.SignerInfoGenerator;
 import org.bouncycastle.cms.SignerInformation;
 import org.bouncycastle.cms.SignerInformationStore;
@@ -12,20 +27,6 @@ import org.jboss.resteasy.security.PemUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetHeaders;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.PrivateKey;
-import java.security.Security;
-import java.security.cert.X509Certificate;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -108,7 +109,8 @@ public class SignedTest
    }
 
 
-   @Test
+   @SuppressWarnings("deprecation")
+  @Test
    public void testPythonSigned() throws Exception
    {
       final InputStream pythonIs = Thread.currentThread().getContextClassLoader().getResourceAsStream("python_signed.txt");
@@ -170,10 +172,7 @@ public class SignedTest
       ByteArrayDataSource ds = new ByteArrayDataSource(is, contentType);
       MimeMultipart mm = new MimeMultipart(ds);
       MimeBodyPart part = (MimeBodyPart)mm.getBodyPart(0);
-
-
-
-
+      Assert.assertNotNull(part);
    }
 
    @Test

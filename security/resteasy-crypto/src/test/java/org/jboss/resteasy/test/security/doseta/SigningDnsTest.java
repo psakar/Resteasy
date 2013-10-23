@@ -1,5 +1,17 @@
 package org.jboss.resteasy.test.security.doseta;
 
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
 import org.jboss.resteasy.annotations.security.doseta.Signed;
 import org.jboss.resteasy.annotations.security.doseta.Verify;
 import org.jboss.resteasy.client.ClientRequest;
@@ -13,18 +25,8 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import se.unlogic.eagledns.EagleDNS;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
+import se.unlogic.eagledns.EagleDNS;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -133,7 +135,7 @@ public class SigningDnsTest extends BaseResourceTest
 
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(204, response.getStatus());
 
 
@@ -149,7 +151,7 @@ public class SigningDnsTest extends BaseResourceTest
       contentSignature.setPrivateKey(badKey);
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(401, response.getStatus());
    }
 
@@ -158,7 +160,7 @@ public class SigningDnsTest extends BaseResourceTest
    {
       ClientRequest request = new ClientRequest(TestPortProvider.generateURL("/signed"));
       request.body("text/plain", "hello world");
-      ClientResponse response = request.post();
+      ClientResponse<?> response = request.post();
       Assert.assertEquals(401, response.getStatus());
    }
 

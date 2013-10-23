@@ -1,12 +1,12 @@
 package org.jboss.resteasy.test.tjws;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
@@ -22,7 +22,7 @@ import org.junit.Test;
 
 /**
  * Unit test for RESTEASY-602.
- * 
+ *
  * @author <a href="mailto:ron.sigal@jboss.com">Ron Sigal</a>
  * @version $Revision: $
  */
@@ -42,31 +42,31 @@ public class ChunkedEmptyEntityTest
    {
       EmbeddedContainer.stop();
    }
-   
+
    @Test
    public void testContinue() throws Exception
    {
       _run_test("PUT", "/continue", "100");
    }
-   
+
    @Test
    public void testHead() throws Exception
    {
       _run_test("HEAD", "/head", "204");
    }
-   
+
    @Test
    public void testNoContent() throws Exception
    {
       _run_test("PUT", "/nocontent", "204");
    }
-   
+
    @Test
    public void testNotModified() throws Exception
    {
       _run_test("GET", "/notmodified", "304");
    }
-   
+
    void _run_test(String method, String path, String status) throws Exception
    {
 	   // Solicit a reply with response code 204.
@@ -79,8 +79,8 @@ public class ChunkedEmptyEntityTest
 	   writeString(os, "");
 	   os.write("hello world".getBytes());
 	   os.flush();
-	   
-	   // Verify response code is correct and that the message 
+
+	   // Verify response code is correct and that the message
 	   // 1. has no "transfer-encoding" header, and
 	   // 2. consists of status line and headers but no chunks.
 	   InputStream is = s.getInputStream();
@@ -96,14 +96,16 @@ public class ChunkedEmptyEntityTest
 		   assertFalse("transfer-encoding".equalsIgnoreCase(line.substring(0, i)));
 		   line = readLine(is);
 	   }
+	   os.close();
+	   s.close();
    }
 
-   private void writeString(OutputStream os, String s) throws IOException 
+   private void writeString(OutputStream os, String s) throws IOException
    {
       System.out.println(">>" + s);
       os.write((s + "\r\n").getBytes());
    }
-   
+
    /**
     * Lifted from Acme.Serve.Serve
     */
@@ -143,7 +145,7 @@ public class ChunkedEmptyEntityTest
 
       return buf.toString();
    }
-   
+
    @Path("/")
    static public class SimpleResource
    {
@@ -154,7 +156,7 @@ public class ChunkedEmptyEntityTest
       {
          return Response.noContent().build();
       }
-      
+
       @PUT
       @Path("/continue")
       @Consumes("text/plain")
@@ -162,7 +164,7 @@ public class ChunkedEmptyEntityTest
       {
          return Response.status(100).build();
       }
-      
+
       @PUT
       @Path("/nocontent")
       @Consumes("text/plain")
@@ -170,7 +172,7 @@ public class ChunkedEmptyEntityTest
       {
          System.out.println(body);
       }
-      
+
       @GET
       @Path("/notmodified")
       @Consumes("text/plain")
