@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
+import org.jboss.resteasy.resteasy736.TestResource;
 import org.junit.Test;
 
 public class DefaultAsyncTimeoutTest extends AsyncTimeoutTestCase
@@ -34,7 +35,8 @@ public class DefaultAsyncTimeoutTest extends AsyncTimeoutTestCase
          assertTrue(response != null);
          System.out.println("response: " + response.getEntity());
          assertEquals(503, response.getStatus());
-         assertTrue("Expected response time < 35000, actual " + elapsed, elapsed < 35000); // Jetty async timeout defaults to 30000.
+         int max = TestResource.getDefaultTimeout() + 5000;
+         assertTrue("Expected response time < " + max + ", actual " + elapsed, elapsed < max);
       }
    }
 }

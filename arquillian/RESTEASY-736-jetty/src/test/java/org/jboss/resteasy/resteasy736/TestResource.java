@@ -57,8 +57,9 @@ public class TestResource
          {
             try
             {
-               System.out.println("TestResource default async thread started, timeout default, sleep 35000");
-               Thread.sleep(35000); // Jetty async timeout defaults to 30000.
+               int millis = getDefaultTimeout() + 5000;
+               System.out.println("TestResource default async thread started, timeout default, sleep " + millis);
+               Thread.sleep(millis);
                Response jaxrs = Response.ok("test").type(MediaType.TEXT_PLAIN).build();
                response.setResponse(jaxrs);
                System.out.println("TestResource default async thread finished");
@@ -70,5 +71,12 @@ public class TestResource
          }
       };
       t.start();
+   }
+
+   public static int getDefaultTimeout() {
+     // Jetty async timeout defaults to 30000
+     // Tomcat async timeout defaults to 10000
+     // JBoss async timeout defaults to 60000
+     return 60000;
    }
 }
