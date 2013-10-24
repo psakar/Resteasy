@@ -52,7 +52,9 @@ prepare_maven_repo_as() {
 	fi
 	mkdir ${MAVEN_REPO_TMP}
 
-	unzip -q $1 -d ${MAVEN_REPO_TMP}
+	cp $1 /tmp/
+	unzip -q /tmp/$(basename $1) -d ${MAVEN_REPO_TMP}
+	# unzip -q $1 -d ${MAVEN_REPO_TMP} # slow if zip is on network share
 	local MAVEN_REPO_FOLDER=$(ls ${MAVEN_REPO_TMP})
 	mv ${MAVEN_REPO_TMP}/$MAVEN_REPO_FOLDER $2
 }
