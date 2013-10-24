@@ -79,8 +79,9 @@
 		-->
 			</properties>
 
-	    <modules>
+	    <modules><!-- FIXME add profile to be able test it with productized bits if required (currently not available in maven AS repo -->
         <module>server-adapters</module>
+        <module>resteasy-guice</module>
 	    </modules>
 		</profile>
 	</profiles>
@@ -97,7 +98,6 @@
         <!--module>resteasy-jaxrs-war</module--><!-- does not contain any tests -->
         <!--module>resteasy-bom</module--><!-- does not contain any tests -->
         <module>resteasy-cache</module>
-        <module>resteasy-guice</module>
         <!--module>eagledns</module--><!-- does not contain any tests -->
         <module>security</module>
         <module>resteasy-links</module>

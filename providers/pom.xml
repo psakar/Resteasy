@@ -30,7 +30,7 @@
 					<name>!productized</name>
 				</property>
 			</activation>
-  	  <modules>
+  	  <modules><!-- FIXME add profile to be able test it with productized bits if required (currently not available in maven AS repo -->
         <module>fastinfoset</module>
 	    </modules>
 		</profile>
