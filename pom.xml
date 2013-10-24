@@ -79,10 +79,6 @@
 		-->
 			</properties>
 
-	    <modules><!-- FIXME add profile to be able test it with productized bits if required (currently not available in maven AS repo -->
-        <module>server-adapters</module>
-        <module>resteasy-guice</module>
-	    </modules>
 		</profile>
 	</profiles>
 
@@ -98,6 +94,7 @@
         <!--module>resteasy-jaxrs-war</module--><!-- does not contain any tests -->
         <!--module>resteasy-bom</module--><!-- does not contain any tests -->
         <module>resteasy-cache</module>
+        <module>resteasy-guice</module>
         <!--module>eagledns</module--><!-- does not contain any tests -->
         <module>security</module>
         <module>resteasy-links</module>
@@ -542,9 +539,24 @@
             <id>jboss</id>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>brew</id>
+            <url>http://download.devel.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
+        </repository>
     </repositories>
     <pluginRepositories>
+        <pluginRepository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>brew</id>
+            <url>http://download.devel.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
+        </pluginRepository>
     </pluginRepositories>
+
+
+
     -->
     <!--
     <build>

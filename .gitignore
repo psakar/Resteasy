@@ -9,4 +9,5 @@
 target
 bin
 /maven-repo-as
-/maven-repo-local
+/maven-repo-local*
+/jboss-eap-6.2*

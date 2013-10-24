@@ -25,7 +25,7 @@
 		  <groupId>javax.inject</groupId>
 		  <artifactId>javax.inject</artifactId>
 		  <version>1</version>
-      <scope>compile</scope>
+          <scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -34,11 +34,35 @@
 			<version>${versions.org.jboss.resteasy}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+            <version>${versions-test.org.jboss.resteasy}</version>
+			<scope>compile</scope>
+        </dependency>
+
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>		
+			<scope>compile</scope>
+		</dependency>
 		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-client</artifactId>
 			<version>${versions-test.org.jboss.resteasy}</version> <scope>compile</scope>
 			</dependency> -->
 
-		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

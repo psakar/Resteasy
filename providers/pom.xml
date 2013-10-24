@@ -21,18 +21,14 @@
 					<name>productized</name>
 				</property>
 			</activation>
-		</profile>
-		<profile>
-			<!-- set properties for test of upstream bits -->
-			<id>upstream</id>
-			<activation>
-				<property>
-					<name>!productized</name>
-				</property>
-			</activation>
-  	  <modules><!-- FIXME add profile to be able test it with productized bits if required (currently not available in maven AS repo -->
-        <module>fastinfoset</module>
-	    </modules>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.resteasy</groupId>
+					<artifactId>resteasy-jaxrs</artifactId>
+					<version>${versions-test.org.jboss.resteasy}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
 		</profile>
 	</profiles>
 
@@ -41,6 +37,7 @@
         <!-- module>abdera-atom</module -->
         <module>jaxb</module>
         <module>jettison</module>
+        <module>fastinfoset</module>
         <module>test-all-jaxb</module>
         <module>jackson</module>
         <module>test-jackson-jaxb-coexistence</module>
