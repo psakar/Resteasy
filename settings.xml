@@ -2,15 +2,14 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <localRepository>/home/development/jbossqe/resteasy-ts/maven-repo-local</localRepository>
+  <localRepository>maven-repo-local</localRepository>
   <profiles>
-
 		<profile>
 	      <id>eap-productization-maven-repository</id>
 		  <repositories>
 		    <repository>
 		      <id>eap-productization-maven-repository</id>
-			  <url>http://download.lab.bos.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
+				  <url>http://download.lab.bos.redhat.com/brewroot/repos/jb-eap-6-rhel-6-build/latest/maven/</url>
 		      <releases>
 		        <enabled>true</enabled>
 		      </releases>
@@ -38,7 +37,7 @@
 		  <repositories>
 		    <repository>
 		      <id>jboss-eap</id>
-		      <url>file:///home/development/jbossqe/resteasy-ts/maven-repo-as</url>
+		      <url>file://maven-repo-as</url>
 		      <releases>
 		        <enabled>true</enabled>
 		      </releases>
@@ -50,7 +49,7 @@
 		  <pluginRepositories>
 		    <pluginRepository>
 		      <id>jboss-eap-maven-plugin-repository</id>
-		      <url>file:///home/development/jbossqe/resteasy-ts/maven-repo-as</url>
+		      <url>file://maven-repo-as</url>
 		      <releases>
 		        <enabled>true</enabled>
 		      </releases>
@@ -68,9 +67,6 @@
 		        <name>JBoss Nexus Public Repository</name>
 		        <layout>default</layout>
 		        <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-			  <releases>
-				<enabled>true</enabled>
-			  </releases>
 		        <snapshots>
 		            <enabled>true</enabled>
 		        </snapshots>
@@ -82,9 +78,6 @@
 		        <name>JBoss Nexus Public Repository</name>
 		        <layout>default</layout>
 		        <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-		      <releases>
-		        <enabled>true</enabled>
-		      </releases>
 		        <snapshots>
 		            <enabled>true</enabled>
 		        </snapshots>
@@ -94,11 +87,9 @@
   </profiles>
 
   <activeProfiles>
-	<activeProfile>jboss-eap-maven-repository</activeProfile>
-    <activeProfile>eap-productization-maven-repository</activeProfile>
-<!--
-	<activeProfile>jboss-nexus-repository</activeProfile>
-	-->
+		<activeProfile>jboss-eap-maven-repository</activeProfile>
+		<activeProfile>eap-productization-maven-repository</activeProfile>
+		<activeProfile>jboss-nexus-repository</activeProfile>
   </activeProfiles>
 
 </settings>
