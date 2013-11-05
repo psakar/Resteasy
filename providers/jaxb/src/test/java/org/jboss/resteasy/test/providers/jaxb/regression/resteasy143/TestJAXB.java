@@ -4,35 +4,19 @@ import static org.jboss.resteasy.test.TestPortProvider.*;
 
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.resteasy.core.Dispatcher;
-import org.jboss.resteasy.test.EmbeddedContainer;
-import org.junit.AfterClass;
+import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- * Simple smoke test
- *
- * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
- * @version $Revision: 1 $
- */
-public class TestJAXB
+public class TestJAXB extends BaseResourceTest
 {
 
-   private static Dispatcher dispatcher;
-
    @BeforeClass
-   public static void before() throws Exception
+   public static void beforeClass() throws Exception
    {
-      dispatcher = EmbeddedContainer.start().getDispatcher();
-      dispatcher.getRegistry().addPerRequestResource(StoreResource.class);
-   }
-
-   @AfterClass
-   public static void after() throws Exception
-   {
-      EmbeddedContainer.stop();
+      BaseResourceTest.beforeClass();
+      addPerRequestResource(StoreResource.class, AbstractData.class, DataCollectionPackage.class, DataCollectionRecord.class, ObjectFactory.class);
    }
 
    private static final String XML_CONTENT = "<ns:DataCollectionPackage xmlns:ns=\"http://www.example.org/DataCollectionPackage\">\n"

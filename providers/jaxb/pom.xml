@@ -57,15 +57,41 @@
 				</plugins>
 			</build>
 		</profile>
-	</profiles>
-
-    <dependencies>
+		<profile>
+			<id>tjws</id>
+			<activation>
+				<property>
+					<name>!arquillian</name>
+				</property>
+			</activation>
+			<dependencies>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
             <artifactId>resteasy-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+	    </dependencies>
+		</profile>
+		<profile>
+			<id>arquillian</id>
+			<activation>
+				<property>
+					<name>arquillian</name>
+				</property>
+			</activation>
+			<dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test-arquillian</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+	    </dependencies>
+		</profile>
+	</profiles>
+
+    <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>

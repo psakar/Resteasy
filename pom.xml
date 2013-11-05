@@ -58,6 +58,10 @@
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
+	    <modules>
+	        <module>resteasy-test-arquillian</module>
+	        <module>resteasy-test</module>
+	    </modules>
 		</profile>
 		<profile>
 			<!-- set properties for test of upstream bits -->
@@ -78,13 +82,14 @@
 				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
 		-->
 			</properties>
+	    <modules>
+	        <module>resteasy-test</module>
+	    </modules>
 
 		</profile>
 	</profiles>
 
     <modules>
-        <module>resteasy-test</module>
-
         <!-- Should probably be removed and be treated as external dependency   -->
         <!--module>tjws</module--><!-- does not contain any tests -->
         <!--module>jaxrs-api</module--><!-- does not contain any tests -->

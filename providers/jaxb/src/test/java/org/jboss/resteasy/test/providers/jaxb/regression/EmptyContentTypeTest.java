@@ -8,7 +8,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
@@ -25,22 +24,6 @@ import org.junit.Test;
  */
 public class EmptyContentTypeTest  extends BaseResourceTest
 {
-   @XmlRootElement
-   public static class Foo
-   {
-      private String name;
-
-      public String getName()
-      {
-         return name;
-      }
-
-      public void setName(String name)
-      {
-         this.name = name;
-      }
-
-   }
 
    @Path("/test1")
    public static class Test1
@@ -56,7 +39,7 @@ public class EmptyContentTypeTest  extends BaseResourceTest
       @POST
       public Response postNada(@HeaderParam("Content-Type") String contentType)
       {
-         Assert.assertEquals(null, contentType);
+         assert null == contentType;
          return Response.ok("NULL", "text/plain").build();
       }
    }
@@ -68,7 +51,7 @@ public class EmptyContentTypeTest  extends BaseResourceTest
       @POST
       public Response postNada(@HeaderParam("Content-Type") String contentType)
       {
-         Assert.assertEquals(null, contentType);
+         assert null == contentType;
          return Response.ok("NULL", "text/plain").build();
       }
 
@@ -85,8 +68,11 @@ public class EmptyContentTypeTest  extends BaseResourceTest
    @Before
    public void setUp() throws Exception
    {
-      addPerRequestResource(Test1.class);
-      addPerRequestResource(Test2.class);
+      stopContainer();
+      createContainer(initParams, contextParams);
+      addPerRequestResource(Test1.class, Foo.class, EmptyContentTypeTest.class, BaseResourceTest.class);
+      addPerRequestResource(Test2.class, Foo.class, EmptyContentTypeTest.class, BaseResourceTest.class);
+      startContainer();
    }
 
    @Test

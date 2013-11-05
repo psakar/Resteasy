@@ -1,9 +1,4 @@
-package org.jboss.resteasy.test;
-
-import org.jboss.resteasy.client.ClientRequest;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+package org.jboss.resteasy.test ;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,6 +6,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
+
+import org.jboss.resteasy.client.ClientRequest;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * RESTEASY-428
@@ -72,8 +72,7 @@ public class XmlEnumParamTest extends BaseResourceTest
    @BeforeClass
    public static void init() throws Exception
    {
-      addPerRequestResource(LocationResource.class);
-
+      addPerRequestResource(LocationResource.class, Location.class);
    }
 
 

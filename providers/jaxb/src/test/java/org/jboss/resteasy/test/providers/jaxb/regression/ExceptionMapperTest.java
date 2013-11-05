@@ -1,5 +1,12 @@
 package org.jboss.resteasy.test.providers.jaxb.regression;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.plugins.providers.jaxb.JAXBUnmarshalException;
@@ -8,13 +15,6 @@ import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
 /**
  * RESTEASY-519
@@ -38,8 +38,8 @@ public class ExceptionMapperTest extends BaseResourceTest
    @BeforeClass
    public static void setup()
    {
-      deployment.getProviderFactory().addExceptionMapper(JAXBMapper.class);
-      addPerRequestResource(TestService.class);
+      addExceptionMapper(JAXBMapper.class);
+      addPerRequestResource(TestService.class, Person.class);
    }
 
    @Provider

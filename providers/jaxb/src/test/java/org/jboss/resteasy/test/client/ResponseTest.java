@@ -69,9 +69,11 @@ public class ResponseTest extends BaseResourceTest
    }
 
    @Before
-   public void setUp() throws Exception
+   public void before() throws Exception
    {
-      addPerRequestResource(CreditService.class);
+      createContainer(initParams, contextParams);
+      addPerRequestResource(CreditService.class, Credit.class, RESTCredits.class, ResponseTest.class, BaseResourceTest.class);
+      startContainer();
    }
 
    @Test
@@ -80,7 +82,7 @@ public class ResponseTest extends BaseResourceTest
       RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
       RESTCredits proxy = ProxyFactory.create(RESTCredits.class, generateBaseUrl());
       ClientResponse<?> response = (ClientResponse<?>) proxy.getCredits("xx");
-      Assert.assertEquals(response.getStatus(), HttpURLConnection.HTTP_OK);
+      Assert.assertEquals(HttpURLConnection.HTTP_OK, response.getStatus());
       response.getEntity(Credit.class);
    }
 

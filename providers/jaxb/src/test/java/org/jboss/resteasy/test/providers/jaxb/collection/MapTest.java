@@ -163,11 +163,11 @@ public class MapTest extends BaseResourceTest
       @Consumes("application/xml")
       public Map<String, Foo> post(Map<String, Foo> map)
       {
-         Assert.assertEquals(2, map.size());
-         Assert.assertNotNull(map.get("bill"));
-         Assert.assertNotNull(map.get("monica"));
-         Assert.assertEquals(map.get("bill").getName(), "bill");
-         Assert.assertEquals(map.get("monica").getName(), "monica");
+         assert 2 == map.size();
+         assert null != map.get("bill");
+         assert null != map.get("monica");
+         assert "bill".equals(map.get("bill").getName());
+         assert "monica".equals(map.get("monica").getName());
          return map;
       }
 
@@ -178,20 +178,22 @@ public class MapTest extends BaseResourceTest
       @WrappedMap(namespace = "")
       public Map<String, Foo> postWrapped(@WrappedMap(namespace = "") Map<String, Foo> map)
       {
-         Assert.assertEquals(2, map.size());
-         Assert.assertNotNull(map.get("bill"));
-         Assert.assertNotNull(map.get("monica"));
-         Assert.assertEquals(map.get("bill").getName(), "bill");
-         Assert.assertEquals(map.get("monica").getName(), "monica");
+         assert 2 == map.size();
+         assert null != map.get("bill");
+         assert null != map.get("monica");
+         assert "bill".equals(map.get("bill").getName());
+         assert "monica".equals(map.get("monica").getName());
          return map;
       }
    }
 
    @Before
-   public void setup()
+   public void setup() throws Exception
    {
-      addPerRequestResource(MyResource.class);
-
+     stopContainer();
+     createContainer(initParams, contextParams);
+     addPerRequestResource(MyResource.class, Foo.class, JaxbMap.class, MapTest.class, BaseResourceTest.class);
+     startContainer();
    }
 
    @Test

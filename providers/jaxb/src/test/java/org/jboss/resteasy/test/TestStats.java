@@ -77,10 +77,13 @@ public class TestStats extends BaseResourceTest {
         public RegistryData get();
     }
 
+    @Override
     @Before
-    public void setUp() throws Exception {
-        dispatcher.getRegistry().addPerRequestResource(MyResource.class);
-        dispatcher.getRegistry().addPerRequestResource(RegistryStatsResource.class);
+    public void before() throws Exception {
+        createContainer(initParams, contextParams);
+        addPerRequestResource(MyResource.class);
+        addPerRequestResource(RegistryStatsResource.class);
+        startContainer();
     }
 
     @Test
