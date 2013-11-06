@@ -22,6 +22,7 @@ import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.plugins.server.embedded.SimpleSecurityDomain;
 import org.jboss.resteasy.test.EmbeddedContainer;
 import org.jboss.resteasy.test.HttpServerContainer;
+import org.jboss.resteasy.test.TestPortProvider;
 import org.jboss.resteasy.util.HttpResponseCodes;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -186,25 +187,25 @@ public class BasicAuthTest
       UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("bill", "password");
       client.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY), credentials);
       ClientExecutor executor = createAuthenticatingExecutor(client);
- 
+
       {
          ClientRequest request = new ClientRequest(generateURL("/secured"), executor);
          ClientResponse<String> response = request.get(String.class);
          Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
          Assert.assertEquals("hello", response.getEntity());
       }
-      
+
       {
          ClientRequest request = new ClientRequest(generateURL("/secured/authorized"), executor);
          ClientResponse<String> response = request.get(String.class);
          Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
-         Assert.assertEquals("authorized", response.getEntity());  
+         Assert.assertEquals("authorized", response.getEntity());
       }
-      
+
       {
          ClientRequest request = new ClientRequest(generateURL("/secured/deny"), executor);
          ClientResponse<String> response = request.get(String.class);
-         Assert.assertEquals(HttpResponseCodes.SC_UNAUTHORIZED, response.getStatus());        
+         Assert.assertEquals(HttpResponseCodes.SC_UNAUTHORIZED, response.getStatus());
       }
    }
 
@@ -241,16 +242,16 @@ public class BasicAuthTest
       }
 
       ClientExecutor executor = createAuthenticatingExecutor(client);
-      
+
       {
          UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("bill", "password");
          client.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY), credentials);
          ClientRequest request = new ClientRequest(generateURL("/secured/authorized"), executor);
          ClientResponse<String> response = request.get(String.class);
          Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
-         Assert.assertEquals("authorized", response.getEntity());  
+         Assert.assertEquals("authorized", response.getEntity());
       }
-      
+
       {
          UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("mo", "password");
          client.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY), credentials);
@@ -264,21 +265,21 @@ public class BasicAuthTest
    /**
     * Create a ClientExecutor which does preemptive authentication.
     */
-   
+
    static private ClientExecutor createAuthenticatingExecutor(DefaultHttpClient client)
    {
       // Create AuthCache instance
       AuthCache authCache = new BasicAuthCache();
-      
+
       // Generate BASIC scheme object and add it to the local auth cache
       BasicScheme basicAuth = new BasicScheme();
-      HttpHost targetHost = new HttpHost("localhost", 8081);
+      HttpHost targetHost = new HttpHost("localhost", TestPortProvider.getPort());
       authCache.put(targetHost, basicAuth);
 
       // Add AuthCache to the execution context
       BasicHttpContext localContext = new BasicHttpContext();
       localContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
-      
+
       // Create ClientExecutor.
       ApacheHttpClient4Executor executor = new ApacheHttpClient4Executor(client, localContext);
       return executor;

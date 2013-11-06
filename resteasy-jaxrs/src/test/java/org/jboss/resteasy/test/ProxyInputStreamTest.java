@@ -52,7 +52,7 @@ public class ProxyInputStreamTest extends BaseResourceTest
    @Test
    public void testInputStream() throws Exception
    {
-      MyResource proxy = ProxyFactory.create(MyResource.class, "http://localhost:8081");
+      MyResource proxy = ProxyFactory.create(MyResource.class, TestPortProvider.generateBaseUrl());
       InputStream is = proxy.get();
       byte[] bytes = ReadFromStream.readFromStream(100, is);
       is.close();

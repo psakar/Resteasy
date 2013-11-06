@@ -16,7 +16,7 @@ import java.net.URL;
  */
 public class TestPortProvider
 {
-   private static final int DEFAULT_PORT = 8081;
+   public static final int DEFAULT_PORT = 8081;
 
    private static final String ENV_VAR_NAME = "RESTEASY_PORT";
 

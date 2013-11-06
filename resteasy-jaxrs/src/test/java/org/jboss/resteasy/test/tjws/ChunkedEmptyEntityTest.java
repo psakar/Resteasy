@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.test.EmbeddedContainer;
+import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -70,12 +71,12 @@ public class ChunkedEmptyEntityTest
    void _run_test(String method, String path, String status) throws Exception
    {
 	   // Solicit a reply with response code 204.
-	   Socket s = new Socket("localhost", 8081);
+	   Socket s = new Socket("localhost", TestPortProvider.getPort());
 	   OutputStream os = s.getOutputStream();
 	   writeString(os, method + " " + path + " HTTP/1.1");
 	   writeString(os, "Content-Length: 11");
 	   writeString(os, "Content-Type: text/plain");
-	   writeString(os, "Host: localhost:8081");
+	   writeString(os, "Host: localhost:" + TestPortProvider.getPort());
 	   writeString(os, "");
 	   os.write("hello world".getBytes());
 	   os.flush();

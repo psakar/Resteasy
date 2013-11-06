@@ -15,6 +15,7 @@ import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.logging.Logger;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.jboss.resteasy.test.EmbeddedContainer;
+import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +23,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author <a href="ron.sigal@jboss.com">Ron Sigal</a>
  * @version $Revision: 1.1 $
  *
@@ -31,9 +32,9 @@ import org.junit.Test;
 public class EntityBufferingInFileTest
 {
    private static final Logger log = Logger.getLogger(EntityBufferingInFileTest.class);
-   
+
    protected ResteasyDeployment deployment;
-   
+
    @Path("/")
    static public class TestResource
    {
@@ -46,7 +47,7 @@ public class EntityBufferingInFileTest
          return body;
       }
    }
-   
+
    @Before
    public void before() throws Exception
    {
@@ -66,51 +67,51 @@ public class EntityBufferingInFileTest
    {
       doTest(ApacheHttpClient4Executor.BYTE_MEMORY_UNIT, 16, 10, true);
    }
-   
+
    @Test
    public void testOnDiskBytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.BYTE_MEMORY_UNIT, 16, 20, false);
    }
-   
+
    @Test
    public void testInMemoryKilobytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.KILOBYTE_MEMORY_UNIT, 1, 500, true);
    }
-   
+
    @Test
    public void testOnDiskKilobytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.KILOBYTE_MEMORY_UNIT, 1, 2000, false);
    }
-   
+
    @Test
    public void testInMemoryMegabytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.MEGABYTE_MEMORY_UNIT, 1, 500000, true);
    }
-   
+
    @Test
    public void testOnDiskMegabytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.MEGABYTE_MEMORY_UNIT, 1, 2000000, false);
    }
-   
+
    @Test
    @Ignore  // we break VM max
    public void testInMemoryGigabytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.GIGABYTE_MEMORY_UNIT, 1, 500000000, true);
    }
-   
+
    @Test
    @Ignore  // we break VM max
    public void testOnDiskGigabytes() throws Exception
    {
       doTest(ApacheHttpClient4Executor.GIGABYTE_MEMORY_UNIT, 1, 2000000000, false);
    }
-   
+
    protected void doTest(String memoryUnit, int threshold, int length, boolean inMemory) throws Exception
    {
       try
@@ -124,7 +125,7 @@ public class EntityBufferingInFileTest
          sb.append("0");
       }
       String body = sb.toString();
-      ClientRequest request = new ClientRequest("http://localhost:8081/hello/", executor);
+      ClientRequest request = new ClientRequest(TestPortProvider.generateURL("/hello/"), executor);
       request.body("text/plain", body);
       System.out.println("Sending request");
       ClientResponse<String> response = request.post(String.class);
@@ -144,20 +145,20 @@ public class EntityBufferingInFileTest
       {
          // Ok, skip it.
          log.info("OutOfMemoryError on " + memoryUnit + " test.");
-         
+
       }
    }
-   
+
    static class TestClientExecutor extends ApacheHttpClient4Executor
    {
       private HttpEntity entityToBuild;
-      
+
       protected HttpEntity buildEntity(final ClientRequest request) throws IOException
       {
          entityToBuild = super.buildEntity(request);
          return entityToBuild;
       }
-      
+
       public HttpEntity getBuildEntity()
       {
          return entityToBuild;

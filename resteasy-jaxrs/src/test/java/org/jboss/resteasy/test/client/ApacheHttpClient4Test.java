@@ -23,6 +23,7 @@ import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.spi.NoLogWebApplicationException;
 import org.jboss.resteasy.test.BaseResourceTest;
+import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -137,7 +138,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
    public void testConnectionCleanupProxy() throws Exception
    {
       final ApacheHttpClient4Executor executor = createClient();
-      final MyResource proxy = ProxyFactory.create(MyResource.class, "http://localhost:8081", executor);
+      final MyResource proxy = ProxyFactory.create(MyResource.class, TestPortProvider.generateBaseUrl(), executor);
       counter.set(0);
 
 
@@ -173,7 +174,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
    public void testConnectionCleanupErrorGC() throws Exception
    {
       final ApacheHttpClient4Executor executor = createClient();
-      final MyResource proxy = ProxyFactory.create(MyResource.class, "http://localhost:8081", executor);
+      final MyResource proxy = ProxyFactory.create(MyResource.class, TestPortProvider.generateBaseUrl(), executor);
       counter.set(0);
 
 
@@ -208,7 +209,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
    public void testConnectionCleanupErrorNoGC() throws Exception
    {
       final ApacheHttpClient4Executor executor = createClient();
-      final MyResource proxy = ProxyFactory.create(MyResource.class, "http://localhost:8081", executor);
+      final MyResource proxy = ProxyFactory.create(MyResource.class, TestPortProvider.generateBaseUrl(), executor);
       counter.set(0);
 
 
@@ -284,7 +285,7 @@ public class ApacheHttpClient4Test extends BaseResourceTest
 
    private void runit(ApacheHttpClient4Executor executor, boolean release)
    {
-      ClientRequest request = executor.createRequest("http://localhost:8081/test");
+      ClientRequest request = executor.createRequest(TestPortProvider.generateURL("/test"));
       ClientResponse<?> response = null;
       try
       {
