@@ -1,12 +1,12 @@
 package org.jboss.resteasy.test;
 
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientRequestFactory;
-import org.jboss.resteasy.client.ProxyFactory;
-
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.client.ClientRequestFactory;
+import org.jboss.resteasy.client.ProxyFactory;
 
 /**
  * Utility class that provides a port number for the Resteasy embedded container.
@@ -21,6 +21,8 @@ public class TestPortProvider
    private static final String ENV_VAR_NAME = "RESTEASY_PORT";
 
    private static final String PROPERTY_NAME = "org.jboss.resteasy.port";
+
+   public static final String ASYNC_JOB_SERVICE_CONTEXT_KEY = "resteasy.async.job.service.enabled";
 
    /**
     * Create a Resteasy ClientRequest object using the configured port.

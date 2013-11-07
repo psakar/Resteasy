@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -51,9 +52,9 @@ public abstract class BaseResourceTest
   // IT IS NOT THREADSAFE !!!!
   protected static boolean manualStart;
   // IT IS NOT THREADSAFE !!!!
-  protected static Map<String, String> initParams;
+  protected static Map<String,String> initParams = new Hashtable<String,String>();
   // IT IS NOT THREADSAFE !!!!
-  protected static Map<String, String> contextParams;
+  protected static Map<String,String> contextParams = new Hashtable<String,String>();
 
 //  protected static ResteasyDeployment deployment;
 //  protected static Dispatcher dispatcher;
@@ -162,15 +163,18 @@ public abstract class BaseResourceTest
 
   protected static void startContainer() throws Exception {
     info("start container - deploy " + DEPLOYMENT);
-    if (contextParams != null && !war.contains("WEB-INF/web.xml")) {
+    if (contextParams != null && contextParams.size() > 0 && !war.contains("WEB-INF/web.xml")) {
       StringBuilder webXml = new StringBuilder();
       webXml.append("<web-app version=\"3.0\" xmlns=\"http://java.sun.com/xml/ns/javaee\" \n");
       webXml.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n");
       webXml.append( " xsi:schemaLocation=\"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd\"> \n");
       for (Map.Entry<String, String> entry : contextParams.entrySet()) {
+        String paramName = entry.getKey();
+        String paramValue = entry.getValue();
+        info("Context param " + paramName + " value " + paramValue);
         webXml.append("<context-param>\n");
-        webXml.append("<param-name>" + entry.getKey() + "</param-name>\n");
-        webXml.append("<param-value>" + entry.getValue() + "</param-value>\n");
+        webXml.append("<param-name>" + paramName + "</param-name>\n");
+        webXml.append("<param-value>" + paramValue + "</param-value>\n");
         webXml.append("</context-param>\n");
       }
       webXml.append("</web-app>\n");

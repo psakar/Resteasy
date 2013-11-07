@@ -22,6 +22,7 @@ public class TestPortProvider
 
    private static final String PROPERTY_NAME = "org.jboss.resteasy.port";
 
+   public static final String ASYNC_JOB_SERVICE_CONTEXT_KEY = "resteasy.async.job.service.enabled";
    /**
     * Create a Resteasy ClientRequest object using the configured port.
     *
