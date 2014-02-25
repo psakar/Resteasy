@@ -52,8 +52,8 @@ prepare_maven_repo_as() {
 	fi
 	mkdir ${MAVEN_REPO_TMP}
 
-	cp $1 /tmp/
-	unzip -q /tmp/$(basename $1) -d ${MAVEN_REPO_TMP}
+	cp $1 ${BUILD_DIR}
+	unzip -q ${BUILD_DIR}/$(basename $1) -d ${MAVEN_REPO_TMP}
 	# unzip -q $1 -d ${MAVEN_REPO_TMP} # slow if zip is on network share
 	local MAVEN_REPO_FOLDER=$(ls ${MAVEN_REPO_TMP})
 	mv ${MAVEN_REPO_TMP}/$MAVEN_REPO_FOLDER $2
@@ -136,6 +136,7 @@ unzip_as() {
 	patch_as
 }
 
+export TMP_DIR=/tmp
 export MAVEN_REPO_AS=${BUILD_DIR}/maven-repo-as
 export MAVEN_REPO_LOCAL=${BUILD_DIR}/maven-repo-local
 
