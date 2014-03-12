@@ -14,6 +14,7 @@ Following chages were done:
    replacement for original tv.bodil:maven-testlol-plugin:1.2.2 used in test-jsapi-servlet-war failing with NullPointerException because of required change of testlol/src/main/resources/tv/bodil/testlol/js/env.rhino.js
    see http://envjs.lighthouseapp.com/projects/21590/tickets/178-__trim__-function-not-available-from-envjssetcookie-method
    see maven-repo-extra
+   see https://github.com/psakar/maven-testlol-plugin/tree/1.5
 
 
 

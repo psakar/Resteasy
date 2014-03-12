@@ -21,7 +21,7 @@
 		<versions.httpunit.httpunit>1.7</versions.httpunit.httpunit>
 		<versions.commons-httpclient.commons-httpclient>3.1</versions.commons-httpclient.commons-httpclient>
 		<versions.org.mortbay.jetty.jetty>6.1.15</versions.org.mortbay.jetty.jetty>
-   	<as.version>7.3.0.Final-redhat-9</as.version>
+   	<as.version>7.3.0.Final-redhat-14</as.version><!-- = EAP 6.2.0.GA -->
     <jetty7.version>7.0.2.v20100331</jetty7.version>
     <jetty8.version>8.1.1.v20120215</jetty8.version>
   </properties>
