@@ -29,7 +29,7 @@ public class TestResource
 
    private static final Logger log = LoggerFactory.getLogger(TestResource.class);
    private static int counter = 0;
-   private ExecutorService executor = Executors.newSingleThreadExecutor();
+   private ExecutorService _executor = Executors.newSingleThreadExecutor();
 
    public TestResource()
    {
@@ -71,7 +71,7 @@ public class TestResource
          }
       };
 
-      executor.submit(runner);
+      _executor.submit(runner);
    }
 
 }
