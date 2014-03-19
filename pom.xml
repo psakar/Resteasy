@@ -120,6 +120,8 @@
         <!--module>jboss-modules</module--><!-- does not contain any tests -->
         <!-- <module>as7-integration-testing</module> --><!-- not included in upstream -->
         <module>arquillian</module> <!-- regression tests using arquillian container -->
+        <module>arquillian-deployment-scenario-provider</module>
+
 <!--
 ./resteasy-cdi/src/test/java
 
