@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * 
  * @author Matt Van Wely
  * @author <a href="ron.sigal@jboss.com">Ron Sigal</a>
  * @version $Revision: 1.1 $
@@ -26,7 +26,7 @@ public class TestResource
 {
    public static final int SERVLET_TIMEOUT = 10000;
    public static final int SERVLET_EXTRA_TIME = 10000;
-
+   
    private static final Logger log = LoggerFactory.getLogger(TestResource.class);
    private static int counter = 0;
    private ExecutorService _executor = Executors.newSingleThreadExecutor();
