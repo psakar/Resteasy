@@ -52,10 +52,14 @@ To test with jetty 8
 mvn -s settings-jenkins.xml -Dproductized clean verify -Djetty8 -Djboss.home 2>&1 | tee log.txt
 
 To test with existing EAP (not running)
-mvn -s settings-jenkins.xml -Dproductized clean verify -Djboss730 -Djboss.home=/home/development/jbossqe/JBEAP-6.2.0.ER6/build/jboss-eap-6.2 2>&1 | tee log.txt
+mvn -s settings.xml -Dproductized clean verify -Djboss730 -Djboss.home=/home/development/jbossqe/JBEAP-6.2.0.ER6/build/jboss-eap-6.2 2>&1 | tee log.txt
 
 To test with EAP downloaded and locally installed by maven
-mvn -s settings-jenkins.xml -Dproductized clean verify -Djboss730 2>&1 | tee log.txt
+mvn -s settings.xml -Dproductized clean verify -Djboss730 2>&1 | tee log.txt
 
 To run single module use -pl option
 eg. mvn -s settings.xml -Dproductized -pl :RESTEASY-736-jetty clean verify -Djboss730 2>&1 | tee log.txt
+
+To run with different version of restesay use -Dversions.
+eg. mvn -s settings.xml -Dproductized -pl :RESTEASY-736-jetty clean verify -Djboss730 2>&1 | tee log.txt
+
