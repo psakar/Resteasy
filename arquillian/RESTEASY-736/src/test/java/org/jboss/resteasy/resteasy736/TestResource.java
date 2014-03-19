@@ -31,7 +31,7 @@ public class TestResource
          {
             try
             {
-               System.out.println("TestResource test async thread started, timeout 50000, sleep 10000");
+               System.out.println("TestResource test async thread started, timeout 5000, sleep 10000");
                Thread.sleep(10000);
                Response jaxrs = Response.ok("test").type(MediaType.TEXT_PLAIN).build();
                response.setResponse(jaxrs);
