@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- *
+ * 
  * @author <a href="ron.sigal@jboss.com">Ron Sigal</a>
  * @version $Revision: 1.1 $
  *
@@ -37,7 +37,7 @@ public class AsyncPostProcessingTest
       System.out.println(war.toString(true));
       return war;
    }
-
+   
    @Test
    public void testSync() throws Exception
    {
@@ -53,7 +53,7 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("sync", response.getEntity(String.class));
    }
-
+   
    @Test
    public void testAsyncWithDelay() throws Exception
    {
@@ -69,7 +69,7 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("async/delay", response.getEntity(String.class));
    }
-
+   
    @Test
    public void testAsyncWithNoDelay() throws Exception
    {
@@ -85,7 +85,7 @@ public class AsyncPostProcessingTest
       Assert.assertTrue(TestPostProcessInterceptor.called);
       Assert.assertEquals("async/nodelay", response.getEntity(String.class));
    }
-
+   
    private void reset()
    {
       TestMessageBodyWriterInterceptor.called = false;
