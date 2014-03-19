@@ -1,7 +1,6 @@
 package org.jboss.resteasy.test.resteasy752;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Date;
 
