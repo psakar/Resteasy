@@ -16,3 +16,4 @@ security/resteasy-crypto/*signed*.txt
 /maven-repo-as
 /maven-repo-local*
 /jboss-eap-6.2*
+settings-eclipse.xml
