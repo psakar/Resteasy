@@ -17,7 +17,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.ResteasyDeployment;
-import org.jboss.resteasy.test.EmbeddedContainer;
+import org.jboss.resteasy.test.BaseResourceTest;
 import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.After;
 import org.junit.Assert;
@@ -31,9 +31,8 @@ import org.junit.Test;
  *
  * Copyright Sep 28, 2012
  */
-public class ProxyWithGenericReturnTypeJacksonTest
+public class ProxyWithGenericReturnTypeJacksonTest extends BaseResourceTest
 {
-   protected ResteasyDeployment deployment;
 
    @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")
    @JsonSubTypes({
@@ -147,15 +146,8 @@ public class ProxyWithGenericReturnTypeJacksonTest
    @Before
    public void before() throws Exception
    {
-      deployment = EmbeddedContainer.start();
-      deployment.getRegistry().addPerRequestResource(TestResource.class);
-   }
-
-   @After
-   public void after() throws Exception
-   {
-      EmbeddedContainer.stop();
-      deployment = null;
+      addPerRequestResource(TestResource.class, TestSubResourceSubIntf.class, TestSubResourceIntf.class, AbstractParent.class, Type1.class, Type2.class, TestInvocationHandler.class);
+      super.before();
    }
 
     @Test
