@@ -6,17 +6,18 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestJAXB extends BaseResourceTest
 {
 
-   @BeforeClass
-   public static void beforeClass() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
-      BaseResourceTest.beforeClass();
       addPerRequestResource(StoreResource.class, AbstractData.class, DataCollectionPackage.class, DataCollectionRecord.class, ObjectFactory.class);
+      super.before();
    }
 
    private static final String XML_CONTENT = "<ns:DataCollectionPackage xmlns:ns=\"http://www.example.org/DataCollectionPackage\">\n"

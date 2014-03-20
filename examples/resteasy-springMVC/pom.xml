@@ -3,17 +3,14 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <version>2.3.7.Final</version>
 	    <relativePath>../../pom.xml</relativePath>
     </parent>
-
     <artifactId>examples-resteasy-springMVC</artifactId>
     <packaging>war</packaging>
-    <version>2.3.7.Final</version>
 
     <name>Spring MVC RestContact Maven Webapp</name>
 
@@ -21,7 +18,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-spring</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <exclusions>
             	<exclusion>
 	            	<groupId>org.jboss.resteasy</groupId>
@@ -43,52 +40,50 @@
         </dependency>
 
 
-         	<dependency>
-          	<groupId>org.jboss.resteasy</groupId>
-          	<artifactId>resteasy-jaxrs</artifactId>
-          	<version>${versions-test.org.jboss.resteasy}</version>
-           <scope>provided</scope>
-         	</dependency>
-         	<dependency>
-          	<groupId>org.jboss.resteasy</groupId>
-          	<artifactId>jaxrs-api</artifactId>
-          	<version>${versions-test.org.jboss.resteasy}</version>
-           <scope>provided</scope>
-         	</dependency>
-         	<dependency>
-          	<groupId>org.jboss.resteasy</groupId>
-          	<artifactId>resteasy-jettison-provider</artifactId>
-          	<version>${versions-test.org.jboss.resteasy}</version>
-           <scope>provided</scope>
-         	</dependency>
-         	<dependency>
-          	<groupId>org.jboss.spec.javax.annotation</groupId>
-          	<artifactId>jboss-annotations-api_1.1_spec</artifactId>
-          	<version>1.0.0.Final</version>
-           <scope>provided</scope>
-         	</dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${version.org.jboss.resteasy}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+            <version>${version.org.jboss.resteasy}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jettison-provider</artifactId>
+            <version>${version.org.jboss.resteasy}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <version>1.0.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
 
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${versions.org.springframework}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <version>6.1.15</version>
-            <scope>test</scope>
+            <version>${version.org.springframework}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws-spring</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

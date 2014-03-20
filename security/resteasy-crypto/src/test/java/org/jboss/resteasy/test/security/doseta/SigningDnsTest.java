@@ -23,7 +23,7 @@ import org.jboss.resteasy.test.BaseResourceTest;
 import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import se.unlogic.eagledns.EagleDNS;
@@ -38,9 +38,10 @@ public class SigningDnsTest extends BaseResourceTest
    public static DosetaKeyRepository serverRepository;
    public static PrivateKey badKey;
 
-   @BeforeClass
-   public static void setup() throws Exception
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       clientRepository = new DosetaKeyRepository();
       clientRepository.setKeyStorePath("test1.jks");
       clientRepository.setKeyStorePassword("password");

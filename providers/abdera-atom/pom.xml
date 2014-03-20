@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.abdera</groupId>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>tjws</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

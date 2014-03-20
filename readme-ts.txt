@@ -43,13 +43,13 @@ run in shell following commands (set proper values)
  install maven-testlol-plugin yourself and setup AS_HOME used for running testsuite in step to proper value
 
 4. run testsuite
- mvn -s settings-jenkins.xml -Dproductized -Peap-productization-maven-repository -Dversions-test.org.jboss.resteasy=${RESTEASY_VERSION} -Djboss.home=$AS_HOME -Djboss730 clean verify
+ mvn -s settings.xml -Dproductized -Peap-productization-maven-repository -Dversion.org.jboss.resteasy=${RESTEASY_VERSION} -Djboss.home=$AS_HOME -Djboss730 clean verify
 
 profile -Peap-productization-maven-repository is required only first time to download artifacts not available in maven repo as
 
 
 To test with jetty 8
-mvn -s settings-jenkins.xml -Dproductized clean verify -Djetty8 -Djboss.home 2>&1 | tee log.txt
+mvn -s settings.xml -Dproductized clean verify -Djetty8 -Djboss.home 2>&1 | tee log.txt
 
 To test with existing EAP (not running)
 mvn -s settings.xml -Dproductized clean verify -Djboss730 -Djboss.home=/home/development/jbossqe/JBEAP-6.2.0.ER6/build/jboss-eap-6.2 2>&1 | tee log.txt
@@ -58,8 +58,5 @@ To test with EAP downloaded and locally installed by maven
 mvn -s settings.xml -Dproductized clean verify -Djboss730 2>&1 | tee log.txt
 
 To run single module use -pl option
-eg. mvn -s settings.xml -Dproductized -pl :RESTEASY-736-jetty clean verify -Djboss730 2>&1 | tee log.txt
-
-To run with different version of restesay use -Dversions.
 eg. mvn -s settings.xml -Dproductized -pl :RESTEASY-736-jetty clean verify -Djboss730 2>&1 | tee log.txt
 

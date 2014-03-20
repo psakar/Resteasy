@@ -1,31 +1,31 @@
-<?xml version="1.0"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.resteasy-ts</groupId>
-        <artifactId>resteasy-jaxrs-all</artifactId>
+        <artifactId>http-adapter-pom</artifactId>
         <version>2.3.7.Final</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>resteasy-netty</artifactId>
-    <name>RESTEasy Netty Integration test</name>
+    <name>RESTEasy Netty Integration</name>
 
     <dependencies>
-
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-netty</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test-tjws</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+
 </project>

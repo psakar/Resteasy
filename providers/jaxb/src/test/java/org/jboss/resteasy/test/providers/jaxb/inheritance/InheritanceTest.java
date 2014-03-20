@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.test.BaseResourceTest;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -15,11 +15,12 @@ import org.junit.Test;
  */
 public class InheritanceTest extends BaseResourceTest
 {
-   @BeforeClass
-   public static void beforeClass() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
-      BaseResourceTest.beforeClass();
       addPerRequestResource(ZooWS.class, Animal.class, Cat.class, Dog.class, Zoo.class);
+      super.before();
    }
 
    @Test

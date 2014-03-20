@@ -12,18 +12,18 @@
     <packaging>war</packaging>
 
     <dependencies>
-		
+
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

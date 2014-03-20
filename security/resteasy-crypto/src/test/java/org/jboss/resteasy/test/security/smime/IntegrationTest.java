@@ -23,7 +23,7 @@ import org.jboss.resteasy.security.smime.SignedOutput;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -99,9 +99,10 @@ public class IntegrationTest extends BaseResourceTest
    private static X509Certificate cert;
    private static PrivateKey privateKey;
 
-   @BeforeClass
-   public static void setup() throws Exception
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       Security.addProvider(new BouncyCastleProvider());
 
       /*
@@ -112,14 +113,14 @@ public class IntegrationTest extends BaseResourceTest
       privateKey = PemUtils.decodePrivateKey(privateIs);
       */
 
-         KeyPair keyPair = KeyPairGenerator.getInstance("RSA", "BC").generateKeyPair();
-         privateKey = keyPair.getPrivate();
-         cert = KeyTools.generateTestCertificate(keyPair);
+      KeyPair keyPair = KeyPairGenerator.getInstance("RSA", "BC").generateKeyPair();
+      privateKey = keyPair.getPrivate();
+      cert = KeyTools.generateTestCertificate(keyPair);
 
 
-      dispatcher.getRegistry().addPerRequestResource(EncryptedResource.class);
-      dispatcher.getRegistry().addPerRequestResource(SignedResource.class);
-      dispatcher.getRegistry().addPerRequestResource(EncryptedSignedResource.class);
+      addPerRequestResource(EncryptedResource.class);
+      addPerRequestResource(SignedResource.class);
+      addPerRequestResource(EncryptedSignedResource.class);
 
    }
 

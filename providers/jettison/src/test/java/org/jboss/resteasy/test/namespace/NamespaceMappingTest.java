@@ -32,7 +32,7 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.plugins.providers.jaxb.JAXBXmlTypeProvider;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -91,9 +91,10 @@ public class NamespaceMappingTest extends BaseResourceTest
    static Unmarshaller unmarshaller = null;
    static Marshaller marshaller = null;
 
-   @BeforeClass
-   public static void setup() throws Exception
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       addPerRequestResource(TestResourceImpl.class);
       ctx = JAXBContext.newInstance("org.example.a.testcanonical:org.example.b.test");
       unmarshaller = ctx.createUnmarshaller();

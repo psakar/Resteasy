@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 
 import org.jboss.resteasy.client.ClientRequest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -69,10 +69,12 @@ public class XmlEnumParamTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void init() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
       addPerRequestResource(LocationResource.class, Location.class);
+      super.before();
    }
 
 

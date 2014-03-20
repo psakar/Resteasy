@@ -18,7 +18,7 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -101,11 +101,12 @@ public class StringCharsetTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setUp() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
       addPerRequestResource(CharsetService.class, RespondTest.class, StringCharsetTest.class, BaseResourceTest.class);
-      BaseResourceTest.beforeClass();
+      super.before();
    }
 
    @Test

@@ -16,7 +16,7 @@ import junit.framework.Assert;
 
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.test.BaseResourceTest;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -25,9 +25,11 @@ import org.junit.Test;
  */
 public class RegressionTest extends BaseResourceTest
 {
-   @BeforeClass
-   public static void setUp() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
+      super.before();
       addPerRequestResource(MessageResource.class, MessageTFM.class, IMessageTFMResource.class, RegressionTest.class, BaseResourceTest.class);
    }
 

@@ -12,17 +12,17 @@
     <name>Resteasy FastInfoSet Provider test</name>
 
     <dependencies>
-		
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-fastinfoset-provider</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
@@ -30,15 +30,15 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
-		
-		
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${versions.org.springframework}</version>
+            <version>${version.org.springframework}</version>
             <scope>test</scope>
         </dependency>
 

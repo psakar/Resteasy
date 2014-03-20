@@ -1,30 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <name>RESTEasy JAX-RS test</name>
-  <groupId>org.jboss.resteasy-ts</groupId>
-  <artifactId>resteasy-jaxrs-all</artifactId>
-  <version>2.3.7.Final</version>
-  <packaging>pom</packaging>
-  <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <modelVersion>4.0.0</modelVersion>
+    <name>RESTEasy JAX-RS test</name>
+    <groupId>org.jboss.resteasy-ts</groupId>
+    <artifactId>resteasy-jaxrs-all</artifactId>
+    <version>2.3.7.Final</version>
+    <packaging>pom</packaging>
+    <properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-		<downloadSources>true</downloadSources>
+    	<maven.compiler.source>1.6</maven.compiler.source>
+    	<maven.compiler.target>1.6</maven.compiler.target>
+    	<downloadSources>true</downloadSources>
 
-		<versions.org.jboss.resteasy>${project.version}</versions.org.jboss.resteasy>
-		<versions.cglib.cglib-nodep>2.1_3</versions.cglib.cglib-nodep>
-		<versions.org.springframework>3.0.3.RELEASE</versions.org.springframework>
-		<versions.javax.persistence.persistence-api>1.0.2</versions.javax.persistence.persistence-api>
-		<versions.httpunit.httpunit>1.7</versions.httpunit.httpunit>
-		<versions.commons-httpclient.commons-httpclient>3.1</versions.commons-httpclient.commons-httpclient>
-		<versions.org.mortbay.jetty.jetty>6.1.15</versions.org.mortbay.jetty.jetty>
-   	<as.version>7.3.0.Final-redhat-14</as.version><!-- = EAP 6.2.0.GA -->
-    <jetty7.version>7.0.2.v20100331</jetty7.version>
-    <jetty8.version>8.1.1.v20120215</jetty8.version>
-  </properties>
+        <version.cglib.cglib-nodep>2.1_3</version.cglib.cglib-nodep>
+        <version.commons-httpclient.commons-httpclient>3.1</version.commons-httpclient.commons-httpclient>
+    	<version.javax.persistence.persistence-api>1.0.2</version.javax.persistence.persistence-api>
+        <version.javax.servlet.javax.servlet-api>3.0.1</version.javax.servlet.javax.servlet-api>
+    	<version.httpunit.httpunit>1.7</version.httpunit.httpunit>
+        <version.org.jboss.arquillian>1.0.2.Final</version.org.jboss.arquillian>
+       	<version.org.jboss.as>7.3.0.Final-redhat-14</version.org.jboss.as><!-- = EAP 6.2.0.GA -->
+        <version.org.jboss.as.jboss-as-arquillian-container-managed>${version.org.jboss.as}</version.org.jboss.as.jboss-as-arquillian-container-managed>
+        <version.org.jboss.resteasy.arquillian-deployment-scenario-provider>1.0.0.Final</version.org.jboss.resteasy.arquillian-deployment-scenario-provider>
+        <version.org.jboss.shrinkwrap.resolver>2.1.0-alpha-1</version.org.jboss.shrinkwrap.resolver>
+        <version.org.jboss.spec.jboss-javaee-6.0>1.0.0.Final</version.org.jboss.spec.jboss-javaee-6.0>
+        <version.org.mortbay.jetty.jetty>6.1.15</version.org.mortbay.jetty.jetty>
+        <version.org.springframework>3.0.7.RELEASE</version.org.springframework>
+
+
+        <jetty7.version>7.0.2.v20100331</jetty7.version>
+        <jetty8.version>8.1.1.v20120215</jetty8.version>
+    </properties>
 
 	<profiles>
 		<profile>
@@ -36,17 +43,13 @@
 				</property>
 			</activation>
 			<properties>
-				<versions-test.org.jboss.resteasy>2.3.7.Final-redhat-2</versions-test.org.jboss.resteasy>
-				<versions.com.google.code.guice.guice>3.0</versions.com.google.code.guice.guice>
-				<versions.javax.enterprise.cdi-api>1.0-SP4.redhat-3</versions.javax.enterprise.cdi-api>
-				<versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.2.Final-redhat-2</versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>
-				<versions.com.sun.xml.bind.jaxb-impl>2.2.5-redhat-5</versions.com.sun.xml.bind.jaxb-impl>
-				<versions.com.sun.istack.istack-commons-runtime>2.6.1-redhat-2</versions.com.sun.istack.istack-commons-runtime>
-				<versions.org.codehaus.jettison.jettison>1.3.1-redhat-2</versions.org.codehaus.jettison.jettison>
-
-		<!--
-				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
-		-->
+				<version.com.google.code.guice.guice>3.0</version.com.google.code.guice.guice>
+				<version.com.sun.istack.istack-commons-runtime>2.6.1-redhat-2</version.com.sun.istack.istack-commons-runtime>
+                <version.com.sun.xml.bind.jaxb-impl>2.2.5-redhat-5</version.com.sun.xml.bind.jaxb-impl>
+                <version.javax.enterprise.cdi-api>1.0-SP4.redhat-3</version.javax.enterprise.cdi-api>
+				<version.org.codehaus.jettison.jettison>1.3.1-redhat-2</version.org.codehaus.jettison.jettison>
+                <version.org.jboss.resteasy>2.3.8.Final-redhat-3</version.org.jboss.resteasy>
+                <version.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.2.Final-redhat-2</version.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>
 			</properties>
 			<dependencyManagement>
 				<dependencies>
@@ -54,14 +57,10 @@
 					<dependency>
 						<groupId>com.github.relaxng</groupId>
 						<artifactId>relaxngDatatype</artifactId>
-						<version>2011.1-redhat-6</version><!--${versions.com.sun.istack.istack-commons-runtime}-->
+						<version>2011.1-redhat-6</version><!--${version.com.sun.istack.istack-commons-runtime}-->
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
-	    <modules>
-	        <module>resteasy-test-arquillian</module>
-	        <module>resteasy-test</module>
-	    </modules>
 		</profile>
 		<profile>
 			<!-- set properties for test of upstream bits -->
@@ -72,29 +71,28 @@
 				</property>
 			</activation>
 			<properties>
-				<versions-test.org.jboss.resteasy>2.3.7.Final</versions-test.org.jboss.resteasy>
-				<versions.com.google.code.guice.guice>3.0</versions.com.google.code.guice.guice>
-				<versions.javax.enterprise.cdi-api>1.0-SP1</versions.javax.enterprise.cdi-api><!--1.0-SP4.redhat-3-->
-				<versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.0.CR2</versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec> <!-- 1.0.2.Final-redhat-2 -->
-				<versions.com.sun.xml.bind.jaxb-impl>2.2.5</versions.com.sun.xml.bind.jaxb-impl>
-				<versions.org.codehaus.jettison.jettison>1.3.1</versions.org.codehaus.jettison.jettison>
-		<!--
-				<jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
-		-->
+				<version.com.google.code.guice.guice>3.0</version.com.google.code.guice.guice>
+                <version.com.sun.xml.bind.jaxb-impl>2.2.5</version.com.sun.xml.bind.jaxb-impl>
+				<version.javax.enterprise.cdi-api>1.0-SP1</version.javax.enterprise.cdi-api><!--1.0-SP4.redhat-3-->
+                <version.org.codehaus.jettison.jettison>1.3.1</version.org.codehaus.jettison.jettison>
+                <version.org.jboss.resteasy>${project.version}</version.org.jboss.resteasy>
+				<version.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec>1.0.0.CR2</version.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec> <!-- 1.0.2.Final-redhat-2 -->
 			</properties>
-	    <modules>
-	        <module>resteasy-test</module>
-	    </modules>
-
+            <modules>
+                <module>resteasy-links</module>
+            </modules>
 		</profile>
 	</profiles>
 
     <modules>
         <!-- Should probably be removed and be treated as external dependency   -->
-        <!--module>tjws</module--><!-- does not contain any tests -->
+        <module>tjws</module>
         <!--module>jaxrs-api</module--><!-- does not contain any tests -->
         <!--module>resteasy-test-data</module--><!-- does not contain any tests -->
-        <module>resteasy-jaxrs</module>
+        <!--module>resteasy-jaxrs</module--><!-- does not contain any tests -->
+        <module>resteasy-jaxrs-test</module>
+        <module>resteasy-test-tjws</module>
+        <module>resteasy-test-arquillian</module>
         <module>providers</module>
         <!--module>resteasy-jaxrs-war</module--><!-- does not contain any tests -->
         <!--module>resteasy-bom</module--><!-- does not contain any tests -->
@@ -102,10 +100,11 @@
         <module>resteasy-guice</module>
         <!--module>eagledns</module--><!-- does not contain any tests -->
         <module>security</module>
-        <module>resteasy-links</module>
         <!--module>async-http-jbossweb</module--><!-- tests are not included in upstream -->
         <module>async-http-tomcat</module>
+        <module>resteasy-test-tjws-spring</module>
         <module>resteasy-spring</module>
+        <module>resteasy-spring-jetty</module>
         <module>resteasy-jsapi</module>
         <!-- <module>resteasy-jsapi-testing</module> --><!-- not included in upstream -->
         <module>resteasy-cdi</module>
@@ -373,7 +372,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>${versions.com.sun.xml.bind.jaxb-impl}</version>
+                <version>${version.com.sun.xml.bind.jaxb-impl}</version>
             </dependency>
 
             <dependency>
@@ -427,7 +426,7 @@
             <dependency>
                 <groupId>org.codehaus.jettison</groupId>
                 <artifactId>jettison</artifactId>
-                <version>${versions.org.codehaus.jettison.jettison}</version>
+                <version>${version.org.codehaus.jettison.jettison}</version>
                 <exclusions>
                     <!-- This results in duplicate stax-api jars. This is the older
             one. A newer is brought in by com.sun.xml.bind:jaxb-impl -->

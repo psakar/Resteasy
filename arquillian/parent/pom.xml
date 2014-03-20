@@ -36,19 +36,19 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>jaxrs-api</artifactId>
-			<version>${versions-test.org.jboss.resteasy}</version>
+			<version>${version.org.jboss.resteasy}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${versions-test.org.jboss.resteasy}</version>
+			<version>${version.org.jboss.resteasy}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>async-http-servlet-3.0</artifactId>
-			<version>${versions-test.org.jboss.resteasy}</version>
+			<version>${version.org.jboss.resteasy}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -183,7 +183,7 @@
 		    <dependency>
 		       <groupId>org.jboss.as</groupId>
 		       <artifactId>jboss-as-arquillian-container-managed</artifactId>
-		       <version>${as.version}</version>
+		       <version>${version.org.jboss.as}</version>
 		       <scope>test</scope>
 		    </dependency>
 		  </dependencies>
@@ -221,7 +221,7 @@
 										<artifactItem>
 											<groupId>org.jboss.as</groupId>
 											<artifactId>jboss-as-dist</artifactId>
-											<version>${as.version}</version>
+											<version>${version.org.jboss.as}</version>
 											<type>zip</type>
 											<overWrite>false</overWrite>
 											<outputDirectory>${project.build.directory}</outputDirectory>

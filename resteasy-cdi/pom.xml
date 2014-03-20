@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -13,31 +14,31 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-cdi</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>${versions.javax.enterprise.cdi-api}</version>
+            <version>${version.javax.enterprise.cdi-api}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
         	<groupId>org.jboss.spec.javax.ejb</groupId>
         	<artifactId>jboss-ejb-api_3.1_spec</artifactId>
-        	<version>${versions.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec}</version>
+        	<version>${version.org.jboss.spec.javax.ejb.jboss-ejb-api_3.1_spec}</version>
         	<scope>provided</scope>
         </dependency>
-        
+
     </dependencies>
 
 </project>

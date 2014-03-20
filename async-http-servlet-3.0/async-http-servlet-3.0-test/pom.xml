@@ -15,17 +15,17 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>async-http-servlet-3.0</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>${versions.commons-httpclient.commons-httpclient}</version>
+            <version>${version.commons-httpclient.commons-httpclient}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

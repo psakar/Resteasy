@@ -9,21 +9,21 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test-oauth-servlet-war</artifactId>
     <packaging>war</packaging>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-oauth</artifactId>
-            <version>${versions.org.jboss.resteasy}</version><!-- not productized -->
+            <version>${version.org.jboss.resteasy}</version><!-- not productized -->
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

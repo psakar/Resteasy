@@ -1,43 +1,47 @@
-<?xml version="1.0"?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <version>2.3.7.Final</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
     <artifactId>resteasy-crypto</artifactId>
     <name>RESTEasy Crypto test</name>
+
+    <properties>
+        <version.org.jboss.resteasy.resteasy-crypto>${version.org.jboss.resteasy}</version.org.jboss.resteasy.resteasy-crypto>
+    </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-crypto</artifactId>
-            <version>${versions.org.jboss.resteasy}</version><!-- only upstream -->
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test</artifactId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-crypto</artifactId>
+            <version>${version.org.jboss.resteasy.resteasy-crypto}</version><!-- only upstream -->
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${versions-test.org.jboss.resteasy}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>eagledns-fork</artifactId>
-            <version>${versions.org.jboss.resteasy}</version><!-- only upstream -->
+            <version>${version.org.jboss.resteasy}</version><!-- only upstream -->
             <scope>test</scope>
         </dependency>
 

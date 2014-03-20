@@ -19,9 +19,7 @@ import junit.framework.Assert;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.test.BaseResourceTest;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -33,19 +31,11 @@ import org.junit.Test;
  */
 public class TestXXE extends BaseResourceTest
 {
-   @BeforeClass
-   public static void beforeClass() throws Exception {
+   @Override
+   @Before
+   public void before() throws Exception {
      manualStart = true;
-   }
-
-   @AfterClass
-   public static void afterClass() throws Exception {
-     manualStart = false;
-   }
-
-   @After
-   public void after() throws Exception {
-     stopContainer();
+     super.before();
    }
 
    @Path("/")

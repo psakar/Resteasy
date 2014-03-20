@@ -43,7 +43,7 @@ import org.jboss.resteasy.util.GenericType;
 import org.jboss.resteasy.util.ParameterParser;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -64,9 +64,10 @@ public class SigningTest extends BaseResourceTest
       System.out.println(url.getFile());
    }
 
-   @BeforeClass
-   public static void setup() throws Exception
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       Logger.setLoggerType(Logger.LoggerType.JUL);
       repository = new DosetaKeyRepository();
       repository.setKeyStorePath("test.jks");

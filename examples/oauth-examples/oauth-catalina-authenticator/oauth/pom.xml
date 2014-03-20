@@ -25,12 +25,12 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-oauth</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-httpclient</groupId>

@@ -30,15 +30,17 @@ import org.jboss.resteasy.test.providers.jaxb.regression.Regression636Classes.Up
 import org.jboss.resteasy.test.providers.jaxb.regression.Regression636Classes.storage_pool;
 import org.jboss.resteasy.util.Types;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class Regression636Test extends BaseResourceTest
 {
 
-   @BeforeClass
-   public static void setup() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
+      super.before();
       addPerRequestResource(Top.class,
           AbstractBackendCollectionResource.class, AbstractBackendResource.class,
           AbstractBackendSubResource.class, Action.class, AssignedPermissionsResource.class,

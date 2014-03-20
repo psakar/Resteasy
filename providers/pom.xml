@@ -25,7 +25,7 @@
 				<dependency>
 					<groupId>org.jboss.resteasy</groupId>
 					<artifactId>resteasy-jaxrs</artifactId>
-					<version>${versions-test.org.jboss.resteasy}</version>
+					<version>${version.org.jboss.resteasy}</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>

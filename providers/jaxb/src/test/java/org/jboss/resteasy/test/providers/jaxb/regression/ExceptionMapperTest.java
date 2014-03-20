@@ -13,7 +13,7 @@ import org.jboss.resteasy.plugins.providers.jaxb.JAXBUnmarshalException;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -35,11 +35,13 @@ public class ExceptionMapperTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setup()
+   @Override
+   @Before
+   public void before() throws Exception
    {
       addExceptionMapper(JAXBMapper.class);
       addPerRequestResource(TestService.class, Person.class);
+      super.before();
    }
 
    @Provider

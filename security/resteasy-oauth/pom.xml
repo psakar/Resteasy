@@ -2,7 +2,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>resteasy-jaxrs-all</artifactId>
+        <artifactId>resteasy-jaxrs-all-ts</artifactId>
         <groupId>org.jboss.resteasy</groupId>
         <version>2.3.7.Final</version>
         <relativePath>../../pom.xml</relativePath>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${project.version}</version>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
     </dependencies>
 

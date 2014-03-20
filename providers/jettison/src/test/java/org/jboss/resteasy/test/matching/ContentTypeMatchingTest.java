@@ -15,7 +15,7 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -92,12 +92,12 @@ public class ContentTypeMatchingTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setup()
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       addPerRequestResource(MapperResource.class);
-      deployment.getProviderFactory().addExceptionMapper(MyErrorExceptinMapper.class);
-
+      addExceptionMapper(MyErrorExceptinMapper.class);
    }
 
    @Test

@@ -16,8 +16,21 @@
         <module>filter-test</module>
         <module>encoding-test</module>
         <module>context-test</module>
-        <module>oauth-servlet-test</module>
         <module>jsapi-servlet-test</module><!-- not included in upstream -->
         <module>application-test</module>
     </modules>
+    <profiles>
+        <profile>
+            <id>upstream</id>
+            <activation>
+                <property>
+                    <name>!productized</name>
+                </property>
+            </activation>
+            <modules>
+                <module>oauth-servlet-test</module><!-- oauth is not productized -->
+            </modules>
+        </profile>
+    </profiles>
+
 </project>

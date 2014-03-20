@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -67,10 +67,12 @@ public class StreamResetTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setUp() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
       addPerRequestResource(SimpleResource.class, Person.class, Place.class);
+      super.before();
    }
 
    @Test

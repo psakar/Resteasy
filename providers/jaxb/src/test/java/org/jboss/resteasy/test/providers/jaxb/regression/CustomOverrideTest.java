@@ -18,7 +18,7 @@ import javax.ws.rs.ext.Provider;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.jboss.resteasy.test.TestPortProvider;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -75,11 +75,13 @@ public class CustomOverrideTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setup() throws Exception
+   @Override
+   @Before
+   public void before() throws Exception
    {
       registerProvider(VCardMessageBodyWriter.class);
       addPerRequestResource(VCardResource.class, Foo.class);
+      super.before();
    }
 
    @Test

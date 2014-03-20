@@ -1,5 +1,6 @@
 package org.jboss.resteasy.test;
 
+import static org.jboss.resteasy.arquillian.extension.DeploymentScenarioUtils.*;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
@@ -18,20 +19,20 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import org.jboss.arquillian.container.spi.client.deployment.DeploymentDescription;
+import org.jboss.arquillian.container.spi.client.deployment.DeploymentScenario;
 import org.jboss.arquillian.container.test.api.Deployer;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ArchivePath;
-import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
@@ -41,70 +42,76 @@ public abstract class BaseResourceTest
 
   private static final Logger logger = Logger.getLogger(BaseResourceTest.class.getName());
 
-  public static final String DEPLOYMENT = "app";
+  public final static String DEPLOYMENT = "app";
 
   @ArquillianResource
-  protected static Deployer deployer;
-  // IT IS NOT THREADSAFE !!!!
-  protected static WebArchive war;
-  // IT IS NOT THREADSAFE !!!!
-  protected static boolean deployed;
-  // IT IS NOT THREADSAFE !!!!
-  protected static boolean manualStart;
-  // IT IS NOT THREADSAFE !!!!
-  protected static Map<String,String> initParams = new Hashtable<String,String>();
-  // IT IS NOT THREADSAFE !!!!
-  protected static Map<String,String> contextParams = new Hashtable<String,String>();
+  protected Deployer deployer;
+
+  @ArquillianResource
+  private DeploymentScenario deploymentScenario;
+
+  protected WebArchive war;
+  protected boolean deployed;
+  protected boolean manualStart;
+  protected Map<String,String> initParams = new Hashtable<String,String>();
+  protected Map<String,String> contextParams = new Hashtable<String,String>();
 
 //  protected static ResteasyDeployment deployment;
 //  protected static Dispatcher dispatcher;
 
-  @Deployment(name = DEPLOYMENT, managed = false, testable = false)
-  public static WebArchive getDeployment() {
-    createDeployment();
-    //war.toString(true);
-    return war;
+  public void createDeploymentIfNotCreated() {
+      if (war == null)
+          war = createDeployment();
   }
 
-  public static WebArchive createDeployment() {
-    war = ShrinkWrap.create(WebArchive.class,  DEPLOYMENT + ".war");
-    war.addClass(TestApplication.class);
-    return war;
-  }
-
-  @BeforeClass
-  public static void beforeClass() throws Exception
-  {
-
-  }
-
+  public WebArchive createDeployment() {
+      WebArchive war = ShrinkWrap.create(WebArchive.class,  DEPLOYMENT + ".war");
+      war.addClass(TestApplication.class);
+      return war;
+    }
 
   @Before
   public void before () throws Exception {
     info("before");
+    createDeploymentIfNotCreated();
     if (!deployed && !manualStart)
       startContainer();
   }
 
-  @AfterClass
-  public static void afterClass() throws Exception
+  protected TestApplication createTestApplication() {
+    return new TestApplication();
+}
+
+@After
+  public void after() throws Exception
   {
     stopContainer();
   }
 
-  public static void addPerRequestResource(Class<?> ... resources)
+  public void addPerRequestResource(Class<?> ... resources)
   {
+    createDeploymentIfNotCreated();
     Class<?> resourceClass = resources[0];
     info("added request resource " + resourceClass.getName());
     TestApplication.classes.add(resourceClass);
     war.addClasses(resources);
   }
-/*
-  protected static void addClasspathResource(String name, String target) {
-    war.addAsResource(name, target);
+
+  protected void addPackageInfo(final Class<?> clazz) {
+      war.addPackages(false, new org.jboss.shrinkwrap.api.Filter<org.jboss.shrinkwrap.api.ArchivePath>()
+              {
+                 @Override
+                 public boolean include(ArchivePath path)
+                 {
+                     return path.get().endsWith("package-info.class");
+                 }
+              }, clazz.getPackage());
+
   }
-*/
-  protected static void addWebResource(File file) {
+
+
+  protected void addWebResource(File file) {
+    createDeploymentIfNotCreated();
     assertTrue("Resource not found " + file.getAbsolutePath(), file.exists());
     info("added web resource " + file.getAbsolutePath());
     war.addAsWebResource(file);
@@ -114,8 +121,8 @@ public abstract class BaseResourceTest
   @ApplicationPath("/")
   public static class TestApplication extends Application
   {
-     // IT IS NOT THREADSAFE !!!!
-     public static final Set<Class<?>> classes = new HashSet<Class<?>>();
+
+     public final static Set<Class<?>> classes = new HashSet<Class<?>>();
 
      @Override
      public Set<Class<?>> getClasses()
@@ -144,25 +151,28 @@ public abstract class BaseResourceTest
      return builder.toString();
   }
 
-  public static void registerProvider(Class<?> clazz) {
+  public void registerProvider(Class<?> clazz) {
+    createDeploymentIfNotCreated();
     info("register provider " + clazz.getName());
     war.addClass(clazz);
     TestApplication.classes.add(clazz);
   }
 
-  public static void addExceptionMapper(Class<? extends ExceptionMapper<?>> clazz) {
+  public void addExceptionMapper(Class<? extends ExceptionMapper<?>> clazz) {
+    createDeploymentIfNotCreated();
     war.addClass(clazz);
     TestApplication.classes.add(clazz);
   }
 
-  protected static void createContainer(Map<String,String> initParams, Map<String, String> contextParams) throws Exception {
+  protected void createContainer(Map<String,String> initParams, Map<String, String> contextParams) throws Exception {
     info("create container");
-    BaseResourceTest.initParams = initParams;
-    BaseResourceTest.contextParams = contextParams;
+    this.initParams = initParams;
+    this.contextParams = contextParams;
   }
 
-  protected static void startContainer() throws Exception {
+  protected void startContainer() throws Exception {
     info("start container - deploy " + DEPLOYMENT);
+    createDeploymentIfNotCreated();
     if (contextParams != null && contextParams.size() > 0 && !war.contains("WEB-INF/web.xml")) {
       StringBuilder webXml = new StringBuilder();
       webXml.append("<web-app version=\"3.0\" xmlns=\"http://java.sun.com/xml/ns/javaee\" \n");
@@ -181,26 +191,28 @@ public abstract class BaseResourceTest
       Asset resource = new StringAsset(webXml.toString());
       war.addAsWebInfResource(resource, "web.xml");
     }
-
+    if (System.getProperty("STORE_WAR") != null) {
+        war.as(ZipExporter.class).exportTo(new File("target", war.getName()), true);
+    }
+    DeploymentDescription deploymentDescription = new DeploymentDescription(DEPLOYMENT, war);
+    deploymentDescription.shouldBeManaged(false);
+    deploymentScenario.addDeployment(deploymentDescription);
     deployer.deploy(DEPLOYMENT);
     deployed = true;
   }
 
-  protected static void stopContainer() throws Exception {
+  protected void stopContainer() throws Exception {
     info("stop container - undeploy " + DEPLOYMENT);
-    if (deployed)
+    if (deployed) {
       deployer.undeploy(DEPLOYMENT);
-    deployed = false;
-    if (war != null) {
-      for (Map.Entry<ArchivePath, Node> asset : war.getContent().entrySet()) {
-        war.delete(asset.getKey());
-      }
-      war.addClass(TestApplication.class);
+      removeDeploymentFromDeploymentScenario(deploymentScenario, DEPLOYMENT);
     }
+    deployed = false;
+    war = null;
     TestApplication.classes.clear();
   }
 
-  protected static void info (String message) {
+  protected void info (String message) {
     logger.info(message);
     System.err.println("BaseResourceTest - " + message);
   }

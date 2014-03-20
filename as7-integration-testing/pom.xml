@@ -1,6 +1,6 @@
 <project>
     <parent>
-        <groupId>org.jboss.resteasy</groupId>
+        <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <version>2.3.7.Final</version>
     </parent>

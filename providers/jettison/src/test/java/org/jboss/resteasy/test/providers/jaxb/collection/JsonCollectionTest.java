@@ -25,7 +25,7 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.core.messagebody.WriterUtility;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -210,13 +210,14 @@ public class JsonCollectionTest extends BaseResourceTest
       }
    }
 
-   @BeforeClass
-   public static void setup()
-   {
+   @Override
+   @Before
+   public void before() throws Exception {
+      super.before();
       addPerRequestResource(MyResource.class);
-      dispatcher.getRegistry().addPerRequestResource(MyResource.class);
-      dispatcher.getRegistry().addPerRequestResource(MyNamespacedResource.class);
-      dispatcher.getRegistry().addPerRequestResource(MyResource2.class);
+      addPerRequestResource(MyResource.class);
+      addPerRequestResource(MyNamespacedResource.class);
+      addPerRequestResource(MyResource2.class);
    }
 
    @Test

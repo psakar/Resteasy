@@ -14,7 +14,7 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.plugins.providers.jaxb.JAXBContextWrapper;
 import org.jboss.resteasy.test.BaseResourceTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -24,10 +24,11 @@ import org.junit.Test;
 public class AbstractJAXBClassTest extends BaseResourceTest
 {
 
-   @BeforeClass
-   public static void beforeClass() throws Exception
+   @Override
+@Before
+   public void before() throws Exception
    {
-      BaseResourceTest.beforeClass();
+      super.before();
       addPerRequestResource(SimpleResource.class, Adresse.class, Firmenkunde.class, Kunde.class, Person.class, Privatkunde.class, AbstractJAXBClassTest.class, BaseResourceTest.class);
    }
 
