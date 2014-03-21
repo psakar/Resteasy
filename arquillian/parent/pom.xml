@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.jboss.arquillian</groupId>
             <artifactId>arquillian-bom</artifactId>
-            <version>1.0.0.Final</version>
+            <version>1.0.2.Final</version>
             <scope>import</scope>
             <type>pom</type>
         </dependency>
@@ -72,6 +72,12 @@
 			<artifactId>commons-logging</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>arquillian-deployment-scenario-provider</artifactId>
+            <version>${version.org.jboss.resteasy.arquillian-deployment-scenario-provider}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 
@@ -115,26 +121,27 @@
 				</property>
 			</activation>
 			<properties>
+                <version.jetty>7.6.14.v20131031</version.jetty>
 				<arquillian.launch>jetty</arquillian.launch>
 			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>org.jboss.arquillian.container</groupId>
 					<artifactId>arquillian-jetty-embedded-7</artifactId>
-					<version>1.0.0.CR1</version>
+					<version>1.0.0.CR2</version>
 					<scope>test</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-webapp</artifactId>
-					<version>${jetty7.version}</version>
+					<version>${version.jetty}</version>
 					<scope>test</scope>
 				</dependency>
 				<!-- plus and naming requires for using JNDI -->
 				<dependency>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-plus</artifactId>
-					<version>${jetty7.version}</version>
+					<version>${version.jetty}</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
@@ -147,26 +154,27 @@
 				</property>
 			</activation>
 			<properties>
+                <version.jetty>8.1.14.v20131031</version.jetty>
 				<arquillian.launch>jetty</arquillian.launch>
 			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>org.jboss.arquillian.container</groupId>
 					<artifactId>arquillian-jetty-embedded-7</artifactId>
-					<version>1.0.0.CR1</version>
+					<version>1.0.0.CR2</version>
 					<scope>test</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-webapp</artifactId>
-					<version>${jetty8.version}</version>
+                    <version>${version.jetty}</version>
 					<scope>test</scope>
 				</dependency>
 				<!-- plus and naming requires for using JNDI -->
 				<dependency>
 					<groupId>org.eclipse.jetty</groupId>
 					<artifactId>jetty-plus</artifactId>
-					<version>${jetty8.version}</version>
+                    <version>${version.jetty}</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
@@ -179,11 +187,14 @@
 					<name>jboss730</name>
 				</property>
 			</activation>
+            <properties>
+                <version.org.jboss.as.jboss-as-arquillian-container-managed>7.2.0.Final</version.org.jboss.as.jboss-as-arquillian-container-managed>
+            </properties>
 			<dependencies>
 		    <dependency>
 		       <groupId>org.jboss.as</groupId>
 		       <artifactId>jboss-as-arquillian-container-managed</artifactId>
-		       <version>${version.org.jboss.as}</version>
+		       <version>${version.org.jboss.as.jboss-as-arquillian-container-managed}</version>
 		       <scope>test</scope>
 		    </dependency>
 		  </dependencies>
@@ -192,11 +203,6 @@
 		<profile>
 			<id>install-jboss730</id>
 			<activation>
-			<!--
-				<property>
-					<name>!no-install-jboss730</name>
-				</property>
-			 -->
 				<property>
 					<name>!jboss.home</name>
 				</property>

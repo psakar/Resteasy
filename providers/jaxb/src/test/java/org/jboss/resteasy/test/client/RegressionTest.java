@@ -29,8 +29,8 @@ public class RegressionTest extends BaseResourceTest
    @Before
    public void before() throws Exception
    {
-      super.before();
       addPerRequestResource(MessageResource.class, MessageTFM.class, IMessageTFMResource.class, RegressionTest.class, BaseResourceTest.class);
+      super.before();
    }
 
    @XmlRootElement

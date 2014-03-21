@@ -40,7 +40,6 @@ public class Regression636Test extends BaseResourceTest
    @Before
    public void before() throws Exception
    {
-      super.before();
       addPerRequestResource(Top.class,
           AbstractBackendCollectionResource.class, AbstractBackendResource.class,
           AbstractBackendSubResource.class, Action.class, AssignedPermissionsResource.class,
@@ -53,6 +52,7 @@ public class Regression636Test extends BaseResourceTest
           storage_pool.class, UpdatableResource.class, Regression636Classes.class
 
       );
+      super.before();
    }
 
    @Test

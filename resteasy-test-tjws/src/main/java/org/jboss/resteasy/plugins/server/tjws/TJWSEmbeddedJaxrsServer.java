@@ -22,7 +22,7 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    protected Hashtable<String,String> contextParameters;
 
    @Override
-  public void setRootResourcePath(String rootResourcePath)
+   public void setRootResourcePath(String rootResourcePath)
    {
       this.rootResourcePath = rootResourcePath;
    }
@@ -32,13 +32,13 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    }
 
    @Override
-  public ResteasyDeployment getDeployment()
+   public ResteasyDeployment getDeployment()
    {
       return deployment;
    }
 
    @Override
-  public void setDeployment(ResteasyDeployment deployment)
+   public void setDeployment(ResteasyDeployment deployment)
    {
       this.deployment = deployment;
    }
@@ -63,7 +63,7 @@ public class TJWSEmbeddedJaxrsServer extends TJWSServletServer implements Embedd
    }
 
    @Override
-  public void setSecurityDomain(SecurityDomain sc)
+   public void setSecurityDomain(SecurityDomain sc)
    {
       servlet.setSecurityDomain(sc);
    }

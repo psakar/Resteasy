@@ -5,11 +5,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ClientResponseFailure;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.spi.NoLogWebApplicationException;
 import org.jboss.resteasy.test.BaseResourceTest;
-import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,17 +54,17 @@ public class ClientResponseFailureTest extends BaseResourceTest
 
    @Override
    @Before
-   public void before() throws Exception {
-       super.before();
-       addPerRequestResource(MyResourceImpl.class);
+   public void before() throws Exception
+   {
+      addPerRequestResource(MyResourceImpl.class);
+      super.before();
    }
 
 
-   @SuppressWarnings("unchecked")
    @Test
    public void testStreamStillOpen() throws Exception
    {
-      final MyResource proxy = ProxyFactory.create(MyResource.class, TestPortProvider.generateBaseUrl());
+      final MyResource proxy = ProxyFactory.create(MyResource.class, "http://localhost:8081");
       boolean failed = true;
       try
       {
@@ -74,7 +74,7 @@ public class ClientResponseFailureTest extends BaseResourceTest
       catch (ClientResponseFailure e)
       {
          Assert.assertEquals(e.getResponse().getStatus(), 404);
-         Assert.assertEquals((e.getResponse()).getEntity(String.class), "there was an error");
+         Assert.assertEquals(((ClientResponse<?>)e.getResponse()).getEntity(String.class), "there was an error");
          e.getResponse().releaseConnection();
       }
 

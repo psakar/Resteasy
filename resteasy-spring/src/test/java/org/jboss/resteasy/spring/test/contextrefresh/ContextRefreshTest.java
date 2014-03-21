@@ -23,7 +23,7 @@ public class ContextRefreshTest
 {
 
    private WebAppContext context;
-  private Server server;
+   private Server server;
 
    @Before
    public void before() throws Exception
@@ -40,8 +40,8 @@ public class ContextRefreshTest
 
    @After
    public void after() throws Exception {
-     server.stop();
-     context.stop();
+      server.stop();
+      context.stop();
    }
 
 

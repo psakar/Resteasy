@@ -7,34 +7,27 @@
         <version>2.3.7.Final</version>
 	    <relativePath>../pom.xml</relativePath>
     </parent>
+
     <artifactId>resteasy-jaxb-provider</artifactId>
-    <packaging>jar</packaging>
     <name>Resteasy JAXB Provider test</name>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>${version.org.jboss.resteasy}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${version.xerces.xercesImpl}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 	<profiles>
-		<profile>
-			<!-- override properties inherited from parents for test of productized bits -->
-			<id>productized</id>
-			<activation>
-				<property>
-					<name>productized</name>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun.istack</groupId>
-					<artifactId>istack-commons-runtime</artifactId>
-					<version>${version.com.sun.istack.istack-commons-runtime}</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-					<version>2.9.1-redhat-4</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
 		<profile>
 			<!-- exclude integrations tests which are known to fail-->
 			<id>exclude-tests-known-failures</id>
@@ -90,15 +83,5 @@
 	    </dependencies>
 		</profile>
 	</profiles>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
 
 </project>

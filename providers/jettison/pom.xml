@@ -8,7 +8,6 @@
 	    <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>resteasy-jettison-provider</artifactId>
-    <packaging>jar</packaging>
     <name>Resteasy Jettison Provider test</name>
 
     <dependencies>

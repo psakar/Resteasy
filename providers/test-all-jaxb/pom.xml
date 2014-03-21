@@ -8,20 +8,13 @@
 	    <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>test-all-jaxb</artifactId>
-    <packaging>jar</packaging>
     <name>Test All JAXB providers</name>
-    <description/>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.jboss.resteasy-ts</groupId>
-            <artifactId>resteasy-test-tjws</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
@@ -47,13 +40,19 @@
             <scope>test</scope>
         </dependency>
 
-
         <!--
             Contains Generated Classes and other test data required for testing.
          -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-test-data</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy-ts</groupId>
+            <artifactId>resteasy-test-tjws</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

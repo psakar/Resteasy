@@ -17,31 +17,14 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 	<profiles>
 		<profile>
 			<!-- exclude integrations tests which are known to fail-->
-			<id>exclude-tests-known-failures</id>
+			<id>exclude-known-tests-failures</id>
 			<activation>
 				<property>
-					<name>exclude-tests-known-failures</name>
+					<name>exclude-known-tests-failures</name>
 				</property>
 			</activation>
 			<build>

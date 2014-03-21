@@ -18,6 +18,14 @@
             <artifactId>resteasy-fastinfoset-provider</artifactId>
             <version>${version.org.jboss.resteasy}</version>
             <scope>test</scope>
+            <!-- exclude and override dependency ?
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                    <version>${version.org.springframework}</version>
+                    <scope>test</scope>
+                </dependency>
+             -->
         </dependency>
 
         <dependency>
@@ -27,26 +35,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
-            <scope>test</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${version.org.springframework}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>

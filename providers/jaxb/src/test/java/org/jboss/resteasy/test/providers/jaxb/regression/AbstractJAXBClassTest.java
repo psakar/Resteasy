@@ -25,11 +25,11 @@ public class AbstractJAXBClassTest extends BaseResourceTest
 {
 
    @Override
-@Before
+   @Before
    public void before() throws Exception
    {
-      super.before();
       addPerRequestResource(SimpleResource.class, Adresse.class, Firmenkunde.class, Kunde.class, Person.class, Privatkunde.class, AbstractJAXBClassTest.class, BaseResourceTest.class);
+      super.before();
    }
 
    @Path("/")

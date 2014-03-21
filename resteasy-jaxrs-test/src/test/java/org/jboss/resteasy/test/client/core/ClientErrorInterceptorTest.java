@@ -32,12 +32,12 @@ public class ClientErrorInterceptorTest extends BaseResourceTest {
 
 	public static class MyResourceImpl implements MyResource {
 		@Override
-    public String get() {
+        public String get() {
 			return "hello world";
 		}
 
 		@Override
-    public String error() {
+        public String error() {
 			Response r = Response.status(404).type("text/plain").entity("there was an error").build();
 			throw new NoLogWebApplicationException(r);
 		}
@@ -69,8 +69,8 @@ public class ClientErrorInterceptorTest extends BaseResourceTest {
 	@Override
     @Before
 	public void before() throws Exception {
-	    super.before();
 		addPerRequestResource(MyResourceImpl.class);
+		super.before();
 	}
 
 	public static class MyClienteErrorInterceptor implements ClientErrorInterceptor {
