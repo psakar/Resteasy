@@ -24,6 +24,7 @@ import org.jboss.resteasy.test.TestPortProvider;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import se.unlogic.eagledns.EagleDNS;
@@ -38,10 +39,9 @@ public class SigningDnsTest extends BaseResourceTest
    public static DosetaKeyRepository serverRepository;
    public static PrivateKey badKey;
 
-   @Override
-   @Before
-   public void before() throws Exception {
-      super.before();
+   @BeforeClass
+   public static void setup() throws Exception
+   {
       clientRepository = new DosetaKeyRepository();
       clientRepository.setKeyStorePath("test1.jks");
       clientRepository.setKeyStorePassword("password");
@@ -60,6 +60,12 @@ public class SigningDnsTest extends BaseResourceTest
       badKey = keyPair.getPrivate();
 
 
+      configureDNS();
+   }
+
+   @Override
+   @Before
+   public void before() throws Exception {
       dispatcher.getDefaultContextObjects().put(KeyRepository.class, serverRepository);
       /*
       deployment.getProviderFactory().registerProvider(DigitalSigningInterceptor.class);
@@ -68,7 +74,7 @@ public class SigningDnsTest extends BaseResourceTest
       deployment.getProviderFactory().registerProvider(DigitalVerificationHeaderDecorator.class);
       */
       addPerRequestResource(SignedResource.class);
-      configureDNS();
+      super.before();
    }
 
    private static EagleDNS dns;
@@ -136,7 +142,7 @@ public class SigningDnsTest extends BaseResourceTest
 
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse<?> response = request.post();
+      ClientResponse response = request.post();
       Assert.assertEquals(204, response.getStatus());
 
 
@@ -152,7 +158,7 @@ public class SigningDnsTest extends BaseResourceTest
       contentSignature.setPrivateKey(badKey);
       request.header(DKIMSignature.DKIM_SIGNATURE, contentSignature);
       request.body("text/plain", "hello world");
-      ClientResponse<?> response = request.post();
+      ClientResponse response = request.post();
       Assert.assertEquals(401, response.getStatus());
    }
 
@@ -161,7 +167,7 @@ public class SigningDnsTest extends BaseResourceTest
    {
       ClientRequest request = new ClientRequest(TestPortProvider.generateURL("/signed"));
       request.body("text/plain", "hello world");
-      ClientResponse<?> response = request.post();
+      ClientResponse response = request.post();
       Assert.assertEquals(401, response.getStatus());
    }
 

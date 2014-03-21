@@ -67,7 +67,6 @@ public class SigningTest extends BaseResourceTest
    @Override
    @Before
    public void before() throws Exception {
-      super.before();
       Logger.setLoggerType(Logger.LoggerType.JUL);
       repository = new DosetaKeyRepository();
       repository.setKeyStorePath("test.jks");
@@ -87,6 +86,7 @@ public class SigningTest extends BaseResourceTest
       dispatcher.getDefaultContextObjects().put(KeyRepository.class, repository);
       addPerRequestResource(SignedResource.class);
       executor = new ApacheHttpClient4Executor();
+      super.before();
    }
 
    @AfterClass

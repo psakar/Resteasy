@@ -102,7 +102,6 @@ public class IntegrationTest extends BaseResourceTest
    @Override
    @Before
    public void before() throws Exception {
-      super.before();
       Security.addProvider(new BouncyCastleProvider());
 
       /*
@@ -121,7 +120,7 @@ public class IntegrationTest extends BaseResourceTest
       addPerRequestResource(EncryptedResource.class);
       addPerRequestResource(SignedResource.class);
       addPerRequestResource(EncryptedSignedResource.class);
-
+      super.before();
    }
 
    @Test
