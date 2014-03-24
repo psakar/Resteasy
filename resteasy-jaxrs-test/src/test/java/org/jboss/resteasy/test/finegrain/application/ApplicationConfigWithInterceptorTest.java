@@ -126,6 +126,7 @@ public class ApplicationConfigWithInterceptorTest
       doTest(path, expectedStatus, true);
    }
 
+   @SuppressWarnings("unchecked")
    private void doTest(String path, int expectedStatus, boolean get) throws Exception
    {
       ClientRequest request = new ClientRequest(generateURL(path));

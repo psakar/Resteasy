@@ -1,19 +1,15 @@
 package org.jboss.resteasy.test.security.doseta;
 
-import static org.junit.Assert.*;
-
-import java.net.URL;
-import java.util.Hashtable;
+import org.apache.log4j.Logger;
+import org.junit.Assert;
+import org.junit.Test;
+import se.unlogic.eagledns.EagleDNS;
 
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
-
-import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Test;
-
-import se.unlogic.eagledns.EagleDNS;
+import java.net.URL;
+import java.util.Hashtable;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -30,7 +26,6 @@ public class EagleDnsTest
 
       log.info("HELLO!!!!!!");
       final URL path = Thread.currentThread().getContextClassLoader().getResource("dns/conf/config.xml");
-      assertNotNull(path);
 
       dns = new EagleDNS();
       dns.setConfigClassPath("dns/conf/config.xml");

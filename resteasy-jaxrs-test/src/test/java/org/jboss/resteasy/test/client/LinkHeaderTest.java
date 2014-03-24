@@ -79,9 +79,10 @@ public class LinkHeaderTest extends BaseResourceTest
 
    @Override
    @Before
-   public void before() throws Exception {
-       super.before();
-       addPerRequestResource(LinkHeaderService.class);
+   public void before() throws Exception
+   {
+      addPerRequestResource(LinkHeaderService.class);
+      super.before();
    }
 
    @Test
