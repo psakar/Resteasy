@@ -14,6 +14,18 @@
 
     <modules>
         <!--module>async-http-servlet-3.0</module--><!-- not tests-->
-        <module>async-http-servlet-3.0-test</module>
     </modules>
+    <profiles>
+        <profile>
+            <id>arquillian</id>
+            <activation>
+                <property>
+                    <name>arquillian</name>
+                </property>
+            </activation>
+            <modules>
+				<module>async-http-servlet-3.0-test</module>
+            </modules>
+        </profile>    
+    </profiles>
 </project>

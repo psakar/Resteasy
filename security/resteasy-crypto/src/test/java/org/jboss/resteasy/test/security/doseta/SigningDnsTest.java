@@ -66,7 +66,6 @@ public class SigningDnsTest extends BaseResourceTest
    @Override
    @Before
    public void before() throws Exception {
-      dispatcher.getDefaultContextObjects().put(KeyRepository.class, serverRepository);
       /*
       deployment.getProviderFactory().registerProvider(DigitalSigningInterceptor.class);
       deployment.getProviderFactory().registerProvider(DigitalSigningHeaderDecorator.class);
@@ -75,6 +74,7 @@ public class SigningDnsTest extends BaseResourceTest
       */
       addPerRequestResource(SignedResource.class);
       super.before();
+      dispatcher.getDefaultContextObjects().put(KeyRepository.class, serverRepository);
    }
 
    private static EagleDNS dns;

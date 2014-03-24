@@ -83,10 +83,10 @@ public class SigningTest extends BaseResourceTest
       badKey = keyPair.getPrivate();
 
 
-      dispatcher.getDefaultContextObjects().put(KeyRepository.class, repository);
       addPerRequestResource(SignedResource.class);
       executor = new ApacheHttpClient4Executor();
       super.before();
+      dispatcher.getDefaultContextObjects().put(KeyRepository.class, repository);
    }
 
    @AfterClass
