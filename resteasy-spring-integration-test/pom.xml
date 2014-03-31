@@ -627,18 +627,26 @@ Modify server configuration to automatically start snowdrop module when webservi
 			<id>install-as-module-snowdrop-3.2.x</id>
 			<activation>
 				<property>
-					<name>as-modules</name>
+					<name>as-modules-snowdrop</name>
 				</property>
 			</activation>
 
             <properties>
-                <version.org.jboss.snowdrop>3.0.2.Final-redhat-1</version.org.jboss.snowdrop>
+                <version.org.jboss.snowdrop>3.1.0.Final-redhat-1</version.org.jboss.snowdrop>
                 <module.snowdrop.slot>3.2.x</module.snowdrop.slot>
                 <module.snowdrop.path>${jboss.home}/modules/system/add-ons/snowdrop/org/jboss/snowdrop/${module.snowdrop.slot}</module.snowdrop.path>
 
                 <!-- reference property from profile install-as-module-spring-* -->
                 <module.snowdrop.spring-slot>${module.spring.slot}</module.snowdrop.spring-slot>
             </properties>
+
+            <repositories>
+       			<repository>
+         			<id>wfk-repo</id>
+         			<name>wfk-snowdrop</name>
+         			<url>http://download.lab.bos.redhat.com/brewroot/repos/jb-wfk-2-rhel-6-build/latest/maven/</url>
+       			</repository>
+     		</repositories>
 
 			<build>
 				<plugins>
