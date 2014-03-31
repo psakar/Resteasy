@@ -107,6 +107,7 @@
         <module>async-http-tomcat</module>
         <module>resteasy-test-tjws-spring</module>
         <module>resteasy-spring</module>
+        <module>resteasy-spring-jboss</module>
         <module>resteasy-spring-jetty</module>
         <module>resteasy-spring-integration-test</module>
         <module>resteasy-jsapi</module>
