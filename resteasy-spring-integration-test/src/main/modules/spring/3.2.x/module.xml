@@ -32,6 +32,7 @@
         <resource-root path="spring-core.jar"/>
         <resource-root path="spring-expression.jar"/>
         <resource-root path="spring-web.jar"/>
+        <resource-root path="spring-webmvc.jar"/>
     </resources>
     <dependencies>
         <module name="ch.qos.cal10n"/>

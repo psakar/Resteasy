@@ -95,6 +95,12 @@
     		<artifactId>log4j</artifactId>
     		<version>${version.log4j}</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.aspectj</groupId>
+    		<artifactId>aspectjrt</artifactId>
+    		<version>1.7.4</version>
+    		<scope>provided</scope>
+		</dependency>
 
 		<!-- arquillian -->
 		<dependency>
@@ -419,6 +425,7 @@
 								<archive>
 									<manifestEntries>
 										<Dependencies>org.jboss.resteasy.resteasy-spring</Dependencies>
+<!-- 										<Dependencies>org.springframework.spring</Dependencies> -->
 									</manifestEntries>
 								</archive>
 							</configuration>
@@ -439,7 +446,7 @@
 			<properties>
 				<module.spring.version>3.2.x</module.spring.version>
 				<module.spring.slot>main</module.spring.slot><!-- beware jbossws spring integration preinstalled in default distribution expects main slot -->
-				<module.spring.path>${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.version}</module.spring.path>
+				<module.spring.path>${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}</module.spring.path>
 				<version.org.aspectj>1.7.3</version.org.aspectj>
 				<version.aopalliance>1.0</version.aopalliance>
 			</properties>
@@ -458,7 +465,7 @@
 								<configuration>
 									<tasks>
 										<echo>----------------------------------------------</echo>
-										<echo>Install AS module spring (slot {module.spring.slot}) into ${jboss.home}</echo>
+										<echo>Install AS module spring (slot ${module.spring.slot}) into ${jboss.home}</echo>
 										<echo>----------------------------------------------</echo>
 									</tasks>
 								</configuration>
@@ -541,6 +548,11 @@
 										<artifactItem>
 											<groupId>org.springframework</groupId>
 											<artifactId>spring-web</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-webmvc</artifactId>
 											<version>${version.org.springframework}</version>
 										</artifactItem>
 
@@ -642,7 +654,7 @@ Modify server configuration to automatically start snowdrop module when webservi
 								<configuration>
 									<tasks>
 										<echo>----------------------------------------------</echo>
-										<echo>Install AS module snowdrop (slot {module.snowdrop.slot}) into ${jboss.home}</echo>
+										<echo>Install AS module snowdrop (slot ${module.snowdrop.slot}) into ${jboss.home}</echo>
 										<echo>----------------------------------------------</echo>
 									</tasks>
 								</configuration>
