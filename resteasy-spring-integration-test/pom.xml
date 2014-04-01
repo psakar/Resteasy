@@ -374,6 +374,24 @@
 			</dependencies>
 		</profile>
 
+		<profile>
+			<id>dependencies-in-deployment-spring-3.1.x</id>
+			<activation>
+				<property>
+					<name>dependencies-in-deployment-spring-3.1.x</name>
+				</property>
+			</activation>
+			<dependencies>
+
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-asm</artifactId>
+					<version>${version.org.springframework}</version>
+				</dependency>
+
+			</dependencies>
+		</profile>
+
 
 		<profile>
 			<id>dependencies-not-in-depoyment</id>
