@@ -442,8 +442,14 @@
 							<configuration>
 								<archive>
 									<manifestEntries>
+<!-- version valid only for EAP 6.2.x
 										<Dependencies>org.jboss.resteasy.resteasy-spring</Dependencies>
-<!-- 										<Dependencies>org.springframework.spring</Dependencies> -->
+ -->
+<!-- version valid only for EAP 6.3.x
+ 										<Dependencies>org.springframework.spring meta-inf</Dependencies>
+ -->
+<!-- version valid for both EAP 6.2.x and EAP 6.3.x (though contains duplicit dependencies) -->
+ 										<Dependencies>org.jboss.resteasy.resteasy-spring, org.springframework.spring meta-inf</Dependencies>
 									</manifestEntries>
 								</archive>
 							</configuration>
@@ -457,7 +463,7 @@
 			<id>install-as-module-spring-3.2.x</id>
 			<activation>
 				<property>
-					<name>spring-3.2.x</name>
+					<name>install-as-module-spring-3.2.x</name>
 				</property>
 			</activation>
 
@@ -536,6 +542,162 @@
 										<artifactItem>
 											<groupId>org.springframework</groupId>
 											<artifactId>spring-aop</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-beans</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-context</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-context-support</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-core</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-expression</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-web</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-webmvc</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+
+										<artifactItem>
+											<groupId>aopalliance</groupId>
+											<artifactId>aopalliance</artifactId>
+											<version>${version.aopalliance}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.aspectj</groupId>
+											<artifactId>aspectjrt</artifactId>
+											<version>${version.org.aspectj}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.aspectj</groupId>
+											<artifactId>aspectjweaver</artifactId>
+											<version>${version.org.aspectj}</version>
+										</artifactItem>
+
+									</artifactItems>
+
+									<outputDirectory>${module.spring.path}</outputDirectory>
+									<overWriteSnapshots>true</overWriteSnapshots>
+									<stripVersion>true</stripVersion>
+									<overWriteReleases>true</overWriteReleases>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>install-as-module-spring-3.1.x</id>
+			<activation>
+				<property>
+					<name>install-as-module-spring-3.1.x</name>
+				</property>
+			</activation>
+
+			<properties>
+				<module.spring.version>3.1.x</module.spring.version>
+				<module.spring.slot>main</module.spring.slot><!-- beware jbossws spring integration preinstalled in default distribution expects main slot -->
+				<module.spring.path>${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}</module.spring.path>
+				<version.org.aspectj>1.7.3</version.org.aspectj>
+				<version.aopalliance>1.0</version.aopalliance>
+			</properties>
+
+			<build>
+				<plugins>
+					<!-- module info -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>${version.maven-antrun-plugin}</version>
+						<executions>
+							<execution>
+								<id>install-as-module-spring-3.1.x-info</id>
+								<phase>pre-integration-test</phase>
+								<configuration>
+									<tasks>
+										<echo>----------------------------------------------</echo>
+										<echo>Install AS module spring (slot ${module.spring.slot}) into ${jboss.home}</echo>
+										<echo>----------------------------------------------</echo>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- module resources copying -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.6</version>
+						<executions>
+							<execution>
+								<id>install-as-module-spring-3.1.x-resources</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${module.spring.path}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/main/modules/spring/${module.spring.version}</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+									<overwrite>true</overwrite>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- module dependencies copying -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>install-as-module-spring-3.1.x-dependencies</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-aop</artifactId>
+											<version>${version.org.springframework}</version>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.springframework</groupId>
+											<artifactId>spring-asm</artifactId>
 											<version>${version.org.springframework}</version>
 										</artifactItem>
 										<artifactItem>

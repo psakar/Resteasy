@@ -49,7 +49,13 @@ war archive do not contain resteasy-spring and spring dependencies, module depen
 
 run 
 
-  mvn -Djboss-eap-maven-repository -Dmaven-repo-as=PATH_TO_MAVEN_REPO_AS -Djboss.home=PATH_TO_EAP -Dversion.org.jboss.resteasy=EAP_RESTEASY_VERSION -Das-modules -Dspring-3.2.x clean verify
+For spring version 3.2.x
+
+  mvn -Djboss-eap-maven-repository -Dmaven-repo-as=PATH_TO_MAVEN_REPO_AS -Djboss.home=PATH_TO_EAP -Dversion.org.jboss.resteasy=EAP_RESTEASY_VERSION -Das-modules -Dinstall-as-module-spring-3.2.x clean verify
+
+For spring version 3.1.x
+
+  mvn -Djboss-eap-maven-repository -Dmaven-repo-as=PATH_TO_MAVEN_REPO_AS -Djboss.home=PATH_TO_EAP -Dversion.org.jboss.resteasy=EAP_RESTEASY_VERSION -Das-modules -Dinstall-as-module-spring-3.1.x clean verify
 
 to test deployment with dependency on resteasy-spring and spring AS module. It will install snowdrop module as well, but it is not used as deployment dependency
 
