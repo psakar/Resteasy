@@ -1,0 +1,15 @@
+#maven related
+maven-repo-*
+settings-*.xml
+
+# idea related
+.idea
+*.iml
+
+# eclipse related
+.classpath
+.project
+.settings
+
+
+target

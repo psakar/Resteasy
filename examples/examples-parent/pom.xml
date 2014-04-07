@@ -6,22 +6,10 @@
         <groupId>org.jboss.resteasy-ts</groupId>
         <artifactId>resteasy-jaxrs-all</artifactId>
         <version>1.2.1.GA_CP02_patch03</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>testable-examples-pom</artifactId>
+    <artifactId>resteasy-examples-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Resteasy Examples test</name>
 
-    <modules>
-        <!--<module>api-clients</module>-->
-        <module>async-job-service</module>
-        <!-- FIXME
-        <module>ejb-integration</module>
-        <module>guice-hello</module>
-        <module>jaxb-json</module>
-        <module>resteasy-springMVC</module>
-        <module>spring-hibernate-contacts</module>
-        -->
-    </modules>
 </project>

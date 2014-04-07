@@ -1,16 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <name>RESTEasy JAX-RS</name>
-    <groupId>org.jboss.resteasy</groupId>
+    <groupId>org.jboss.resteasy-ts</groupId>
     <artifactId>resteasy-jaxrs-all</artifactId>
-    <version>1.2.1.GA_CP02</version>
+    <version>1.2.1.GA_CP02_patch03</version>
     <packaging>pom</packaging>
 
-    <properties>
-        <jboss.home>/Users/billburke/jboss/jboss-4.2.3.GA</jboss.home>
-    </properties>
 
     <url>http://rest-easy.org</url>
 
@@ -66,28 +64,72 @@
         </contributor>
     </contributors>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+
+		<downloadSources>true</downloadSources>
+
+		<version.org.jboss.arquillian.arquillian-bom>1.1.1.Final</version.org.jboss.arquillian.arquillian-bom>
+		<version.org.jboss.resteasy>1.2.1.GA_CP02_patch03</version.org.jboss.resteasy>
+		<version.org.jboss.shrinkwrap.resolver>2.1.0-alpha-1</version.org.jboss.shrinkwrap.resolver>
+
+
+
+	</properties>
+
     <modules>
 
         <!-- Should probably be removed and be treated as external dependency -->
-        <module>jaxrs-api</module>
+        <!--<module>jaxrs-api</module>-->
         <!--<module>resteasy-test-data</module>-->
-        <module>resteasy-jaxrs</module>
-        <module>providers</module>
-        <module>resteasy-jaxrs-war</module>
-        <module>resteasy-bom</module>
-        <module>resteasy-cache</module>
-        <module>resteasy-guice</module>
+        <!--<module>resteasy-jaxrs</module>-->
+        <!--<module>providers</module>-->
+        <!--<module>resteasy-jaxrs-war</module>-->
+        <!--<module>resteasy-bom</module>-->
+        <!--<module>resteasy-cache</module>-->
+        <!--<module>resteasy-guice</module>-->
         <!--<module>resteasy-oauth</module>-->
-        <module>async-http-jbossweb</module>
-        <module>async-http-tomcat</module>
-        <module>resteasy-spring</module>
-        <module>war-tests</module>
+        <!--<module>async-http-jbossweb</module>-->
+        <!--<module>async-http-tomcat</module>-->
+        <!--<module>resteasy-spring</module>-->
+        <!--<module>war-tests</module>-->
         <module>examples</module>
         <!--<module>async-http-servlet-3.0</module>-->
+        <!-- FIXME module>jboss-integration-testing</module-->
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.org.jboss.shrinkwrap.resolver}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${version.org.jboss.arquillian.arquillian-bom}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+            	<groupId>org.jboss.resteasy</groupId>
+            	<artifactId>resteasy-jaxrs</artifactId>
+            	<version>${version.org.jboss.resteasy}</version>
+            	<!-- filter out unwanted jars -->
+            		<exclusions>
+                		<exclusion>
+                    		<groupId>tjws</groupId>
+                    		<artifactId>webserver</artifactId>
+                	</exclusion>
+            	</exclusions>
+        	</dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -107,13 +149,13 @@
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>jaxrs-api</artifactId>
-                <version>${project.version}</version>
+                <version>${version.org.jboss.resteasy}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-test-data</artifactId>
-                <version>${project.version}</version>
+                <version>${version.org.jboss.resteasy}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -279,6 +321,7 @@
                 <artifactId>oauth</artifactId>
                 <version>20090825</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
