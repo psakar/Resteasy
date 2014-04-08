@@ -14,20 +14,6 @@
 	<artifactId>async-job-service</artifactId>
 	<packaging>war</packaging>
 
-	<properties>
-		<version.junit>4.8</version.junit>
-		<version.org.jboss.arquillian.arquillian-bom>1.1.1.Final</version.org.jboss.arquillian.arquillian-bom>
-		<version.org.jboss.arquillian.container.arquillian-jbossas-managed-5.1>1.0.0.CR3</version.org.jboss.arquillian.container.arquillian-jbossas-managed-5.1>
-		<version.org.jboss.arquillian.container.arquillian-jbossas-remote-5.1>1.0.0.CR3</version.org.jboss.arquillian.container.arquillian-jbossas-remote-5.1>
-		<version.org.jboss.jbossas.jboss-as-client.pom>5.1.0.GA</version.org.jboss.jbossas.jboss-as-client.pom>
-		<version.org.jboss.jbossas.jboss-as-profileservice-client.pom>6.0.0.Final</version.org.jboss.jbossas.jboss-as-profileservice-client.pom>
-
-		<version.org.jboss.jbossas.jboss-server-manager>1.0.4.Final</version.org.jboss.jbossas.jboss-server-manager>
-
-		<!--<version.org.jboss.jbossas.jboss-server-manager>1.0.5-SNAPSHOT</version.org.jboss.jbossas.jboss-server-manager>-->
-
-
-	</properties>
     <repositories>
         <!-- For resteasy -->
         <repository>
@@ -44,51 +30,17 @@
 
     <dependencies>
 
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${version.org.jboss.resteasy}</version>
-			<!-- filter out unwanted jars -->
-			<exclusions>
-				<exclusion>
-					<groupId>commons-httpclient</groupId>
-					<artifactId>commons-httpclient</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>tjws</groupId>
-					<artifactId>webserver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.servlet</groupId>
-					<artifactId>servlet-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        <dependency>
-            <groupId>org.scannotation</groupId>
-            <artifactId>scannotation</artifactId>
-        </dependency>
+
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
 			<version>${version.org.jboss.resteasy}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.3</version>
 		</dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
-        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
