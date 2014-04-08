@@ -9,7 +9,7 @@
     </parent>
     <artifactId>resteasy-jaxrs-test</artifactId>
     <name>RESTEasy JAX-RS Implementation test</name>
-
+<!-- comment out to test with arquillian -->
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy-ts</groupId>
@@ -18,6 +18,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+<!-- END OF comment out to test with arquillian -->
 	<profiles>
 		<profile>
 			<!-- exclude integrations tests which are known to fail-->
@@ -41,5 +42,45 @@
 				</plugins>
 			</build>
 		</profile>
+<!-- uncomment to test with arquillian
+        <profile>
+            <id>tjws</id>
+            <activation>
+                <property>
+                    <name>!arquillian</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.resteasy-ts</groupId>
+                    <artifactId>resteasy-test-tjws</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>arquillian</id>
+            <activation>
+                <property>
+                    <name>arquillian</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.resteasy-ts</groupId>
+                    <artifactId>resteasy-test-arquillian</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jaxrs</artifactId>
+                    <version>${version.org.jboss.resteasy}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+ -->
 	</profiles>
 </project>
