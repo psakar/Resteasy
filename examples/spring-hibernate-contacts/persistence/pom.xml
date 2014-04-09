@@ -2,21 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.jboss.resteasy.examples</groupId>
-        <artifactId>spring-hibernate-contacts</artifactId>
-        <version>1.2.1.GA_CP02</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.resteasy.examples</groupId>
+    <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
+        <artifactId>resteasy-spring-hibernate-contacts-parent</artifactId>
+        <version>1.2.1.GA_CP02_patch03</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
     <artifactId>spring-hibernate-contacts-persistence</artifactId>
-    <name/>
-    <version>1.2.1.GA_CP02</version>
-    <description/>
 
     <dependencies>
         <dependency>
-            <groupId>org.jboss.resteasy.examples</groupId>
+            <groupId>org.jboss.resteasy-ts</groupId>
             <artifactId>spring-hibernate-contacts-core</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
@@ -40,6 +37,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>3.3.2.GA</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- In memory database. To replace MySQL for test -->
         <dependency>

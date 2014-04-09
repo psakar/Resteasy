@@ -22,8 +22,6 @@
         <module>ejb-integration</module>
         -->
         <module>resteasy-springMVC</module>
-        <!--
         <module>spring-hibernate-contacts</module>
-         -->
     </modules>
 </project>

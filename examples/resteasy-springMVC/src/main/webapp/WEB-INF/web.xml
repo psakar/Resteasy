@@ -13,7 +13,7 @@
 		</init-param>
         <init-param>
               <param-name>contextClass</param-name>
-              <param-value> org.jboss.spring.vfs.context.VFSXmlWebApplicationContext</param-value>
+              <param-value>org.jboss.spring.vfs.context.VFSXmlWebApplicationContext</param-value>
         </init-param>
 	</servlet>
 
