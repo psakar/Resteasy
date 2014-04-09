@@ -25,6 +25,8 @@
         <version.org.springframework>2.5.6.SEC03</version.org.springframework>
         <version.org.jboss.jbossas.jboss-server-manager>1.0.4.Final</version.org.jboss.jbossas.jboss-server-manager>
         <version.org.jboss.snowdrop>1.0.1.GA</version.org.jboss.snowdrop>
+		<version.org.jboss.jbossas.jboss-server-manager>1.0.4.Final</version.org.jboss.jbossas.jboss-server-manager>
+		<!--<version.org.jboss.jbossas.jboss-server-manager>1.0.5-SNAPSHOT</version.org.jboss.jbossas.jboss-server-manager>-->
     </properties>
 
     <repositories>

@@ -17,9 +17,9 @@
         <!--<module>api-clients</module>-->
         <module>async-job-service</module>
         <module>guice-hello</module>
+        <module>jaxb-json</module>
         <!-- FIXME
         <module>ejb-integration</module>
-        <module>jaxb-json</module>
         -->
         <module>resteasy-springMVC</module>
         <!--
