@@ -1,6 +1,5 @@
 #maven related
-maven-repo-*
-settings-*.xml
+target
 
 # idea related
 .idea
@@ -11,5 +10,7 @@ settings-*.xml
 .project
 .settings
 
-
-target
+# test related
+maven-repo-*
+settings-*.xml
+jboss-eap-*

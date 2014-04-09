@@ -1,5 +1,13 @@
-MAVEN_REPO_LOCAL=maven-repo-local
-AS_DISTRIBUTION=/home/kanovotn/RESTEasy/EAP5/EAP_5.3.0.ER3/jboss-eap-5.3
+if [ "x${AS_DISTRIBUTION}x" == "xx" ]; then
+	echo "Please set varible AS_DISTRIBUTION (eg. export AS_DISTRIBUTION=/home/development/EAP-5.3.0.ER3/jboss-eap-5.3)"
+	exit 1
+fi
+
+if [ "x${MAVEN_REPO_LOCAL}x" == "xx" ]; then
+	MAVEN_REPO_LOCAL=maven-repo-local
+fi
+echo "Install resteasy artifacts into maven local repository ${MAVEN_REPO_LOCAL}"
+
 RESTEASY_VERSION=1.2.1.GA_CP02_patch03
 
 install_into_maven_repo_local() {
