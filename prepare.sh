@@ -27,10 +27,13 @@ prepare_maven_repo_local() {
 		rm -rf ${MAVEN_REPO_LOCAL}
 	fi
 	mkdir ${MAVEN_REPO_LOCAL}
-	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-jaxb-provider.jar org.jboss.resteasy resteasy-jaxb-provider ${RESTEASY_VERSION} jar
-	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-jaxrs.jar org.jboss.resteasy resteasy-jaxrs ${RESTEASY_VERSION} jar
 	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/jaxrs-api.jar org.jboss.resteasy jaxrs-api ${RESTEASY_VERSION} jar
 	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-guice.jar org.jboss.resteasy resteasy-guice ${RESTEASY_VERSION} jar
+	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-jaxb-provider.jar org.jboss.resteasy resteasy-jaxb-provider ${RESTEASY_VERSION} jar
+	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-jaxrs.jar org.jboss.resteasy resteasy-jaxrs ${RESTEASY_VERSION} jar
+	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-jettison-provider.jar org.jboss.resteasy resteasy-jettison-provider ${RESTEASY_VERSION} jar
+	install_into_maven_repo_local ${AS_DISTRIBUTION}/resteasy/lib/resteasy-spring.jar org.jboss.resteasy resteasy-spring ${RESTEASY_VERSION} jar
+	
 }
 
 

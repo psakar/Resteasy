@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 public class AsyncJobTest
 {
    private static final String DEPLOYMENT = "async-job";
-private static final String URL = "http://localhost:8080/" + DEPLOYMENT;
+   private static final String URL = "http://localhost:8080/" + DEPLOYMENT;
 
    @Deployment
    public static WebArchive getDeployment() {

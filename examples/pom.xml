@@ -20,8 +20,10 @@
         <!-- FIXME
         <module>ejb-integration</module>
         <module>jaxb-json</module>
-        <module>resteasy-springMVC</module>
-        <module>spring-hibernate-contacts</module>
         -->
+        <module>resteasy-springMVC</module>
+        <!--
+        <module>spring-hibernate-contacts</module>
+         -->
     </modules>
 </project>
