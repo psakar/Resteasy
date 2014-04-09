@@ -20,7 +20,7 @@ import java.net.URL;
 public class HelloResourceIntegrationTest
 {
 
-	private static final String DEPLOYMENT = "guice-hello-1.2.1.GA_CP02_patch03";
+	private static final String DEPLOYMENT = "guice-hello";
 	private static final String URL = "http://localhost:8080/" + DEPLOYMENT;
 
 	@Deployment

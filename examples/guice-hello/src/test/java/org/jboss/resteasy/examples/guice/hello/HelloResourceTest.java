@@ -12,29 +12,19 @@ import org.junit.Test;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
-@RunWith(Arquillian.class)
-@RunAsClient
 public class HelloResourceTest
 {
 
-	private static final String DEPLOYMENT = "guice-hello-1.2.1.GA_CP02_patch03";
-
-	@Deployment
-	public static WebArchive getDeployment() {
-		WebArchive archive = ShrinkWrap.create(ZipImporter.class, DEPLOYMENT + ".war").importFrom(new File("target/" + DEPLOYMENT + ".war"))
-	        .as(WebArchive.class);
-		   return archive;
-	}
-
 	@Test
 	public void testHello() {
+		final String message = "greeting";
 		final HelloResource helloResource = new HelloResource(new Greeter()
 		{
 			public String greet(final String name)
 			{
-				return "greeting";
+				return message;
 			}
 		});
-		Assert.assertEquals("greeting", helloResource.hello("foo"));
+		Assert.assertEquals(message, helloResource.hello(null));
 	}
 }
