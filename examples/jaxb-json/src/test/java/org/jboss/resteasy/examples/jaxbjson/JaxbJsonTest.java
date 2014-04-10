@@ -1,9 +1,6 @@
 package org.jboss.resteasy.examples.jaxbjson;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
-
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -27,11 +24,11 @@ public class JaxbJsonTest {
 	private static final String RESPONSE_BADGER = "{\"listing\":{\"books\":[{\"@title\":\"EJB 3.0\",\"author\":{\"$\":\"Bill Burke\"},\"ISBN\":{\"$\":\"596529260\"}},{\"@title\":\"RESTful Web Services\",\"author\":{\"$\":\"Leonard Richardson\"},\"ISBN\":{\"$\":\"596529260\"}}]}}";
 
 	@Deployment
-	   public static WebArchive getDeployment() {
-		   WebArchive archive = ShrinkWrap.create(ZipImporter.class, DEPLOYMENT + ".war").importFrom(new File("target/" + DEPLOYMENT + ".war"))
-	        .as(WebArchive.class);
-		   return archive;
-	   }
+    public static WebArchive getDeployment() {
+        WebArchive archive = ShrinkWrap.create(ZipImporter.class, DEPLOYMENT + ".war")
+                .importFrom(new File("target/" + DEPLOYMENT + ".war")).as(WebArchive.class);
+        return archive;
+    }
 
 	@Test
 	public void mappedJsonTest() throws Exception {

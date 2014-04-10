@@ -1,38 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <parent>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>ejb-integration-example</artifactId>
-      <version>1.2.1.GA_CP02</version>
-   </parent>
-   <modelVersion>4.0.0</modelVersion>
-   <artifactId>ejb-integration</artifactId>
-   <packaging>jar</packaging>
-   <name>EJB test - EJB</name>
-   <url>http://maven.apache.org</url>
-   <dependencies>
-      <dependency>
-         <groupId>org.jboss.resteasy</groupId>
-         <artifactId>resteasy-jaxrs</artifactId>
-         <version>1.2.1.GA_CP02</version>
-      </dependency>
-      <dependency>
-         <groupId>javax.ejb</groupId>
-         <artifactId>ejb-api</artifactId>
-         <version>3.0</version>
-         <scope>provided</scope>
-      </dependency>
-   </dependencies>
-   <build>
-      <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-               <source>1.5</source>
-               <target>1.5</target>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.resteasy-ts</groupId>
+        <artifactId>ejb-integration-example</artifactId>
+        <version>1.2.1.GA_CP02_patch03</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>ejb-integration</artifactId>
+    <packaging>jar</packaging>
+    <name>EJB test - EJB</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <!-- filter out unwanted jars -->
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-httpclient</groupId>
+                    <artifactId>commons-httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tjws</groupId>
+                    <artifactId>webserver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.scannotation</groupId>
+            <artifactId>scannotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
