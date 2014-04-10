@@ -99,7 +99,7 @@
         <!--<module>war-tests</module>-->
         <module>examples</module>
         <!--<module>async-http-servlet-3.0</module>-->
-        <!-- FIXME module>jboss-integration-testing</module-->
+        <module>jboss-integration-testing</module>
     </modules>
 
     <dependencyManagement>
@@ -130,6 +130,11 @@
                 	</exclusion>
             	</exclusions>
         	</dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxb-provider</artifactId>
+                <version>${version.org.jboss.resteasy}</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>

@@ -1,18 +1,17 @@
 package org.jboss.resteasy.test.smoke;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Context;
-import org.junit.Assert;
+import javax.ws.rs.core.HttpHeaders;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -22,7 +21,6 @@ import org.junit.Assert;
 public class SimpleResource
 {
 
-   private final static String encodedPart = "foo+bar%20gee@foo.com";
    private final static String decodedPart = "foo+bar gee@foo.com";
    private final static String queryDecodedPart = "foo bar gee@foo.com";
 
@@ -104,8 +102,8 @@ public class SimpleResource
    @GET
    public String get(@PathParam("bar") String pathParam, @QueryParam("foo") String queryParam)
    {
-      Assert.assertEquals(decodedPart, pathParam);
-      Assert.assertEquals(queryDecodedPart, queryParam);
+      assert decodedPart.equals(pathParam);
+      assert queryDecodedPart.equals(queryParam);
       return pathParam;
    }
 }
