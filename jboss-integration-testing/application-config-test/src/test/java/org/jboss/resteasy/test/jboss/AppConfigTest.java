@@ -1,59 +1,51 @@
 package org.jboss.resteasy.test.jboss;
 
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Test;
-import org.jboss.resteasy.util.HttpResponseCodes;
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-
-import javax.ws.rs.Path;
-import javax.ws.rs.GET;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.ext.Provider;
-import javax.ws.rs.ext.MessageBodyWriter;
-import java.lang.reflect.Type;
-import java.lang.annotation.Annotation;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.HashMap;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.resteasy.util.HttpResponseCodes;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.importer.ZipImporter;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
+@RunWith(Arquillian.class)
+@RunAsClient
 public class AppConfigTest
 {
-   private void _test(HttpClient client, String uri, String body)
-   {
-      {
-         GetMethod method = new GetMethod(uri);
-         try
-         {
+
+    private static final String DEPLOYMENT = "application-config-test";
+    private static final String URL = "http://localhost:8080/" + DEPLOYMENT;
+
+    @Deployment
+    public static WebArchive getDeployment() {
+        WebArchive archive = ShrinkWrap.create(ZipImporter.class, DEPLOYMENT + ".war").importFrom(new File("target/" + DEPLOYMENT + ".war"))
+         .as(WebArchive.class);
+        return archive;
+    }
+
+    @Test
+    public void testIt() {
+        HttpClient client = new HttpClient();
+        GetMethod method = new GetMethod(URL + "/my");
+        try {
             method.addRequestHeader("Accept", "text/quoted");
             int status = client.executeMethod(method);
             Assert.assertEquals(status, HttpResponseCodes.SC_OK);
-            Assert.assertEquals(body, method.getResponseBodyAsString());
-         }
-         catch (IOException e)
-         {
+            Assert.assertEquals("\"hello\"", method.getResponseBodyAsString());
+        } catch (IOException e) {
             throw new RuntimeException(e);
-         }
-      }
-
-   }
-
-
-   @Test
-   public void testIt()
-   {
-      HttpClient client = new HttpClient();
-      _test(client, "http://localhost:8080/application-config-test/my", "\"hello\"");
-   }
+        }
+    }
 }
