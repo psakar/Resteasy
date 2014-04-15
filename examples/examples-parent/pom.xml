@@ -93,46 +93,6 @@
         </dependency>
         <!-- ENF OF arquillian -->
 
-        <!-- arquillian jboss as specific -->
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-jbossas-managed-5.1</artifactId>
-            <version>${version.org.jboss.arquillian.container.arquillian-jbossas-managed-5.1}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>apache-log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.jbossas</groupId>
-            <artifactId>jboss-server-manager</artifactId>
-            <version>${version.org.jboss.jbossas.jboss-server-manager}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.jbossas</groupId>
-            <artifactId>jboss-as-client</artifactId>
-            <version>${version.org.jboss.jbossas.jboss-as-client.pom}</version>
-            <type>pom</type>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>trove</groupId>
-                    <artifactId>trove</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.jbossas</groupId>
-            <artifactId>jboss-as-profileservice-client</artifactId>
-            <version>${version.org.jboss.jbossas.jboss-as-profileservice-client.pom}</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-        <!-- END OF arquillian jboss as specific -->
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
@@ -162,4 +122,106 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+		<profile>
+			<id>jbossas-managed-5</id>
+            <activation>
+                <property>
+                    <name>!jbossas-remote-5</name>
+                </property>
+            </activation>
+			<dependencies>
+				<!-- arquillian jboss as specific -->
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-jbossas-managed-5.1</artifactId>
+					<version>${version.org.jboss.arquillian.container.arquillian-jbossas-managed-5.1}</version>
+					<scope>test</scope>
+					<exclusions>
+						<exclusion>
+							<groupId>apache-log4j</groupId>
+							<artifactId>log4j</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-server-manager</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-server-manager}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-as-client</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-as-client.pom}</version>
+					<type>pom</type>
+					<scope>test</scope>
+					<exclusions>
+						<exclusion>
+							<groupId>trove</groupId>
+							<artifactId>trove</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-as-profileservice-client</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-as-profileservice-client.pom}</version>
+					<type>pom</type>
+					<scope>test</scope>
+				</dependency>
+				<!-- END OF arquillian jboss as specific -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>jbossas-remote-5</id>
+            <activation>
+                <property>
+                    <name>jbossas-remote-5</name>
+                </property>
+            </activation>
+			<dependencies>
+				<!-- arquillian jboss as specific -->
+				<dependency>
+					<groupId>org.jboss.arquillian.container</groupId>
+					<artifactId>arquillian-jbossas-remote-5.1</artifactId>
+					<version>${version.org.jboss.arquillian.container.arquillian-jbossas-remote-5.1}</version>
+					<scope>test</scope>
+					<exclusions>
+						<exclusion>
+							<groupId>apache-log4j</groupId>
+							<artifactId>log4j</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-server-manager</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-server-manager}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-as-client</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-as-client.pom}</version>
+					<type>pom</type>
+					<scope>test</scope>
+					<exclusions>
+						<exclusion>
+							<groupId>trove</groupId>
+							<artifactId>trove</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.jboss.jbossas</groupId>
+					<artifactId>jboss-as-profileservice-client</artifactId>
+					<version>${version.org.jboss.jbossas.jboss-as-profileservice-client.pom}</version>
+					<type>pom</type>
+					<scope>test</scope>
+				</dependency>
+				<!-- END OF arquillian jboss as specific -->
+			</dependencies>
+		</profile>
+    </profiles>
 </project>
