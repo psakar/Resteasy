@@ -1,14 +1,14 @@
 package org.jboss.resteasy.test.smoke;
 
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.jboss.resteasy.annotations.Suspend;
+import org.jboss.resteasy.spi.AsynchronousResponse;
 
 
 /**
@@ -18,10 +18,12 @@ import javax.ws.rs.core.Response;
 @Path("/")
 public class SimpleResource
 {
+
+   public static final int SUSPEND_TIMEOUT = 3000;
    @GET
    @Path("failure")
    @Produces("text/plain")
-   public void failure(final @Suspend(2000) AsynchronousResponse response) throws Exception
+   public void failure(final @Suspend(SUSPEND_TIMEOUT) AsynchronousResponse response) throws Exception
    {
       throw new WebApplicationException(403);
    }

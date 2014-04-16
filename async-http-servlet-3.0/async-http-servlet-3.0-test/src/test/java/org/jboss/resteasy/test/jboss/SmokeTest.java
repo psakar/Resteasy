@@ -58,8 +58,8 @@ public class SmokeTest
          long start = System.currentTimeMillis();
          int status = client.executeMethod(method);
          long end = System.currentTimeMillis() - start;
-         assertTrue(end < 1000);
          assertEquals(403, status);
+         assertTrue(end < SimpleResource.SUSPEND_TIMEOUT);
          method.releaseConnection();
       }
    }
