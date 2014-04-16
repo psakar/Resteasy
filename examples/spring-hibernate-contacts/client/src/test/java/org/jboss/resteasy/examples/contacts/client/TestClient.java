@@ -1,7 +1,9 @@
 package org.jboss.resteasy.examples.contacts.client;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 import org.apache.tools.ant.util.FileUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,14 +37,17 @@ public class TestClient
        String name = DEPLOYMENT + ".war";
     WebArchive archive = ShrinkWrap.create(ZipImporter.class, name).importFrom(new File("../services/target/" + DEPLOYMENT + ".war"))
         .as(WebArchive.class);
-       File dbProperties = new File("src/test/resources/db.properties");
-       String content = FileUtils.readFully(new FileReader(dbProperties));
-       File databaseDir = new File("../persistence/src/main/sql");
-       content = content.replace("hsqldb/contact", databaseDir.getAbsolutePath() + "/" + "hsqldb/contact");
-       archive.addAsResource(new StringAsset(content), "db.properties");
+       archive.addAsResource(new StringAsset(createDbProperties()), "db.properties");
        archive.as(ZipExporter.class).exportTo(new File("target/" + name), true);
        return archive;
    }
+
+    private static String createDbProperties() throws IOException, FileNotFoundException {
+        File databaseDir = new File("../persistence/src/main/sql");
+        File dbProperties = new File("src/test/resources/db.properties");
+        String content = FileUtils.readFully(new FileReader(dbProperties));
+        return content.replace("hsqldb/contact", databaseDir.getAbsolutePath() + "/" + "hsqldb/contact");
+    }
 
    @Test
    public void testGetContacts()

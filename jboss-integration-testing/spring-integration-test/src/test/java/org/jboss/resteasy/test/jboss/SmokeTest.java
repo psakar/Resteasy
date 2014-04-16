@@ -1,101 +1,114 @@
 package org.jboss.resteasy.test.jboss;
 
+import java.io.File;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.resteasy.util.HttpResponseCodes;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.importer.ZipImporter;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
-import org.jboss.resteasy.util.HttpResponseCodes;
+import org.junit.runner.RunWith;
 
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
+@RunWith(Arquillian.class)
+@RunAsClient
 public class SmokeTest
 {
-   @Test
-   public void testNoDefaultsResource() throws Exception
-   {
-      HttpClient client = new HttpClient();
+    private static final String DEPLOYMENT = "spring-integration-test";
 
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/basic");
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("basic", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-      {
-         PutMethod method = new PutMethod("http://localhost:8080/spring-integration-test/basic");
-         method.setRequestEntity(new StringRequestEntity("basic", "text/plain", null));
-         int status = client.executeMethod(method);
-         Assert.assertEquals(204, status);
-         method.releaseConnection();
-      }
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/queryParam");
-         NameValuePair[] params = {new NameValuePair("param", "hello world")};
-         method.setQueryString(params);
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("hello world", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/uriParam/1234");
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("1234", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-   }
+    private static final String URL = "http://localhost:8080/" + DEPLOYMENT;
 
-   @Test
-   public void testLocatingResource() throws Exception
-   {
-      HttpClient client = new HttpClient();
+    @Deployment
+    public static WebArchive getDeployment() throws Exception {
+        String name = DEPLOYMENT + ".war";
+        WebArchive archive = ShrinkWrap.create(ZipImporter.class, name)
+                .importFrom(new File("target/" + DEPLOYMENT + ".war")).as(WebArchive.class);
+        return archive;
+    }
 
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/locating/basic");
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("basic", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-      {
-         PutMethod method = new PutMethod("http://localhost:8080/spring-integration-test/locating/basic");
-         method.setRequestEntity(new StringRequestEntity("basic", "text/plain", null));
-         int status = client.executeMethod(method);
-         Assert.assertEquals(204, status);
-         method.releaseConnection();
-      }
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/locating/queryParam");
-         NameValuePair[] params = {new NameValuePair("param", "hello world")};
-         method.setQueryString(params);
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("hello world", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-      {
-         GetMethod method = new GetMethod("http://localhost:8080/spring-integration-test/locating/uriParam/1234");
-         int status = client.executeMethod(method);
-         Assert.assertEquals(HttpResponseCodes.SC_OK, status);
-         Assert.assertEquals("1234", method.getResponseBodyAsString());
-         method.releaseConnection();
-      }
-   }
+    @Test
+    public void testNoDefaultsResource() throws Exception {
+        HttpClient client = new HttpClient();
 
-   /*
-   public static Test suite() throws Exception
-   {
-      System.out.println("***********");
-      System.out.println(System.getProperty("jbosstest.deploy.dir"));
-      return getDeploySetup(SmokeTest.class, "spring-integration-test.war");
-   }
-   */
+        {
+            GetMethod method = new GetMethod(URL + "/basic");
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("basic", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+        {
+            PutMethod method = new PutMethod(URL + "/basic");
+            method.setRequestEntity(new StringRequestEntity("basic", "text/plain", null));
+            int status = client.executeMethod(method);
+            Assert.assertEquals(204, status);
+            method.releaseConnection();
+        }
+        {
+            GetMethod method = new GetMethod(URL + "/queryParam");
+            NameValuePair[] params = {new NameValuePair("param", "hello world")};
+            method.setQueryString(params);
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("hello world", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+        {
+            GetMethod method = new GetMethod(URL + "/uriParam/1234");
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("1234", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+    }
+
+    @Test
+    public void testLocatingResource() throws Exception {
+        HttpClient client = new HttpClient();
+
+        {
+            GetMethod method = new GetMethod(URL + "/locating/basic");
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("basic", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+        {
+            PutMethod method = new PutMethod(URL + "/locating/basic");
+            method.setRequestEntity(new StringRequestEntity("basic", "text/plain", null));
+            int status = client.executeMethod(method);
+            Assert.assertEquals(204, status);
+            method.releaseConnection();
+        }
+        {
+            GetMethod method = new GetMethod(URL + "/locating/queryParam");
+            NameValuePair[] params = {new NameValuePair("param", "hello world")};
+            method.setQueryString(params);
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("hello world", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+        {
+            GetMethod method = new GetMethod(URL + "/locating/uriParam/1234");
+            int status = client.executeMethod(method);
+            Assert.assertEquals(HttpResponseCodes.SC_OK, status);
+            Assert.assertEquals("1234", method.getResponseBodyAsString());
+            method.releaseConnection();
+        }
+    }
+
 }

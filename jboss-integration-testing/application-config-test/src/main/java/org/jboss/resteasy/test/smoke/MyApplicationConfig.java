@@ -1,21 +1,9 @@
 package org.jboss.resteasy.test.smoke;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.ext.MessageBodyWriter;
-import javax.ws.rs.ext.Provider;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
+
+import javax.ws.rs.core.Application;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -23,8 +11,8 @@ import java.util.Set;
  */
 public class MyApplicationConfig extends Application
 {
-   private Set<Class<?>> classes = new HashSet<Class<?>>();
-   private Set<Object> singletons = new HashSet<Object>();
+   private final Set<Class<?>> classes = new HashSet<Class<?>>();
+   private final Set<Object> singletons = new HashSet<Object>();
 
    public MyApplicationConfig()
    {
@@ -32,6 +20,7 @@ public class MyApplicationConfig extends Application
       singletons.add(new AppConfig.QuotedTextWriter());
    }
 
+   @Override
    public Set<Class<?>> getClasses()
    {
       return classes;

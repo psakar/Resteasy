@@ -47,7 +47,6 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
             <!-- filter out unwanted jars -->
             <exclusions>
                 <exclusion>
@@ -71,13 +70,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
-            <version>${version.org.jboss.resteasy}</version>
         </dependency>
 
         <!-- arquillian -->
@@ -96,7 +93,6 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
         </dependency>
     </dependencies>
     <build>
