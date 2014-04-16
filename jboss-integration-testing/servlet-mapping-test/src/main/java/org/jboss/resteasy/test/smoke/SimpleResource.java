@@ -1,21 +1,20 @@
 package org.jboss.resteasy.test.smoke;
 
+import java.net.URI;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import org.junit.Assert;
-import java.net.URI;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.POST;
+import javax.ws.rs.core.UriInfo;
 
 
 
@@ -33,7 +32,7 @@ public class SimpleResource
    public String getBasic(@Context UriInfo uriInfo) throws Exception
    {
       URI uri = uriInfo.getBaseUriBuilder().path(SimpleResource.class, "getBasic").build();
-      Assert.assertEquals(uri.getPath(), "/resteasy/rest/basic");
+      assert uri.getPath().equals("/resteasy/rest/basic");
       System.out.println("getBasic()");
       return "basic";
    }

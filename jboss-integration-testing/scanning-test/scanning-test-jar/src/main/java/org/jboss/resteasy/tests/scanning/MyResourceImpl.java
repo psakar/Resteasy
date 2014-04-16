@@ -1,8 +1,5 @@
 package org.jboss.resteasy.tests.scanning;
 
-import javax.ws.rs.Path;
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
 
 /**
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
@@ -10,11 +7,13 @@ import javax.ws.rs.Produces;
  */
 public class MyResourceImpl implements MyResource
 {
+   @Override
    public Subresource doit()
    {
       return new Subresource();
    }
 
+   @Override
    public String get()
    {
       return "hello world";
